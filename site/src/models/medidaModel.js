@@ -313,13 +313,13 @@ function variacaoCordsMapas(valor) {
 
 function temperaturaComparativaMapas() {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select t2.minimo, t2.maximo, t1.dia, t2.nome from
-        (select idLeitura, t1.horario, t1.dia from
+        instrucaoSql = `select t2.minimo, t2.valor, t2.maximo, t1.dia, t2.nome, t1.fkTotem from
+        (select idLeitura, t1.horario, t1.dia, t1.fkTotem from
             (select fkTotem, max(horario) as horario, dia from crawlerLeitura, Leitura where crawlerLeitura.fkLeitura = Leitura.idLeitura group by dia, fkTotem)
         t1 join Leitura t2
         on t1.horario = t2.horario and t1.dia = t2.dia) t1
         join crawlerLeitura t2
-        on t1.idLeitura = t2.fkLeitura where nome = 'CPU Core'`
+        on t1.idLeitura = t2.fkLeitura where nome = 'CPU Core' order by t1.dia desc`
     } else {
         console.log("\nEsta API só suporta rodar em ambiente cloud\n")
         return
@@ -388,12 +388,12 @@ function dadosAlertas(empresa) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function contarAlertas(totem) {
+function contarAlertas(fkTotem) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', componente from alerta group by componente where fkTotem = ${totem}`;
+        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', componente from alerta where fkTotem = ${fkTotem} group by componente `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql =

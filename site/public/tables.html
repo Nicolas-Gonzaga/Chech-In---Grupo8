@@ -93,7 +93,7 @@
               <p>Processos</p>
             </a>
           <li class="active">
-            <a href="tables.html">
+            <a href="tables.html?diario">
               <i class="tim-icons icon-single-copy-04"></i>
               <p>Histórico</p>
             </a>
@@ -217,9 +217,9 @@
               <div class="card-header">
                 <h4 class="card-title"> Alertas</h4>
                 <select id= "totem" onchange="mudarTotem()">
-                  <option value="1">Totem 1</option>
-                  <option value="2">Totem 2</option>
-                  <option value="3">Totem 3</option>
+                  <option value="50000">Totem 1</option>
+                  <option value="50001">Totem 2</option>
+                  <option value="50002">Totem 3</option>
                   </select>
                   
                 </div>
@@ -397,58 +397,52 @@
   </script>
 </body>
 <script>
+  console.log('oi')
   function mudarSelect() {
+    console.log('oi')
     if (selecionar.value == 1) {
       window.location.href = './tables.html?diario'
     } else {
       
       window.location.href = './tables.html?semanal'
     }
-    
+  } 
+  console.log('oi')
     if (modoGrafico == 'diario') {
+    console.log('oi1')
+    
     selecionar.innerHTML += `<option value="4">diario</option>
-                  <option value="5">semanal</option>`
-    } else if (modoGrafico == 'semanal') {
+    <option value="5">semanal</option>`
+  } else if (modoGrafico == 'semanal') {
+      console.log('oi2')
     selecionar.innerHTML += `
                 <option value="5">semanal</option>
                 <option value="4">diario</option>`
-    }
-    
-  } 
-  var fkTotem = 0
-  function mudarTotem(){
-    
-    if (totem.value == '1') {
-      fkTotem = 50000
-    } else if (totem.value== '2') {
-      fkTotem = 50001
-    } else if (totem.value == '3') {
-    }
-    fkTotem = 50002
-  }
-  function obterDadosGrafico(fkTotem) {
-    
-    console.log('OI')
-    if (proximaAtualizacao != undefined) {
-      clearTimeout(proximaAtualizacao);
-    }
-    fetch(`/medidas/contarAlertas/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(fkTotem)
-          resposta.reverse();
-          plotarGrafico(resposta);
-        });
-      } else {
+              }
+              
+
+              function obterDadosGrafico(fkTotem) {
+                var fkTotem = totem.value
+                
+                console.log('OI')
+      fetch(`/medidas/contarAlertas/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            console.log(fkTotem)
+            resposta.reverse();
+            plotarGrafico(resposta);
+          });
+        } else {
         console.error('Nenhum dado encontrado ou erro na API');
       }
     })
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
-
-  }
+    }
+    
+  
   
 
 
@@ -650,7 +644,8 @@
               }
             }
           }); */
-        }
+       
+        }obterDadosGrafico(fkTotem)
 
   
 </script>
