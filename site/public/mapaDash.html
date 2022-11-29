@@ -3,6 +3,7 @@
 
 <head>
   <script>
+    // Pegando a queryString da página
       carregarTotem = window.location.search
       carregarTotem = carregarTotem.substring(1, carregarTotem.length)
   </script>
@@ -96,7 +97,7 @@
               <p>Processos</p>
             </a>
           <li>
-            <a href="tables.html">
+            <a href="tables.html?diario">
               <i class="tim-icons icon-single-copy-04"></i>
               <p>Histórico</p>
             </a>
@@ -268,7 +269,6 @@
   <script src="assets/js/core/popper.min.js"></script>
   <script src="assets/js/core/bootstrap.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <script src="assets/js/plugins/chartjs.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="assets/js/plugins/bootstrap-notify.js"></script>
@@ -532,54 +532,86 @@
     })
 </script>
 <script>
-  if (carregarTotem == "totens") {
-    enviado = ""
-  } else {
-    enviado = ` where fkTotem = ${carregarTotem}`
-  }
-  fetch(`/medidas/variacao-cords/${enviado}`, {
-    method: "GET"
-  }).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (resposta) {
-        console.log(resposta)
-      })
-    }
-  })
+  // Temperatura do Totem - Média diária
 
-  fetch(`/medidas/tempTotens`, {
-    method: "GET"
-  }).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (resposta) {
-        for(i = 0; resposta.length; i++) {
-          console.log("/medidas/tempTotens")
-          console.log(resposta[i])
-        }
-      })
+  function plotarTempTotem(resposta) {
+    datasNecessitadas = []
+    for (i = 0; i < 5; i++) {
+      dataa = new Date(Date.now() - i * 24 * 60 * 60 * 1000)
+      datasNecessitadas.push(`${String(dataa.getFullYear())}/${String(dataa.getMonth()+1)}/${dataa.getDate()}`)
     }
-  })
+    valoresUsaveis = []
+    for (i = 0; i < resposta.length; i++) {
+      if (resposta[i].fkTotem == carregarTotem) {
+        valoresUsaveis.push(resposta[i])
+      }
+    }
+    valoresDoGrafico = []
+    for (i = 0; i < datasNecessitadas.length; i++) {
+      for (f = 0; f < valoresUsaveis.length; f++) {
+        if (datasNecessitadas[i] == valoresUsaveis[f].dia) {
+          valoresDoGrafico.push([valoresUsaveis[f].minimo, valoresUsaveis[f].valor, valoresUsaveis[f].maximo])
+          break
+        }
+      }
+      if (valoresDoGrafico.length != i+1) {
+        valoresDoGrafico.push([null, null, null])
+      }
+    }
+    valoresDoGrafico = valoresDoGrafico.reverse()
+    console.log(valoresDoGrafico)
+    datasets = []
+    for (i = 0; i < 3; i++) {
+      if (i == 0) {
+        labela = 'Minimo'
+        backgroundColora = '#47afff'
+        borderColora = '#a8d9ff'
+      } else if (i == 1) {
+        labela = 'Valor'
+        backgroundColora = '#1061a2'
+        borderColora = '#2586d4'
+      } else if (i == 2) {
+        labela = 'Maximo'
+        backgroundColora = '#47afff'
+        borderColora = '#a8d9ff'
+      }
+      dados = []
+      for (f = 0; f < valoresDoGrafico.length; f++) {
+        dados.push(valoresDoGrafico[f][i])
+      }
+      datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: dados})
+    }
+    Chart.defaults.color = '#fff'
+    new Chart(
+              graficoTestes,
+              {
+                  type: 'line',
+                  data:
+                  {
+                      labels: [datasNecessitadas[4], datasNecessitadas[3], datasNecessitadas[2], datasNecessitadas[1], datasNecessitadas[0]],
+                      datasets: datasets
+                  },
+                  options: {}
+              }
+      )
+  }
+    fetch("/medidas/temp-comparativa-mapas", {
+        method: "GET"
+    }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+              plotarTempTotem(resposta)
+            })
+        }
+    })
 </script>
 <script>
-  // NINGUEM DESCOMENTA ISSO PELO AMOR DE DEUS!!!!!111!! ~joca
+  // Temperatura da Região - Média diária
 
     // dataa = new Date()
-    // ano = String(dataa.getFullYear())
-    // mes = String(dataa.getMonth()+1)
-    // dia = String(dataa.getDate())
-    // dataFinal = `${ano}-${mes}-${dia}`
-    // if (dia > 4) {
-    //     dia -= 4
-    // } else {
-    //     dia += 26
-    //     if (mes > 1) {
-    //         mes -= 1
-    //     } else {
-    //         mes += 11
-    //         ano -= 1
-    //     }
-    // }
-    // dataInicial = `${ano}-${mes}-${dia}`
+    // dataFinal = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
+    // dataa = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
+    // dataInicial = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
     // respostaFinal = []
     // fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-23.5668698,-46.6608874/${dataInicial}/${dataFinal}?unitGroup=us&key=3HRNW8DH3UCLBY3XJ2N3XT2EX&contentType=json`, {
     //     "method": "GET",
@@ -642,21 +674,36 @@
     // })
 </script>
 <script>
-  Chart.defaults.color = '#fff'
-  new Chart(
-            graficoTestes,
-            {
-                type: 'line',
-                data:
-                {
-                    labels: ['A', 'B', 'C', 'D', 'E'],
-                    datasets: [{
-                        label: 'Fodase',
-                        backgroundColor: '#47afff',
-                        borderColor: '#a8d9ff',
-                        data: [1, 2, 3, 4, 5]}]
-                },
-                options: {}
-            }
-    )
+  // variacao de cordenadas
+
+  // if (carregarTotem == "totens") {
+  //   enviado = ""
+  // } else {
+  //   enviado = ` where fkTotem = ${carregarTotem}`
+  // }
+  // fetch(`/medidas/variacao-cords/${enviado}`, {
+  //   method: "GET"
+  // }).then(function (response) {
+  //   if (response.ok) {
+  //     response.json().then(function (resposta) {
+  //       console.log(resposta)
+  //     })
+  //   }
+  // })
+
+  // fetch(`/medidas/tempTotens`, {
+  //   method: "GET"
+  // }).then(function (response) {
+  //   if (response.ok) {
+  //     response.json().then(function (resposta) {
+  //       for(i = 0; resposta.length; i++) {
+  //         console.log("/medidas/tempTotens")
+  //         console.log(resposta[i])
+  //       }
+  //     })
+  //   }
+  // })
+</script>
+<script>
+  // variacao de precisao da coleta
 </script>
