@@ -325,9 +325,22 @@ function temperaturaComparativaMapas() {
         return
     }
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql)
+    return database.executar(instrucaoSql)
 }
+
+function checarMediasTempTotens() {
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select avg(valor) as media, fkTotem from crawlerLeitura, Leitura where crawlerLeitura.fkLeitura = Leitura.idLeitura and nome = 'CPU Core' group by fkTotem`
+    } else {
+        console.log("\nEsta API só suporta rodar em ambiente cloud\n")
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
 
 function buscarEmpresa(fkempresa) {
     instrucaoSql = ''
@@ -450,6 +463,7 @@ module.exports = {
     coletandoPortas,
     variacaoCordsMapas,
     temperaturaComparativaMapas,
+    checarMediasTempTotens,
     dadosAlertas,
     contarAlertasDiario,
     contarAlertasSemanal,
