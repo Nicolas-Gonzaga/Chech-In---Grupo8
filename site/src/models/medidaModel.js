@@ -364,6 +364,19 @@ function processos() {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+ 
+function MemoryProcess(){
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select t1.* from Processos as t1 join (select distinct Nome, max(id) as id from Processos group by Nome) as t2 on t1.id = t2.id order by MemoryPercent desc;`
+    } else {
+        console.log("\nEsta API só suporta rodar em ambiente cloud\n");
+        return
+    }
+
+    console.log("grsagrgarrwggrsExecutando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function coletandoPortas() {
     var instrucao = `select top 9 portaAberta, horario from porta order by idPorta desc;`;
     return database.executar(instrucao);
@@ -426,5 +439,6 @@ module.exports = {
     variacaoCordsMapas,
     temperaturaComparativaMapas,
     dadosAlertas,
-    contarAlertas
+    contarAlertas,
+    MemoryProcess
 }

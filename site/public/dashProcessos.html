@@ -37,6 +37,7 @@
   <!-- Script para o modal do alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="">
@@ -205,8 +206,8 @@
         <div class="row">
           <div class="col-12">
             <div class="card card-chart">
-              <div class="card-header" style="height: 500px;">
-                <p id="fds">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+              <div class="card-header" style="height: 500px; display: flex; align-items: center; justify-content: center;">
+                <div id="processosList"  style="width: 100%; height: 100%; background-color:white"></div>
               </div>
             </div>
           </div>
@@ -214,11 +215,15 @@
         <div class="row">
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
+              <div>
+                <canvas id="graficoDonut"  style="position: absolute;" ></canvas>
+              </div>
             </div>
           </div>
           <!-- HISTORICO -->
           <div class="col-lg-6 col-md-12">
-            <div class="card card-tasks">
+            <div class="card card-tasks" style="height: 500px; display: flex; align-items: center; justify-content: center;">
+              <div id="memoryprocess" style="width: 100%; height: 100%; background-color:white"></div>
             </div>
         </div>
       </div>
@@ -388,13 +393,50 @@
     }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
-              fds.innerHTML += "BBBBBBBBBBBBBBBBBBBBBBB"
               for (i = 0; i < resposta.length; i++) {
-                fds.innerHTML += "CCCCCCCCCCCCCCCCCCCC"
-                fds.innerHTML += "<br>"
-                fds.innerHTML += JSON.stringify(resposta[i])
+                processosList.innerHTML += `<div class"processoListado">${JSON.stringify(resposta[i])}</div>`
               }
             })
         }
     })
+</script>
+<script>
+fetch(`/medidas/MemoryProcess`, {
+        method: "GET"
+    }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+              for (i = 0; i < resposta.length; i++) {
+                memoryprocess.innerHTML += `<div style="background-color: grey;">${JSON.stringify(resposta[i])}</div>`
+              }
+            })
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+			});
+</script>
+<script>
+    new Chart(
+        graficoDonut,
+        {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Janeiro',
+                    'Fevereiro',
+                    'Março',
+                    'Abril',
+                    'Maio',
+                    'Junho',
+                ],
+                datasets: [{
+                    label: 'Gastos e Despesas',
+                    backgroundColor: ['#F5222C', '#fd0402', '#e21d46', '#fb2304', '#ff4100', '#de2123'],
+                    data: [50, 5, 10, 20, 30, 5],
+                }]
+            },
+            options: {}
+        }
+    )
 </script>

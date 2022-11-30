@@ -4,6 +4,10 @@
   margin-bottom: 20px;
 }
 
+.processoListado {
+  background-color: grey;
+}
+
 .tim-white-buttons {
   background-color: #777777;
 }

@@ -59,6 +59,11 @@ router.get("/temp-comparativa-mapas", function (req, res) {
 router.get("/processos", function (req, res) {
     medidaController.processos(req, res)
 })
+
+router.get("/MemoryProcess", function (req, res) {
+    medidaController.MemoryProcess(req, res)
+})
+
 router.get("/coletandoPortas", function (req, res) {
     medidaController.coletandoPortas(req, res);
 })
