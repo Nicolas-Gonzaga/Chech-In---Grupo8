@@ -226,7 +226,7 @@
                 <div class="row">
                   <div class="col-sm-6 text-left">
                     <h5 class="card-category">Portas Abertas</h5>
-                    <h2 class="card-title">ESTADO</h2>
+                    <h2 class="card-title">QUANTIDADE</h2>
                     <canvas id="graficoPortas"></canvas>
                   </div>
                   <div class="col-sm-6">
@@ -264,6 +264,53 @@
             </div>
           </div>
         </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-chart">
+                <div class="card-header ">
+                  <div class="row">
+                    <div class="col-sm-6 text-left">
+                      <h5 class="card-category">Portas Abertas</h5>
+                      <h2 class="card-title">STATUS</h2>
+                      <canvas id="graficoPortasAberta"></canvas>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                        <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
+                        <!-- <input type="radio" name="options" checked> -->
+                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
+                        <!-- <span class="d-block d-sm-none"> -->
+                        <!-- <i class="tim-icons icon-single-02"></i> -->
+                        </span>
+                        </label>
+                        <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
+                        <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
+                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
+                        <!-- <span class="d-block d-sm-none"> -->
+                        <!-- <i class="tim-icons icon-gift-2"></i> -->
+                        </span>
+                        </label>
+                        <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
+                        <!-- <input type="radio" class="d-none" name="options"> -->
+                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
+                        <!-- <span class="d-block d-sm-none"> -->
+                        <!-- <i class="tim-icons icon-tap-02"></i> -->
+                        </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body-cpu">
+                  <div class="chart-area-cpu">
+                    <canvas id="chartBig11"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
 
         <!-- SIDE BAR -->
         <div class="fixed-plugin">
@@ -547,8 +594,8 @@ var dados = {
 
 for (i = 0; i < resposta.length; i++) {
   var registro = resposta[i];
-  dados.labels.push(registro.horario);
-  dados.datasets[0].data.push(registro.portaAberta);
+  dados.labels.push(registro.horario)
+  dados.datasets[0].data.push(registro.portaAberta)
 }
 
 console.log(JSON.stringify(dados));
@@ -611,8 +658,7 @@ console.log("---------------------------------")
 console.log(dados)
 console.log("---------------------------------")
 
-
-fetch(`/medidas/tempo-real`, { cache: 'no-store' }).then(function (response) {
+fetch(`/medidas/coletandoPortas`, { cache: 'no-store' }).then(function (response) {
   if (response.ok) {
     response.json().then(function (novoRegistro) {
       console.log(`Dados atuais do gráfico: ${dados}`);
@@ -641,6 +687,133 @@ fetch(`/medidas/tempo-real`, { cache: 'no-store' }).then(function (response) {
   });
 
 }
+
+
+/*function obterDadosGrafico() {
+
+
+fetch(`/medidas/coletandoPortas`, { cache: 'no-store' }).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (resposta) {
+      console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+      resposta.reverse();
+      plotarGrafico(resposta);
+    });
+  } else {
+    console.error('Nenhum dado encontrado ou erro na API');
+  }
+})
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+}
+
+// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+// Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+// A função *plotarGrafico* também invoca a função *atualizarGrafico*
+function plotarGrafico(resposta, id) {
+console.log('iniciando plotagem do gráfico...');
+
+var dados = {
+  labels: [],
+  datasets: [
+    {
+      yAxisID: 'yAxis',
+      xAxisID: 'xAxis',
+      label: 'Portas Abertas',
+      borderColor: '#D346B1',
+      backgroundColor: 'rgba(211,70,177,0.01)',
+      fill: true,
+      data: [1,2,3,4,5,6,7,8,9]
+    }
+  ]
+
+};
+
+
+
+for (i = 0; i < resposta.length; i++) {
+  var registro = resposta[i];
+  dados.labels.push(registro.portas);
+  dados.datasets[0].data.push(registro.porta1);
+  
+}
+
+console.log(JSON.stringify(dados));
+
+
+window.lineChart = new Chart(graficoPortas, {
+  type: 'bar',
+  data: dados,
+  options: {
+    plugins: {
+      legend: {
+        display: false,
+        labels: {
+          font: {
+            size: 70,
+            weight: "bold",
+            family: "arial"
+          }
+        }
+      },
+    },
+    responsive: true,
+    animation: { duration: 1000 },
+    hoverMode: 'index',
+    stacked: false,
+    tooltips: {
+      backgroundColor: 'rgba(0, 0, 0, 0.703)',
+    },
+    scales: {
+      yAxis: {
+        beginAtZero: true,
+        max: 100,
+        ticks: {
+          stepSize: 20,
+          color: "rgba(255,255,255,0.6)",
+        }
+      },
+      xAxis: {
+        ticks: {
+          color: "rgba(255,255,255,0.6)",
+        }
+      }
+    }
+  }
+})
+
+
+/* setTimeout(() => atualizarGrafico(id, dados), 2000);
+ }
+
+
+// Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+// buscando a última medida inserida em tabela contendo as capturas, 
+
+//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+//     Para ajustar o "select", ajuste o comando sql em src/models
+function atualizarGrafico(dados) {
+console.log("ENTRANDO NO ATUALIZAR GRAFICO")
+console.log("---------------------------------")
+console.log(dados)
+console.log("---------------------------------")
+
+
+fetch(`/medidas/tempo-real`, { cache: 'no-store' }).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (novoRegistro) {
+      console.log(`Dados atuais do gráfico: ${dados}`);
+
+      // tirando e colocando valores no gráfico
+      dados.labels.shift(); // apagar o primeiro
+      dados.labels.push(novoRegistro.horario); // incluir um novo momento
+      dados.datasets.data.push(novoRegistro.portaAberta) // incluir uma nova medida
+    
+      
+      /* dados.datasets[0].data.shift(); */  // apagar o primeiro de temperatura
+      /*  dados.datasets[0].data.push(novoRegistro[0].grafico_zonas); */ // incluir uma nova medida de temperatura
+      
 </script>
 
 </html>

@@ -302,25 +302,25 @@ function coletandoPortas(req, res) {
             }
         );
 }
-
 function dadosAlertas(req, res) {
 
     const limite_linhas = 3;
 
-    const empresa = req.params.empresa
-
-    medidaModel.dadosAlertas(empresa).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
+    var empresa = req.params.empresa
+    console.log('Cheguei aqui')
+        medidaModel.contarAlertas(empresa).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
     }).catch(function (erro) {
         console.log(erro);
         console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
+
 function contarAlertasDiario(req, res) {
 
     const limite_linhas = 3;
@@ -357,6 +357,23 @@ console.log('Cheguei aqui')
         res.status(500).json(erro.sqlMessage);
     });
 }
+function estadoPortas(req, res) {
+
+    medidaModel.estadoPortas()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 
 
@@ -379,5 +396,7 @@ module.exports = {
     temperaturaComparativaMapas,
     dadosAlertas,
     contarAlertasDiario,
-    contarAlertasSemanal
+    contarAlertasSemanal,
+    MemoryProcess,
+    estadoPortas
 }

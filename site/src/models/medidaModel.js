@@ -374,7 +374,7 @@ function dadosAlertas(empresa) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select componente, metrica, descricao, fkTotem, format(horario, 'hh:mm:ss') as horario from alerta where format(horario, 'dd-MM-yyyy') =  format(getdate(),'dd-MM-yyyy') and empresa = '${empresa}';`;
+        instrucaoSql = `select componente, metrica, descricao, fkTotem, format(horario, 'hh:mm:ss) as horario from alerta where format(horario, 'dd-MM-yyyy) = format(getdate(), 'dd-MM-yyyy) and empresa = '${empresa}'`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql =
@@ -387,6 +387,10 @@ function dadosAlertas(empresa) {
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
+}
+function estadoPortas() {
+    var instrucao = `select top 9 porta,statusPorta from porta;`;
+    return database.executar(instrucao);
 }
 function contarAlertasDiario(fkTotem) {
 
@@ -448,5 +452,7 @@ module.exports = {
     temperaturaComparativaMapas,
     dadosAlertas,
     contarAlertasDiario,
-    contarAlertasSemanal
+    contarAlertasSemanal,
+    MemoryProcess,
+    estadoPortas
 }

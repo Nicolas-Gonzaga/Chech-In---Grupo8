@@ -78,4 +78,12 @@ router.get("/contarAlertasSemanal/:fkTotem", function (req, res) {
     medidaController.contarAlertasSemanal(req, res)
 })
 
+router.get("/coletandoPortas", function (req, res) {
+    medidaController.coletandoPortas(req, res);
+})
+
+router.get("/estadoPortas", function (req, res) {
+    medidaController.estadoPortas(req, res);
+})
+
 module.exports = router;
