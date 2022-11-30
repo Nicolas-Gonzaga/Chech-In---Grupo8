@@ -325,8 +325,8 @@ function contarAlertas(req, res) {
 
     const limite_linhas = 3;
 
-    const fkTotem = req.params.fkTotem
-
+    var fkTotem = req.params.fkTotem
+console.log('Cheguei aqui')
     medidaModel.contarAlertas(fkTotem).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);

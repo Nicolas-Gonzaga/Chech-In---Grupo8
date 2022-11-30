@@ -22,7 +22,7 @@ fun main() {
     if(tipoBanco != 3) {QueryCreate(Conexao().getJdbcTemplate(tipoBanco)).createTable(tipoBanco)}
 
     var fkTotem = 50000
-    while (true) {
+        while (true) {
         val hora = LocalTime.now().toString().substring(0, 8)
         var data = "${LocalDate.now()}"
         data = data.substring(0, 4) + "/" + data.substring(5, 7) + "/" + data.substring(8, 10)

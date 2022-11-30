@@ -66,7 +66,7 @@ router.get("/coletandoPortas", function (req, res) {
 router.get("/dadosAlertas/:empresa", function (req, res) {
     medidaController.dadosAlertas(req, res)
 })
-router.get("/contarAlertas/:totem", function (req, res) {
+router.get("/contarAlertas/:fkTotem", function (req, res) {
     medidaController.contarAlertas(req, res)
 })
 

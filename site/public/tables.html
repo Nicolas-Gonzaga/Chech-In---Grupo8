@@ -20,13 +20,14 @@
   <script>
     modoGrafico = window.location.search
     modoGrafico = modoGrafico.substring(1, modoGrafico.length)
-   
+
 
   </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/icon-ekran.png">
   <link rel="icon" type="image/png" href="assets/img/icon-ekran.png">
+  
   <title>
     ēKran - Histórico
   </title>
@@ -39,6 +40,7 @@
   <link href="assets/css/black-dashboard.css" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
+  <script src="http://www.chartjs.org/dist/4.0.1/Chart.js"></script>
 </head>
 
 <body class="">
@@ -216,215 +218,247 @@
             <div class="card ">
               <div class="card-header">
                 <h4 class="card-title"> Alertas</h4>
-                <select id= "totem" onchange="mudarTotem()">
+                <select id="totens" onchange="mudarGrafico()">
+                  <option value="">-- Selecione um Totem</option>
                   <option value="50000">Totem 1</option>
                   <option value="50001">Totem 2</option>
                   <option value="50002">Totem 3</option>
-                  </select>
-                  
-                </div>
-                <div class="card-body">
-                  <select id="selecionar" onchange="mudarSelect()">
-                  </select>
+                </select>
+
+              </div>
+              <div class="card-body">
+                
+                <select id="selecionar" onchange="mudarSelect()">
+                </select>
                 <div class="table-responsive">
-                  <canvas id= "chartTotem1"></canvas>
+                  <canvas id="chartTotem1"></canvas>
                 </div>
               </div>
             </div>
           </div>
-          
-             
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-        <i class="fa fa-cog fa-2x"> </i>
-      </a>
-      <ul class="dropdown-menu">
-        <li class="header-title"> FUNDO </li>
-        <li class="adjustments-line">
-          <a href="javascript:void(0)" class="switch-trigger background-color">
-            <div class="badge-colors text-center">
-              <span class="badge filter badge-primary active" data-color="primary"></span>
-              <span class="badge filter badge-info" data-color="blue"></span>
-              <span class="badge filter badge-success" data-color="dark"></span>
+
+
+          <div class="fixed-plugin">
+            <div class="dropdown show-dropdown">
+              <a href="#" data-toggle="dropdown">
+                <i class="fa fa-cog fa-2x"> </i>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header-title"> FUNDO </li>
+                <li class="adjustments-line">
+                  <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                      <span class="badge filter badge-primary active" data-color="primary"></span>
+                      <span class="badge filter badge-info" data-color="blue"></span>
+                      <span class="badge filter badge-success" data-color="dark"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </a>
+                </li>
+                <li class="adjustments-line text-center color-change">
+                  <span class="color-label">MODO CLARO</span>
+                  <span class="badge light-badge mr-2"></span>
+                  <span class="badge dark-badge ml-2"></span>
+                  <span class="color-label">MODO ESCURO</span>
+                </li>
+              </ul>
             </div>
-            <div class="clearfix"></div>
-          </a>
-        </li>
-        <li class="adjustments-line text-center color-change">
-          <span class="color-label">MODO CLARO</span>
-          <span class="badge light-badge mr-2"></span>
-          <span class="badge dark-badge ml-2"></span>
-          <span class="color-label">MODO ESCURO</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!--   Core JS Files   -->
-  <script src="assets/js/core/jquery.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap.min.js"></script>
-  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chart JS -->
-  <script src="assets/js/plugins/chartjs.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
-  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-  <script src="assets/demo/demo.js"></script>
-  <script>
-    $(document).ready(function () {
-      $().ready(function () {
-        $sidebar = $('.sidebar');
-        $navbar = $('.navbar');
-        $main_panel = $('.main-panel');
+          </div>
+          <!--   Core JS Files   -->
+          <script src="assets/js/core/jquery.min.js"></script>
+          <script src="assets/js/core/popper.min.js"></script>
+          <script src="assets/js/core/bootstrap.min.js"></script>
+          <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+          <!--  Google Maps Plugin    -->
+          <!-- Place this tag in your head or just before your close body tag. -->
+          <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+          <!-- Chart JS -->
+          <script src="assets/js/plugins/chartjs.min.js"></script>
 
-        $full_page = $('.full-page');
 
-        $sidebar_responsive = $('body > .navbar-collapse');
-        sidebar_mini_active = true;
-        white_color = false;
+          <!--  Notifications Plugin    -->
+          <script src="assets/js/plugins/bootstrap-notify.js"></script>
+          <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+          <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
+          <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+          <script src="assets/demo/demo.js"></script>
+          <script>
+            $(document).ready(function () {
+              $().ready(function () {
+                $sidebar = $('.sidebar');
+                $navbar = $('.navbar');
+                $main_panel = $('.main-panel');
 
-        window_width = $(window).width();
+                $full_page = $('.full-page');
 
-        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+                $sidebar_responsive = $('body > .navbar-collapse');
+                sidebar_mini_active = true;
+                white_color = false;
+
+                window_width = $(window).width();
+
+                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
 
 
-        $('.fixed-plugin a').click(function (event) {
-          if ($(this).hasClass('switch-trigger')) {
-            if (event.stopPropagation) {
-              event.stopPropagation();
-            } else if (window.event) {
-              window.event.cancelBubble = true;
-            }
-          }
-        });
+                $('.fixed-plugin a').click(function (event) {
+                  if ($(this).hasClass('switch-trigger')) {
+                    if (event.stopPropagation) {
+                      event.stopPropagation();
+                    } else if (window.event) {
+                      window.event.cancelBubble = true;
+                    }
+                  }
+                });
 
-        $('.fixed-plugin .background-color span').click(function () {
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
+                $('.fixed-plugin .background-color span').click(function () {
+                  $(this).siblings().removeClass('active');
+                  $(this).addClass('active');
 
-          var new_color = $(this).data('color');
+                  var new_color = $(this).data('color');
 
-          if ($sidebar.length != 0) {
-            $sidebar.attr('data', new_color);
-          }
+                  if ($sidebar.length != 0) {
+                    $sidebar.attr('data', new_color);
+                  }
 
-          if ($main_panel.length != 0) {
-            $main_panel.attr('data', new_color);
-          }
+                  if ($main_panel.length != 0) {
+                    $main_panel.attr('data', new_color);
+                  }
 
-          if ($full_page.length != 0) {
-            $full_page.attr('filter-color', new_color);
-          }
+                  if ($full_page.length != 0) {
+                    $full_page.attr('filter-color', new_color);
+                  }
 
-          if ($sidebar_responsive.length != 0) {
-            $sidebar_responsive.attr('data', new_color);
-          }
-        });
+                  if ($sidebar_responsive.length != 0) {
+                    $sidebar_responsive.attr('data', new_color);
+                  }
+                });
 
-        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
-          var $btn = $(this);
+                $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                  var $btn = $(this);
 
-          if (sidebar_mini_active == true) {
-            $('body').removeClass('sidebar-mini');
-            sidebar_mini_active = false;
-            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
-          } else {
-            $('body').addClass('sidebar-mini');
-            sidebar_mini_active = true;
-            blackDashboard.showSidebarMessage('Sidebar mini activated...');
-          }
+                  if (sidebar_mini_active == true) {
+                    $('body').removeClass('sidebar-mini');
+                    sidebar_mini_active = false;
+                    blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                  } else {
+                    $('body').addClass('sidebar-mini');
+                    sidebar_mini_active = true;
+                    blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                  }
 
-          // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function () {
-            window.dispatchEvent(new Event('resize'));
-          }, 180);
+                  // we simulate the window Resize so the charts will get updated in realtime.
+                  var simulateWindowResize = setInterval(function () {
+                    window.dispatchEvent(new Event('resize'));
+                  }, 180);
 
-          // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function () {
-            clearInterval(simulateWindowResize);
-          }, 1000);
-        });
+                  // we stop the simulation of Window Resize after the animations are completed
+                  setTimeout(function () {
+                    clearInterval(simulateWindowResize);
+                  }, 1000);
+                });
 
-        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
-          var $btn = $(this);
+                $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                  var $btn = $(this);
 
-          if (white_color == true) {
+                  if (white_color == true) {
 
-            $('body').addClass('change-background');
-            setTimeout(function () {
-              $('body').removeClass('change-background');
-              $('body').removeClass('white-content');
-            }, 900);
-            white_color = false;
-          } else {
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                      $('body').removeClass('change-background');
+                      $('body').removeClass('white-content');
+                    }, 900);
+                    white_color = false;
+                  } else {
 
-            $('body').addClass('change-background');
-            setTimeout(function () {
-              $('body').removeClass('change-background');
-              $('body').addClass('white-content');
-            }, 900);
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                      $('body').removeClass('change-background');
+                      $('body').addClass('white-content');
+                    }, 900);
 
-            white_color = true;
-          }
+                    white_color = true;
+                  }
 
 
-        });
+                });
 
-        $('.light-badge').click(function () {
-          $('body').addClass('white-content');
-        });
+                $('.light-badge').click(function () {
+                  $('body').addClass('white-content');
+                });
 
-        $('.dark-badge').click(function () {
-          $('body').removeClass('white-content');
-        });
-      });
-    });
-  </script>
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script>
-    window.TrackJS &&
-      TrackJS.install({
-        token: "ee6fab19c5a04ac1a32a645abde4613a",
-        application: "black-dashboard-free"
-      });
-  </script>
+                $('.dark-badge').click(function () {
+                  $('body').removeClass('white-content');
+                });
+              });
+            });
+          </script>
+          <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+          <script>
+            window.TrackJS &&
+              TrackJS.install({
+                token: "ee6fab19c5a04ac1a32a645abde4613a",
+                application: "black-dashboard-free"
+              });
+          </script>
 </body>
 <script>
-  console.log('oi')
+  function mudarGrafico(){
+   
+  plotAlertas()
+
+}
+
+
   function mudarSelect() {
     console.log('oi')
     if (selecionar.value == 1) {
       window.location.href = './tables.html?diario'
     } else {
-      
+
       window.location.href = './tables.html?semanal'
     }
-  } 
-  console.log('oi')
-    if (modoGrafico == 'diario') {
+  }
+  if (modoGrafico == 'diario') {
     console.log('oi1')
-    
-    selecionar.innerHTML += `<option value="4">diario</option>
-    <option value="5">semanal</option>`
-  } else if (modoGrafico == 'semanal') {
-      console.log('oi2')
-    selecionar.innerHTML += `
-                <option value="5">semanal</option>
-                <option value="4">diario</option>`
-              }
-              
 
-              function obterDadosGrafico(fkTotem) {
-                var fkTotem = totem.value
-                
-                console.log('OI')
+    selecionar.innerHTML += `<option value="1">Período diário</option>
+    <option value="2">Período semanal</option>`
+  } else if (modoGrafico == 'semanal') {
+    console.log('oi2')
+    selecionar.innerHTML += `
+                <option value="2">Período semanal</option>
+                <option value="1">Período diário</option>`
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function plotAlertas() {
+    obterDadosGrafico()
+    function obterDadosGrafico(fkTotem) {
+      var dataAtual = new Date();
+      var dia = dataAtual.getDate();
+      var mes = (dataAtual.getMonth() + 1);
+      var ano = dataAtual.getFullYear();
+      var horas = dataAtual.getHours();
+      var minutos = dataAtual.getMinutes();
+      var fkTotem = totens.value
+
+
+
+      console.log(fkTotem)
       fetch(`/medidas/contarAlertas/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
           response.json().then(function (resposta) {
@@ -434,220 +468,122 @@
             plotarGrafico(resposta);
           });
         } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
     }
-    
-  
-  
 
 
-  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-  // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-  function plotarGrafico(resposta, id) {
-    console.log('iniciando plotagem do gráfico...');
 
-    
-      var dados = {
+
+
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+
+
+    function plotarGrafico(resposta) {
+
+      console.log("Entrei no plotar")
+      const dados4 = {
         labels: [],
-        datasets: [
-          {
-            yAxisID: 'yAxis',
-            xAxisID: 'xAxis',
-            label: 'Quantidade de alertas',
-            borderColor: '#D346B1',
-            backgroundColor: 'rgba(211,70,177,0.01)',
-            fill: true,
-            data: []
-          }
-        ]
-
+        datasets: [{
+          backgroundColor: ['rgba(211,70,177,0.7)', 'rgba(31,142,241,0.7)'],
+          borderColor: ['rgba(211,70,177,0.7)', 'rgba(31,142,241,0.7)'],
+          data: [],
+        }]
       };
-    var dados2 = {
-      labels: [],
-      datasets: [
-        {
-          yAxisID: 'yAxisRam',
-          xAxisID: 'xAxisRam',
-          label: 'Quantidade de alertas',
-          borderColor: 'rgba(31,142,241,1)',
-          backgroundColor: 'rgba(31,142,241,0.01)',
-          fill: true,
-          data: []
-        }
-      ]
-    };
 
-    var dados3 = {
-      labels: [],
-      datasets: [
-        {
-          yAxisID: 'yAxisDown',
-          xAxisID: 'xAxisDown',
-          label:'Quantidade de alertas',
-          borderColor: '#D346B1',
-          backgroundColor: 'rgba(211,70,177,0.01)',
-          fill: true,
-          data: []
-        },
-        
-      ]
-    };
+      for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados4.labels.push(registro.componente)
+        dados4.datasets[0].data.push(registro.qtdAlertas)
 
-    for (i = 0; i < resposta.length; i++) {
-      var registro = resposta[i];
-      dados.labels.push(registro.componente);
-      dados.datasets[0].data.push(registro.qtdAlertas);
-      
-    }
-
-
-
-    console.log(JSON.stringify(dados));
-    console.log(JSON.stringify(dados2));
-
-    /* var ctx = chartBig11.getContext('2d');  */
-    /*       var optionsTeste = {
-            options: {
-              responsive: true,
-              animation: { duration: 1000 },
-              hoverMode: 'index',
-              stacked: false,
-              title: {
-                display: false,
-                text: 'Dados capturados'
-              },
-              legend: {
-                display: false
-              },
-    
-              tooltips: {
-                backgroundColor: 'rgba(0, 0, 0, 0.703)',
-              },
-              scales: {
-                yAxis: {
-                  type: 'bar',
-                  display: true,
-                  position: 'left',
-                  beginAtZero: true,
-                  max: 30,
-                  min: 0,
-                    ticks: {
-                    fontColor: 'white',
-                    beginAtZero: true,
-                    max: 100,
-                    min: 0
-                  }, 
-    
-    
-                },
-                xAxes: [{
-                  ticks: {
-                    fontColor: 'white'
-                  }
-                }]
-              }
-            }
-          }
-     */
-    if (dados == undefined) {
-      res.status(400).send("Data undefined!")
-    };
-
-    window.lineChart = new Chart(chartTotem1, {
-      type: 'pie',
-      data: dados,
-      options: {
-        plugins: {
-          legend: {
-            display: false,
-            labels: {
-              font: {
-                size: 70,
-                weight: "bold",
-                family: "arial"
-              }
-            }
-          },
-        },
-        responsive: true,
-        animation: { duration: 1000 },
-        hoverMode: 'index',
-        stacked: false,
-        tooltips: {
-          backgroundColor: 'rgba(0, 0, 0, 0.703)',
-        },
-        scales: {
-          yAxis: {
-            beginAtZero: true,
-            max: 100,
-            ticks: {
-              stepSize: 20,
-              color: "rgba(255,255,255,0.6)",
-            }
-          },
-          xAxis: {
-            ticks: {
-              color: "rgba(255,255,255,0.6)",
-            }
-          }
-        }
       }
-    })
-   
 
-   
 
-    /*       window.grafico_barra = Chart.Line(ctx, {
-            data: dados,
-            options: {
-              responsive: true,
-              animation: { duration: 1000 },
-              hoverMode: 'index',
-              stacked: false,
-              title: {
-                display: false,
-                text: 'Dados capturados'
-              },
-              legend: {
-                display: false
-              },
-    
-              tooltips: {
-                backgroundColor: 'rgba(0, 0, 0, 0.703)',
-              },
-              scales: {
-                yAxes: [{
-                  type: 'linear',
-                  display: true,
-                  position: 'left',
-                  id: 'y-temperatura',
-                  ticks: {
-                    fontColor: 'white',
-                    beginAtZero: true,
-                    max: 100,
-                    min: 0
-                  },
-    
-    
-                }],
-                xAxes: [{
-                  ticks: {
-                    fontColor: 'white'
-                  }
-                }]
+
+
+      const config = {
+        type: 'pie',
+        data: dados4,
+        options: {}
+      };
+
+
+
+      const myChart = new Chart(
+        document.getElementById('chartTotem1'),
+        config
+      );
+
+
+
+
+
+      /*       window.grafico_barra = Chart.Line(ctx, {
+              data: dados,
+              options: {
+                responsive: true,
+                animation: { duration: 1000 },
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                  display: false,
+                  text: 'Dados capturados'
+                },
+                legend: {
+                  display: false
+                },
+      
+                tooltips: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.703)',
+                },
+                scales: {
+                  yAxes: [{
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    id: 'y-temperatura',
+                    ticks: {
+                      fontColor: 'white',
+                      beginAtZero: true,
+                      max: 100,
+                      min: 0
+                    },
+      
+      
+                  }],
+                  xAxes: [{
+                    ticks: {
+                      fontColor: 'white'
+                    }
+                  }]
+                }
               }
-            }
-          }); */
-       
-        }obterDadosGrafico(fkTotem)
+            }); */
+      setTimeout(() => atualizarGrafico(dados4, myChart), 15000)
+
+    }
+  
+  function atualizarGrafico(data, myChart) {
+    myChart.clear();
+    myChart.update()
+    setTimeout(() => plotAlertas(), 500)
+  }
 
   
+  
+
+  }
+  let proximaAtualizacao;
+
+  window.onload = plotAlertas()
+
+
 </script>
 
 </html>
