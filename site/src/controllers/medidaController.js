@@ -285,20 +285,6 @@ function processos(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-function MemoryProcess(req, res) {
-
-    medidaModel.MemoryProcess().then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
 function coletandoPortas(req, res) {
 
     medidaModel.coletandoPortas()
@@ -321,27 +307,45 @@ function dadosAlertas(req, res) {
 
     const limite_linhas = 3;
 
-    var novototem = req.params.novototem
-    console.log('Cheguei aqui')
-        medidaModel.contarAlertas(novototem).then(function (resultado) {
-            if (resultado.length > 0) {
-                res.status(200).json(resultado);
-            } else {
-                res.status(204).send("Nenhum resultado encontrado!")
-            }
+    const empresa = req.params.empresa
+
+    medidaModel.dadosAlertas(empresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
     }).catch(function (erro) {
         console.log(erro);
         console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
-function contarAlertas(req, res) {
+function contarAlertasDiario(req, res) {
 
     const limite_linhas = 3;
 
     var fkTotem = req.params.fkTotem
 console.log('Cheguei aqui')
-    medidaModel.contarAlertas(fkTotem).then(function (resultado) {
+    medidaModel.contarAlertasDiario(fkTotem).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+function contarAlertasSemanal(req, res) {
+
+    const limite_linhas = 3;
+
+    var fkTotem = req.params.fkTotem
+console.log('Cheguei aqui')
+    medidaModel.contarAlertasSemanal(fkTotem).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -374,6 +378,6 @@ module.exports = {
     variacaoCordsMapas,
     temperaturaComparativaMapas,
     dadosAlertas,
-    contarAlertas,
-    MemoryProcess
+    contarAlertasDiario,
+    contarAlertasSemanal
 }

@@ -64,15 +64,18 @@ router.get("/MemoryProcess", function (req, res) {
     medidaController.MemoryProcess(req, res)
 })
 
-router.get("/contarAlertas/:novototem", function (req, res) {
+router.get("/coletandoPortas", function (req, res) {
     medidaController.coletandoPortas(req, res);
 })
 
 router.get("/dadosAlertas/:empresa", function (req, res) {
     medidaController.dadosAlertas(req, res)
 })
-router.get("/contarAlertas/:fkTotem", function (req, res) {
-    medidaController.contarAlertas(req, res)
+router.get("/contarAlertasDiario/:fkTotem", function (req, res) {
+    medidaController.contarAlertasDiario(req, res)
+})
+router.get("/contarAlertasSemanal/:fkTotem", function (req, res) {
+    medidaController.contarAlertasSemanal(req, res)
 })
 
 module.exports = router;

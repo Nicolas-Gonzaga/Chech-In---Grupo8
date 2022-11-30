@@ -364,30 +364,17 @@ function processos() {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
- 
-function MemoryProcess(){
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select t1.* from Processos as t1 join (select distinct Nome, max(id) as id from Processos group by Nome) as t2 on t1.id = t2.id order by MemoryPercent desc;`
-    } else {
-        console.log("\nEsta API só suporta rodar em ambiente cloud\n");
-        return
-    }
-
-    console.log("grsagrgarrwggrsExecutando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 function coletandoPortas() {
     var instrucao = `select top 9 portaAberta, horario from porta order by idPorta desc;`;
     return database.executar(instrucao);
 }
 
-function contarAlertas(novototem) {
+function dadosAlertas(empresa) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', componente from alerta where fkTotem = ${novototem[0]} and horario like '${novototem[1]}' group by componente `;
+        instrucaoSql = `select componente, metrica, descricao, fkTotem, format(horario, 'hh:mm:ss') as horario from alerta where format(horario, 'dd-MM-yyyy') =  format(getdate(),'dd-MM-yyyy') and empresa = '${empresa}';`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql =
@@ -401,12 +388,33 @@ function contarAlertas(novototem) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function contarAlertas(fkTotem) {
+function contarAlertasDiario(fkTotem) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', componente from alerta where fkTotem = ${fkTotem} group by componente `;
+        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', componente from alerta where fkTotem = ${fkTotem} and DAY(horario) = DAY(current_timestamp)  group by componente;
+        `
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql =
+            `select cpuPercent, ramPercent, horario, date_format(horario, '%H:%i') as horarioF from LoocaLeitura join Leitura on fkLeitura = idLeitura order by fkLeitura desc limit ${limite_linhas}`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function contarAlertasSemanal(fkTotem) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', componente from alerta where fkTotem = ${fkTotem} and datepart(week, current_timestamp) = datepart(week, horario)  group by componente;
+        `
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql =
@@ -439,6 +447,6 @@ module.exports = {
     variacaoCordsMapas,
     temperaturaComparativaMapas,
     dadosAlertas,
-    contarAlertas,
-    MemoryProcess
+    contarAlertasDiario,
+    contarAlertasSemanal
 }

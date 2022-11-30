@@ -437,12 +437,12 @@
   }
 
   function verificar(metrica){
-    if(modoGrafico == 'Diario'){
+    if(window.location.href == "tables.html?diario"){
     if(metrica >= 10 ){
       Swal.fire("Cuidado! Esse totem está dando problemas frequentes! Inspecione-o", "warning");
     }
   }
-    if(modoGrafico == 'Semanal'){
+    if(window.location.href == "tables.html?semanal"){
       if(metrica >= 50){
       Swal.fire("Cuidado! Esse totem está dando problemas frequentes! Inspecione-o", "warning");
 
@@ -467,19 +467,32 @@
   function plotAlertas() {
     obterDadosGrafico()
     function obterDadosGrafico(fkTotem) {
-      var dataAtual = new Date();
-      var dia = dataAtual.getDate();
-      var mes = (dataAtual.getMonth() + 1);
-      var ano = dataAtual.getFullYear();
-      var horas = dataAtual.getHours();
-      var minutos = dataAtual.getMinutes();
       var fkTotem = totens.value
-      var novototem = [fkTotem, dia, modoGrafico]
 
 
-
+      console.log("a")
+      if(modoGrafico == "diario"){
+        console.log("b")
       console.log(fkTotem)
-      fetch(`/medidas/contarAlertas/${novototem}`, { cache: 'no-store' }).then(function (response) {
+      fetch(`/medidas/contarAlertasDiario/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            console.log(fkTotem)
+            resposta.reverse();
+            plotarGrafico(resposta);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    } 
+    else {
+      console.log('B')
+      fetch(`/medidas/contarAlertasSemanal/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -496,7 +509,7 @@
         });
     }
 
-
+  }
 
 
 
@@ -592,7 +605,8 @@
   
   function atualizarGrafico(data, myChart) {
     myChart.clear();
-    myChart.update()
+    myChart.update();
+    document.getElementById('chartTotem1')
     
     setTimeout(() => plotAlertas(), 500)
   }
