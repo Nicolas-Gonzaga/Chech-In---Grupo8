@@ -52,7 +52,7 @@ router.get("/variacao-cords/:valor", function (req, res) {
     medidaController.variacaoCordsMapas(req, res)
 })
 
-router.get("/variacao-cords/", function (req, res) {
+router.get("/temp-comparativa-mapas", function (req, res) {
     medidaController.temperaturaComparativaMapas(req, res)
 })
 

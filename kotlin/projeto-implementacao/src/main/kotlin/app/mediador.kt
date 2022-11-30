@@ -42,7 +42,7 @@ fun main() {
         Thread.sleep(500)
         cursor.insertLooca(lista, cursor.selectIdLeitura(hora, data))
         fkTotem++
-        if (fkTotem == 50003) {fkTotem = 50000}
+        if (fkTotem == 50004) {fkTotem = 50000}
 
         println("RECOMEÇANDO O LOOP...\r\n")
     }

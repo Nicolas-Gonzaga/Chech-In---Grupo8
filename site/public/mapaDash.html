@@ -175,8 +175,10 @@
                 <div class="postcard">
                     <div class="postcardPlaceholder">
                         <div class="postcardInner">
-                            <div class="postcardFront" style="background-color: rgb(211, 211, 211);">
-                                <div id="botoesMapa">Carregando</div>
+                            <div class="postcardFront">
+                              <div id=""></div>
+                                <span id="botoesMapa" style="color: white;">CARREGANDO</span>
+                                <img src="./assets/img/map-icon.png" height="40%" width="20%">
                             </div>
                             <div class="postcardBack">
                                 <button onclick="virar(false)" class="postcardBtn">Visualizar todos os Totens</button>
@@ -193,7 +195,7 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <span style="margin-top: 5%; font-size: 200%; color: white;">Temperatura do Totem</span>
+                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Temperatura do Totem <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Média diária</span>
                 <div style="padding: 2%; height:95%; width:95%;">
                   <canvas id="graficoTestes" style="position: relative; height:100%; width:100%"></canvas>
@@ -204,7 +206,7 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <span style="margin-top: 5%; font-size: 200%; color: white;">Temperatura da Região</span>
+                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Temperatura da Região <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Média diária</span>
                 <div style="padding: 20px; height:95%; width:95%;">
                   <canvas id="graficoLinhas" style="position: relative; height:100%; width:100%"></canvas>
@@ -218,7 +220,8 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <h3 style="margin-top: 5%;">A B C</h3>
+                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Cordenadas <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="color: white;">Gráfico de Variação</span>
                 <div style="padding: 2%; height:95%; width:95%;">
                   <canvas id="graficoTestes" style="position: relative; height:100%; width:100%"></canvas>
                 </div>
@@ -228,7 +231,8 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <h3 style="margin-top: 5%;">A B C</h3>
+                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Precisão das Cords <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="color: white;">Gráfico de Variação</span>
                 <div style="padding: 20px; height:95%; width:95%;">
                   <canvas id="graficoLinhas" style="position: relative; height:100%; width:100%"></canvas>
                 </div>
@@ -477,12 +481,12 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
         for (i = 0; i < cords.length; i++) {
-            L.marker([cords[i].latitude, cords[i].longitude], {icon: new LeafIcon({iconUrl: "./assets/img/totemAeroporto.png"})}
+            L.marker([cords[i].latitude, cords[i].longitude], {icon: new LeafIcon({iconUrl: "./assets/img/totemAeroportoC.png"})}
             ).addTo(map)
-            .bindPopup(`<b>Nome do Totem:</b><br>Totem ${cords[i].fkTotem-49999}<br><b>ID do Totem:</b><br>${cords[i].fkTotem}<br><b>Latitude:</b><br>${cords[i].latitude}°<br><b>Longitude:</b><br>${cords[i].longitude}°<br><b>Precisão da coleta:</b><br>${cords[i].precisao}m<br><b>Data:</b><br>${cords[i].dia}<br><b>Horário:</b><br>${cords[i].hora}<br><b>ID da Unidade:</b><br>${cords[i].idUnidade}`)
+            .bindPopup(`<b>Nome do Totem:</b><br>Totem ${cords[i].fkTotem-49999}<br><b>ID do Totem:</b><br>${cords[i].fkTotem}<br><b>Latitude:</b><br>${cords[i].latitude}°<br><b>Longitude:</b><br>${cords[i].longitude}°<br><b>Precisão da coleta:</b><br>${cords[i].precisao}m<br><b>Data da coleta:</b><br>${cords[i].dia}<br><b>Horário da coleta:</b><br>${cords[i].hora}<br><b>ID da Unidade:</b><br>${cords[i].idUnidade}`)
             L.circle([cords[i].latitude, cords[i].longitude], {
-                color: '#0087ff',
-                fillColor: '#0bc9f4',
+                color: '#3bd22d',
+                fillColor: '#11ee24',
                 fillOpacity: 0.2,
                 radius: cords[i].precisao,
             }).addTo(map)
@@ -559,21 +563,21 @@
       }
     }
     valoresDoGrafico = valoresDoGrafico.reverse()
-    console.log(valoresDoGrafico)
+    datasNecessitadas = datasNecessitadas.reverse()
     datasets = []
     for (i = 0; i < 3; i++) {
       if (i == 0) {
-        labela = 'Minimo'
-        backgroundColora = '#47afff'
-        borderColora = '#a8d9ff'
+        labela = 'Mínimo'
+        backgroundColora = '#3DA4C2'
+        borderColora = '#1EC1E1'
       } else if (i == 1) {
-        labela = 'Valor'
-        backgroundColora = '#1061a2'
-        borderColora = '#2586d4'
+        labela = 'Média'
+        backgroundColora = '#fff8ff'
+        borderColora = '#ecf2f0'
       } else if (i == 2) {
-        labela = 'Maximo'
-        backgroundColora = '#47afff'
-        borderColora = '#a8d9ff'
+        labela = 'Máximo'
+        backgroundColora = '#D6292C'
+        borderColora = '#D03A2F'
       }
       dados = []
       for (f = 0; f < valoresDoGrafico.length; f++) {
@@ -588,13 +592,14 @@
                   type: 'line',
                   data:
                   {
-                      labels: [datasNecessitadas[4], datasNecessitadas[3], datasNecessitadas[2], datasNecessitadas[1], datasNecessitadas[0]],
+                      labels: datasNecessitadas,
                       datasets: datasets
                   },
                   options: {}
               }
-      )
+    )
   }
+  if (carregarTotem != 'totens') {
     fetch("/medidas/temp-comparativa-mapas", {
         method: "GET"
     }).then(function (response) {
@@ -604,74 +609,77 @@
             })
         }
     })
-</script>
-<script>
-  // Temperatura da Região - Média diária
+  }
 
-    // dataa = new Date()
-    // dataFinal = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
-    // dataa = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
-    // dataInicial = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
-    // respostaFinal = []
-    // fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-23.5668698,-46.6608874/${dataInicial}/${dataFinal}?unitGroup=us&key=3HRNW8DH3UCLBY3XJ2N3XT2EX&contentType=json`, {
-    //     "method": "GET",
-    //     "headers": {}
-    // })
-    // .then(response => {
-    // if (response.ok) {
-    //   return response.json()
-    // }
-    //   throw response
-    // })
-    // .then(response => {
-    //   resposta = response
-    //   for (i = 0; i < resposta.days.length; i++) {
-    //     respostaFinal.push([((resposta.days[i].tempmin - 32) / 9) * 5, ((resposta.days[i].temp - 32) / 9) * 5, ((resposta.days[i].tempmax - 32) / 9) * 5, resposta.days[i].datetime])
-    //   }
-    //   const data = {
-    //     labels: [],
-    //     datasets: []
-    //   }
-    //   console.log(`A: ${respostaFinal}`)
-    //   for (i = 0; i < respostaFinal.length; i++) {
-    //     data.labels.push(`${respostaFinal[i][3].substring(8,10)}/${respostaFinal[0][3].substring(5,7)}/${respostaFinal[0][3].substring(2,4)}`)
-    //   }
-    //   for (i = 0; i < 3; i++) {
-    //     if (i == 0) {
-    //       label = 'Minimo'
-    //       backgroundColor = '#47afff'
-    //       borderColor = '#a8d9ff'
-    //     } else if (i == 1) {
-    //       label = 'Valor'
-    //       backgroundColor = '#1061a2'
-    //       borderColor = '#2586d4'
-    //     } else if (i == 2) {
-    //       label = 'Maximo'
-    //       backgroundColor = '#47afff'
-    //       borderColor = '#a8d9ff'
-    //     }
-    //   console.log(`B: ${respostaFinal}`)
+  /*
+  ====================================
+  Temperatura da Região - Média diária
+  ====================================
+  */
 
-    //     data.datasets.push({label: label, backgroundColor: backgroundColor, borderColor: borderColor, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
-    //   }
-    //   new Chart(
-    //     graficoLinhas,
-    //     {
-    //         type: 'line',
-    //         data: data,
-    //         options: {}
-    //     }
-    //   )
-    // })
-    // .catch((errorResponse) => {
-    // if (errorResponse.text) {
-    //     errorResponse.text().then( errorMessage => {
-    //         console.log(errorMessage)
-    //     })
-    // } else {
-    //     console.log("Erro maluco") 
-    // }
-    // })
+  // dataa = new Date()
+  // dataFinal = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
+  // dataa = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
+  // dataInicial = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
+  // respostaFinal = []
+  // fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-23.5668698,-46.6608874/${dataInicial}/${dataFinal}?unitGroup=us&key=3HRNW8DH3UCLBY3XJ2N3XT2EX&contentType=json`, {
+  //     "method": "GET",
+  //     "headers": {}
+  // })
+  // .then(response => {
+  // if (response.ok) {
+  //   return response.json()
+  // }
+  //   throw response
+  // })
+  // .then(response => {
+  //   resposta = response
+  //   for (i = 0; i < resposta.days.length; i++) {
+  //     respostaFinal.push([((resposta.days[i].tempmin - 32) / 9) * 5, ((resposta.days[i].temp - 32) / 9) * 5, ((resposta.days[i].tempmax - 32) / 9) * 5, resposta.days[i].datetime])
+  //   }
+  //   const data = {
+  //     labels: [],
+  //     datasets: []
+  //   }
+  //   for (i = 0; i < respostaFinal.length; i++) {
+  //     data.labels.push(`${respostaFinal[i][3].substring(8,10)}/${respostaFinal[0][3].substring(5,7)}/${respostaFinal[0][3].substring(2,4)}`)
+  //   }
+  //   for (i = 0; i < 3; i++) {
+      // if (i == 0) {
+      //   labela = 'Mínimo'
+      //   backgroundColora = '#3DA4C2'
+      //   borderColora = '#1EC1E1'
+      // } else if (i == 1) {
+      //   labela = 'Média'
+      //   backgroundColora = '#fff8ff'
+      //   borderColora = '#ecf2f0'
+      // } else if (i == 2) {
+      //   labela = 'Máximo'
+      //   backgroundColora = '#D6292C'
+      //   borderColora = '#D03A2F'
+      // }
+
+  //     data.datasets.push({label: label, backgroundColor: backgroundColor, borderColor: borderColor, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
+  //   }
+  //   Chart.defaults.color = '#fff'
+  //   new Chart(
+  //     graficoLinhas,
+  //     {
+  //         type: 'line',
+  //         data: data,
+  //         options: {}
+  //     }
+  //   )
+  // })
+  // .catch((errorResponse) => {
+  // if (errorResponse.text) {
+  //     errorResponse.text().then( errorMessage => {
+  //         console.log(errorMessage)
+  //     })
+  // } else {
+  //     console.log("Erro maluco") 
+  // }
+  // })
 </script>
 <script>
   // variacao de cordenadas
