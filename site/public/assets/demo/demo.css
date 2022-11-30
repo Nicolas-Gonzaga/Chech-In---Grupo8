@@ -6,6 +6,12 @@
 
 .processoListado {
   background-color: grey;
+  border: 1px solid black;
+}
+
+.processoDonut1{
+  width: 100%;
+  height: 100%;
 }
 
 .tim-white-buttons {
