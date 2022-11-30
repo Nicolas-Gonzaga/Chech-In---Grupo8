@@ -41,6 +41,11 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
   <script src="http://www.chartjs.org/dist/4.0.1/Chart.js"></script>
+  <!-- Script para o alert-->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 </head>
 
 <body class="">
@@ -431,6 +436,20 @@
                 <option value="1">Período diário</option>`
   }
 
+  function verificar(metrica){
+    if(modoGrafico == 'Diario'){
+    if(metrica >= 10 ){
+      Swal.fire("Cuidado! Esse totem está dando problemas frequentes! Inspecione-o", "warning");
+    }
+  }
+    if(modoGrafico == 'Semanal'){
+      if(metrica >= 50){
+      Swal.fire("Cuidado! Esse totem está dando problemas frequentes! Inspecione-o", "warning");
+
+      }
+    }
+  }
+
 
 
 
@@ -455,11 +474,12 @@
       var horas = dataAtual.getHours();
       var minutos = dataAtual.getMinutes();
       var fkTotem = totens.value
+      var novototem = [fkTotem, dia, modoGrafico]
 
 
 
       console.log(fkTotem)
-      fetch(`/medidas/contarAlertas/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
+      fetch(`/medidas/contarAlertas/${novototem}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -566,12 +586,14 @@
               }
             }); */
       setTimeout(() => atualizarGrafico(dados4, myChart), 15000)
+      setTimeout(()=> verificar(dados4.qtdAlertas), 30000)
 
     }
   
   function atualizarGrafico(data, myChart) {
     myChart.clear();
     myChart.update()
+    
     setTimeout(() => plotAlertas(), 500)
   }
 

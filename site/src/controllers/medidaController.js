@@ -321,14 +321,14 @@ function dadosAlertas(req, res) {
 
     const limite_linhas = 3;
 
-    const empresa = req.params.empresa
-
-    medidaModel.dadosAlertas(empresa).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
+    var novototem = req.params.novototem
+    console.log('Cheguei aqui')
+        medidaModel.contarAlertas(novototem).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
     }).catch(function (erro) {
         console.log(erro);
         console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);

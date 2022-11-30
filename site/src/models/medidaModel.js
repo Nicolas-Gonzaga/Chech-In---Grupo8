@@ -382,12 +382,12 @@ function coletandoPortas() {
     return database.executar(instrucao);
 }
 
-function dadosAlertas(empresa) {
+function contarAlertas(novototem) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select componente, metrica, descricao, fkTotem, format(horario, 'hh:mm:ss') as horario from alerta where format(horario, 'dd-MM-yyyy') =  format(getdate(),'dd-MM-yyyy') and empresa = '${empresa}';`;
+        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', componente from alerta where fkTotem = ${novototem[0]} and horario like '${novototem[1]}' group by componente `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql =

@@ -64,7 +64,7 @@ router.get("/MemoryProcess", function (req, res) {
     medidaController.MemoryProcess(req, res)
 })
 
-router.get("/coletandoPortas", function (req, res) {
+router.get("/contarAlertas/:novototem", function (req, res) {
     medidaController.coletandoPortas(req, res);
 })
 
