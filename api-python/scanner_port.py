@@ -55,7 +55,7 @@ while True:
 #--------------------------------------------------------------------------------------------------------------
 
 
-    portas = [3333,23,8080,443,21,3333,22,3389,3306]
+    portas = [80,23,8080,443,21,3333,22,3389,3306]
 
 
     portas_aberta = 0
@@ -76,7 +76,7 @@ while True:
             if codigo == 10035:
                     
                     portas_aberta += 1
-                    status_porta.append(1)
+                    status_porta.append(100)
             else:
                     status_porta.append(0)
                 
@@ -100,10 +100,18 @@ while True:
                     print(values)
                     cursor.execute(sql, values)
 
+                    sql = "INSERT INTO statusPorta (portas,porta1,porta2,porta3,porta4,porta5,porta6,porta7,porta8,porta9) VALUES (?,?,?,?,?,?,?,?,?,?)"
+                    values = [portaAtual,status_porta[0],status_porta[1],status_porta[2],status_porta[3],status_porta[4],status_porta[5],status_porta[6]
+                   ,status_porta[7],status_porta[8]]
+                    print(values)
+                    cursor.execute(sql, values)
+
                 fkTotem+=1
+                
         
         #------------------------------------------------------------------------------------------------------------       
                 print(i, "valores inseridos no banco.")
                 print("------------------------------------------")
                 print("\r")
                 cnxn.commit()
+                time.sleep(10)
