@@ -480,6 +480,15 @@
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
+        fetch(`/medidas/checarMediasTempTotens`, {
+            method: "GET"
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    a
+                })
+            }
+        })
         for (i = 0; i < cords.length; i++) {
             L.marker([cords[i].latitude, cords[i].longitude], {icon: new LeafIcon({iconUrl: "./assets/img/totemAeroportoC.png"})}
             ).addTo(map)
@@ -587,16 +596,16 @@
     }
     Chart.defaults.color = '#fff'
     new Chart(
-              graficoTestes,
-              {
-                  type: 'line',
-                  data:
-                  {
-                      labels: datasNecessitadas,
-                      datasets: datasets
-                  },
-                  options: {}
-              }
+      graficoTestes,
+      {
+          type: 'line',
+          data:
+          {
+              labels: datasNecessitadas,
+              datasets: datasets
+          },
+          options: {}
+      }
     )
   }
   if (carregarTotem != 'totens') {
@@ -645,21 +654,21 @@
   //     data.labels.push(`${respostaFinal[i][3].substring(8,10)}/${respostaFinal[0][3].substring(5,7)}/${respostaFinal[0][3].substring(2,4)}`)
   //   }
   //   for (i = 0; i < 3; i++) {
-      // if (i == 0) {
-      //   labela = 'Mínimo'
-      //   backgroundColora = '#3DA4C2'
-      //   borderColora = '#1EC1E1'
-      // } else if (i == 1) {
-      //   labela = 'Média'
-      //   backgroundColora = '#fff8ff'
-      //   borderColora = '#ecf2f0'
-      // } else if (i == 2) {
-      //   labela = 'Máximo'
-      //   backgroundColora = '#D6292C'
-      //   borderColora = '#D03A2F'
-      // }
+  //     if (i == 0) {
+  //       labela = 'Mínimo'
+  //       backgroundColora = '#3DA4C2'
+  //       borderColora = '#1EC1E1'
+  //     } else if (i == 1) {
+  //       labela = 'Média'
+  //       backgroundColora = '#fff8ff'
+  //       borderColora = '#ecf2f0'
+  //     } else if (i == 2) {
+  //       labela = 'Máximo'
+  //       backgroundColora = '#D6292C'
+  //       borderColora = '#D03A2F'
+  //     }
 
-  //     data.datasets.push({label: label, backgroundColor: backgroundColor, borderColor: borderColor, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
+  //     data.datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
   //   }
   //   Chart.defaults.color = '#fff'
   //   new Chart(

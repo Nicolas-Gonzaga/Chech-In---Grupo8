@@ -56,6 +56,10 @@ router.get("/temp-comparativa-mapas", function (req, res) {
     medidaController.temperaturaComparativaMapas(req, res)
 })
 
+router.get("/checarMediasTempTotens", function (req, res) {
+    medidaController.checarMediasTempTotens(req, res)
+})
+
 router.get("/processos", function (req, res) {
     medidaController.processos(req, res)
 })
