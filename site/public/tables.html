@@ -237,6 +237,8 @@
                 </select>
                 <div class="table-responsive">
                   <canvas id="chartTotem1"></canvas>
+                  <canvas id="chartTotem2"></canvas>
+                  <canvas id="chartTotem3"></canvas>
                 </div>
               </div>
             </div>
@@ -409,7 +411,22 @@
 </body>
 <script>
   function mudarGrafico(){
-   
+    if(totens.value == "50000"){
+      chartTotem1.style.display = "block"
+      chartTotem2.style.display = "none"
+      chartTotem3.style.display = "none"
+    } else if(totens.value == "50001"){
+      chartTotem1.style.display = "none"
+      chartTotem2.style.display = "block"
+      chartTotem3.style.display = "none"
+      
+    } else if(totens.value == "50002"){
+      chartTotem1.style.display = "none"
+      chartTotem2.style.display = "none"
+      chartTotem3.style.display = "block"
+      
+      
+    }
   plotAlertas()
 
 }
@@ -439,7 +456,7 @@
   function verificar(metrica){
     if(window.location.href == "tables.html?diario"){
     if(metrica >= 10 ){
-      Swal.fire("Cuidado! Esse totem está dando problemas frequentes! Inspecione-o", "warning");
+      Swal.fire("CUIDADO!", " Esse totem está dando problemas frequentes! Inspecione-o", "warning");
     }
   }
     if(window.location.href == "tables.html?semanal"){
@@ -552,6 +569,14 @@
         document.getElementById('chartTotem1'),
         config
       );
+      const myChart2 = new Chart(
+        document.getElementById('chartTotem2'),
+        config
+      );
+      const myChart3 = new Chart(
+        document.getElementById('chartTotem3'),
+        config
+      );
 
 
 
@@ -598,15 +623,22 @@
                 }
               }
             }); */
+            if(totens == "50000"){
+              myChart = myChart
+            } else if(totens == "50001"){
+              myChart= myChart2
+            } else if(totens == "50002"){
+              myChart  = myChart3
+            }
+          
       setTimeout(() => atualizarGrafico(dados4, myChart), 15000)
       setTimeout(()=> verificar(dados4.qtdAlertas), 30000)
 
     }
   
   function atualizarGrafico(data, myChart) {
-    myChart.clear();
+
     myChart.update();
-    document.getElementById('chartTotem1')
     
     setTimeout(() => plotAlertas(), 500)
   }
