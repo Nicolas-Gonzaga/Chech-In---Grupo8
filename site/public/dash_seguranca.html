@@ -687,7 +687,75 @@ fetch(`/medidas/coletandoPortas`, { cache: 'no-store' }).then(function (response
   });
 
 }
+  
 
+function obterDadosGraficoAnalise() {
+        let vetor_portas = []
+        let vetor_status = []
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/estadoPortas`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+
+
+                    resposta.forEach(element => {
+                        vetor_portas.push(element.portas)
+                        vetor_status.push(element.statusPorta)
+                    })
+
+
+                    plotarGrafico(vetor_portas, 'graficoPortasAberta', vetor_status,resposta);{
+                      for (i = 0; i < resposta.length; i++) {
+                      var registro = resposta[i];
+                      dados.labels.push(registro.vetor_portas)
+                      dados.datasets[0].data.push(registro.vetor_status)
+}
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenÃ§Ã£o dos dados p/ grÃ¡fico: ${error.message}`);
+            });
+    }
+    
+    window.grafico_linha = new Chart(document.getElementById(graficoPortasAberta),
+     {
+            type: 'bar',
+            data: {
+                labels: {
+                  font: {
+                  size: 70,
+                  weight: "bold",
+                  family: "arial"
+                }
+                },
+                datasets: [
+                    {
+                        label: "Estado de Portas no Sistema",
+                        backgroundColor: ["#3e95cd", "#8e5ea2"],
+                        data: []
+                    }
+                ]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'faksdhf'
+                }
+            }
+        });
+    
 
 /*function obterDadosGrafico() {
 
