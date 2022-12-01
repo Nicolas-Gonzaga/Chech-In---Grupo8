@@ -19,6 +19,9 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <!-- Nucleo Icons -->
+  
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="assets/css/nucleo-icons.css" rel="stylesheet">
   <!-- CSS Files -->
   <link rel="stylesheet" href="assets/css/black-dashboard.css?v=1.0.0">
@@ -32,9 +35,6 @@
 <body class="">
   <div class="wrapper">
     <div class="sidebar">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
-    -->
       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="javascript:void(0)" class="simple-text logo-mini">
@@ -204,7 +204,7 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Cordenadas <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Coordenadas <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Gráfico de Variação</span>
                 <div style="padding: 2%; height:95%; width:95%;">
                   <canvas id="graficoTestes" style="position: relative; height:100%; width:100%"></canvas>
@@ -414,6 +414,7 @@
         }
     }
 
+
     // Decidir centro do mapa com base na localização dos pontos carregados
     if (cords.length > 1) {
         centro = []
@@ -465,6 +466,7 @@
             iconAnchor: [24, 50]
         }
     })
+
     var map = L.map('map').setView([centroMapa.lat, centroMapa.lng], zoomMapa)
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -548,7 +550,6 @@
                     response.json().then(function (resposta) {
                       var v2 = resposta
                       criarMapa(v1, v2)
-                      
                     })
                 }
             })
@@ -579,15 +580,11 @@
     valoresDoGrafico = []
     for (i = 0; i < datasNecessitadas.length; i++) {
       for (f = 0; f < valoresUsaveis.length; f++) {
-        console.log(datasNecessitadas[i])
-        console.log(valoresUsaveis[f].dia)
         if (datasNecessitadas[i] == valoresUsaveis[f].dia) {
           valoresDoGrafico.push([valoresUsaveis[f].minimo, valoresUsaveis[f].valor, valoresUsaveis[f].maximo])
           break
         }
       }
-      console.log(valoresDoGrafico.length)
-      console.log(i)
       if (valoresDoGrafico.length != i+1) {
         valoresDoGrafico.push([null, null, null])
       }
@@ -657,6 +654,48 @@
   // Aqui eu desativo minha API
   visualCrossingInativo = true
 
+  function plotarVisualCrossing(resposta) {
+    for (i = 0; i < resposta.days.length; i++) {
+      respostaFinal.push([((resposta.days[i].tempmin - 32) / 9) * 5, ((resposta.days[i].temp - 32) / 9) * 5, ((resposta.days[i].tempmax - 32) / 9) * 5, resposta.days[i].datetime])
+    }
+    const data = {
+      labels: [],
+      datasets: []
+    }
+    for (i = 0; i < respostaFinal.length; i++) {
+      data.labels.push(`${respostaFinal[i][3].substring(8,10)}/${respostaFinal[0][3].substring(5,7)}`)
+    }
+    dados2 = []
+    for (i = 0; i < 3; i++) {
+      if (i == 0) {
+        labela = 'Mínimo'
+        backgroundColora = '#3DA4C2'
+        borderColora = '#1EC1E1'
+      } else if (i == 1) {
+        labela = 'Média'
+        backgroundColora = '#fff8ff'
+        borderColora = '#ecf2f0'
+      } else if (i == 2) {
+        labela = 'Máximo'
+        backgroundColora = '#D6292C'
+        borderColora = '#D03A2F'
+      }
+
+      data.datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
+      dados2.push([respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]])
+    }
+    chamarGrafico(dados2)
+    Chart.defaults.color = '#fff'
+    new Chart(
+      graficoLinhas,
+      {
+          type: 'line',
+          data: data,
+          options: {}
+      }
+    )
+  }
+
   dataa = new Date()
   dataFinal = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
   dataa = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
@@ -664,8 +703,39 @@
   respostaFinal = []
   function plotarClimaTempo(lat, lng) {
     if (visualCrossingInativo) {
+      plotarVisualCrossing({
+        address: "-23.5429886,-46.7575315",
+        days: [{
+          datetime: "2022-11-27",
+          tempmin: 60.6,
+          temp: 67.5,
+          tempmax: 78.2
+        }, {
+          datetime: "2022-11-28",
+          tempmin: 63,
+          temp: 66.7,
+          tempmax: 77.9
+        }, {
+          datetime: "2022-11-29",
+          tempmin: 64.3,
+          temp: 67.8,
+          tempmax: 77.5
+        }, {
+          datetime: "2022-11-30",
+          tempmin: 64.3,
+          temp: 68.5,
+          tempmax: 78.4
+        }, {
+          datetime: "2022-12-01",
+          tempmin: 64.1,
+          temp: 72,
+          tempmax: 82.5
+        }],
+      })
+      i = 0
       return
     }
+
     fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lng}/${dataInicial}/${dataFinal}?unitGroup=us&key=3HRNW8DH3UCLBY3XJ2N3XT2EX&contentType=json`, {
         "method": "GET",
         "headers": {}
@@ -677,46 +747,7 @@
       throw response
     })
     .then(response => {
-      resposta = response
-      for (i = 0; i < resposta.days.length; i++) {
-        respostaFinal.push([((resposta.days[i].tempmin - 32) / 9) * 5, ((resposta.days[i].temp - 32) / 9) * 5, ((resposta.days[i].tempmax - 32) / 9) * 5, resposta.days[i].datetime])
-      }
-      const data = {
-        labels: [],
-        datasets: []
-      }
-      for (i = 0; i < respostaFinal.length; i++) {
-        data.labels.push(`${respostaFinal[i][3].substring(8,10)}/${respostaFinal[0][3].substring(5,7)}`)
-      }
-      dados2 = []
-      for (i = 0; i < 3; i++) {
-        if (i == 0) {
-          labela = 'Mínimo'
-          backgroundColora = '#3DA4C2'
-          borderColora = '#1EC1E1'
-        } else if (i == 1) {
-          labela = 'Média'
-          backgroundColora = '#fff8ff'
-          borderColora = '#ecf2f0'
-        } else if (i == 2) {
-          labela = 'Máximo'
-          backgroundColora = '#D6292C'
-          borderColora = '#D03A2F'
-        }
-
-        data.datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
-        dados2.push([respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]])
-      }
-      chamarGrafico(dados2)
-      Chart.defaults.color = '#fff'
-      new Chart(
-        graficoLinhas,
-        {
-            type: 'line',
-            data: data,
-            options: {}
-        }
-      )
+      plotarVisualCrossing(response)
     })
     .catch((errorResponse) => {
     if (errorResponse.text) {
@@ -755,6 +786,8 @@
         verificar(metrica, `Perigo `, "elevada")
       } else if (metrica >= (70 - (metricaComparativa))) {
         verificar(metrica, `Alerta  `, "elevada")
+      } else {
+        verificar(metrica, `Alerta  `, "normal")
       }
     }
   }
@@ -801,32 +834,7 @@ function verificar(metrica, frase, intensidade) {
 
   var descricao = `A temperatura da ${componente} do totem ${carregarTotem} está ficando muito ${intensidade} Momento do alerta: dia ${dia}/${mes}/${ano} às ${horas}:${minutos}. Temperatura em celsius:`
   
-  alertas(nome,componente,metrica,frase,descricao)            
-
-  fetch("/medidas/alertas", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      metricaServer: metrica,
-      fraseServer: frase,
-      componenteServer: componente,
-      fkTotemServer: carregarTotem,
-      empresaServer: empresa
-    })
-  }).then(function (resposta) {
-    console.log("entrei no fetch")
-    console.log("resposta: ", resposta)
-    if (resposta.ok) {
-      console.log("Inserts feitos com sucesso")    
-    } else {
-      console.log("Erro nos inserts")
-    }
-  }).catch(function (resposta) {
-    console.log(`#ERRO: ${resposta}`)
-  })
-  return
+  alertas(nome,componente,metrica,frase,descricao)
 }
 </script>
 <script>
