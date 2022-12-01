@@ -226,6 +226,7 @@ function dadosHistorico(req, res) {
     });
 }
 
+// mapas
 function buscarMedidasMapas(req, res) {
 
     medidaModel.buscarMedidasMapas().then(function (resultado) {
@@ -240,7 +241,6 @@ function buscarMedidasMapas(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-
 function variacaoCordsMapas(req, res) {
     var valor = req.params.valor
 
@@ -256,7 +256,6 @@ function variacaoCordsMapas(req, res) {
         res.status(500).json(erro.sqlMessage);
     })
 }
-
 function temperaturaComparativaMapas(req, res) {
     medidaModel.temperaturaComparativaMapas().then(function (resultado) {
         if (resultado.length > 0) {
@@ -270,7 +269,6 @@ function temperaturaComparativaMapas(req, res) {
         res.status(500).json(erro.sqlMessage);
     })
 }
-
 function checarMediasTempTotens(req, res) {
     medidaModel.checarMediasTempTotens().then(function (resultado) {
         if (resultado.length > 0) {
@@ -284,6 +282,8 @@ function checarMediasTempTotens(req, res) {
         res.status(500).json(erro.sqlMessage);
     })
 }
+
+
 
 function processos(req, res) {
 

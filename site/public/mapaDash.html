@@ -16,22 +16,6 @@
     <title>
     ēKran - Mapas
   </title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet">
-
-
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="assets/css/main.css"> -->
-  <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <!-- Nucleo Icons -->
@@ -177,7 +161,7 @@
                         <div class="postcardInner">
                             <div class="postcardFront">
                               <div id=""></div>
-                                <span id="botoesMapa" style="color: white;">CARREGANDO</span>
+                                <span id="botoesMapa" style="color: white;"><span style="font-size: 200%; font-weight: bold;">CARREGANDO</span></span>
                                 <img src="./assets/img/map-icon.png" height="40%" width="20%">
                             </div>
                             <div class="postcardBack">
@@ -196,7 +180,7 @@
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
                 <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Temperatura do Totem <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
-                <span style="color: white;">Média diária</span>
+                <span style="color: white;">Média diária em °C</span>
                 <div style="padding: 2%; height:95%; width:95%;">
                   <canvas id="graficoTestes" style="position: relative; height:100%; width:100%"></canvas>
                 </div>
@@ -207,7 +191,7 @@
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
                 <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Temperatura da Região <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
-                <span style="color: white;">Média diária</span>
+                <span style="color: white;">Média diária em °C</span>
                 <div style="padding: 20px; height:95%; width:95%;">
                   <canvas id="graficoLinhas" style="position: relative; height:100%; width:100%"></canvas>
                 </div>
@@ -231,7 +215,7 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Precisão das Cords <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Precisão da Coleta <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Gráfico de Variação</span>
                 <div style="padding: 20px; height:95%; width:95%;">
                   <canvas id="graficoLinhas" style="position: relative; height:100%; width:100%"></canvas>
@@ -393,156 +377,184 @@
 </script>
 </html>
 <script>
-    //tudo que realmente importa
-    function virar(virado) {
-        const classePostcardInner = document.querySelector('.postcardInner')
-        if (virado == true) {
-            classePostcardInner.classList.add('virado')
-        } else if (virado == false) {
-            classePostcardInner.classList.remove('virado')
+  //tudo que realmente importa
+  function virar(virado) {
+    const classePostcardInner = document.querySelector('.postcardInner')
+    if (virado == true) {
+        classePostcardInner.classList.add('virado')
+    } else if (virado == false) {
+        classePostcardInner.classList.remove('virado')
+    }
+  }
+  function criarMapa(cords, mediasCores) {
+    // Preparar mapa escolhido e botões de seleção
+    const cordsOriginais = cords
+    texto = ""
+    if (carregarTotem == "totens") {
+        totemAtual = " style='background-color: #1498ff;"
+    } else {
+        totemAtual = " style='background-color: #0061ad;"
+    }
+    texto = `<button onclick="location.href='mapaDash.html?totens'"${totemAtual} margin: 1px; width: 140px; height: 35px; border: 1px solid black; border-radius: 5px; color: white; font-weight: bold;'>Todos os Totens</button>`
+    totemAtual = ""
+    for (i = 0; i < cordsOriginais.length; i ++) {
+        if (cordsOriginais[i].fkTotem == carregarTotem) {
+            cords = [cords[i]]
+            totemAtual = " style='background-color: #1498ff;"
+        } else {
+            totemAtual = " style='background-color: #0061ad;"
+        }
+        if (i % 2 == 0) {
+          texto += "<div style='display: flex;'>"
+        }
+        texto += `<button onclick="location.href='mapaDash.html?${cordsOriginais[i].fkTotem}'"${totemAtual} margin: 1px; width: 125px; height: 40px; border: 1px solid black; border-radius: 5px; color: white; font-size: 150%; font-weight: bold;'>Totem ${cordsOriginais[i].fkTotem-49999}</button>`
+        totemAtual = " style='background-color: #0061ad;"
+        if (!(i % 2 == 0)) {
+          texto += "</div>"
         }
     }
-    function criarMapa(cords) {
-        // Preparar mapa escolhido e botões de seleção
-        const cordsOriginais = cords
-        texto = ""
-        if (carregarTotem == "totens") {
-            totemAtual = "Atual - "
-        } else {
-            totemAtual = ""
-        }
-        texto = `<a href="mapaDash.html?totens">${totemAtual}Todos os Totens</a>`
-        totemAtual = ""
-        for (i = 0; i < cordsOriginais.length; i ++) {
-            if (cordsOriginais[i].fkTotem == carregarTotem) {
-                cords = [cords[i]]
-                totemAtual = "Atual - "
-            } else {
-                totemAtual = ""
-            }
-            texto += `<br><a href="mapaDash.html?${cordsOriginais[i].fkTotem}">${totemAtual}Totem ${cordsOriginais[i].fkTotem}</a>`
-            totemAtual = ""
-        }
 
-        // Decidir centro do mapa com base na localização dos pontos carregados
-        if (cords.length > 1) {
-            centro = []
-            for (i = 0; i < cords.length; i++) {
-                centro.push([cords[i].latitude, cords[i].longitude])
-            }
-            centroMapa = L.polygon(centro).getBounds().getCenter()
-        } else {
-            centroMapa = {lat: cords[0].latitude, lng: cords[0].longitude}
-        }
-
-        // Calculando distância entre o centro do mapa e todos os pontos e salvando o mais distante deles
-        maiorDistancia = 0
+    // Decidir centro do mapa com base na localização dos pontos carregados
+    if (cords.length > 1) {
+        centro = []
         for (i = 0; i < cords.length; i++) {
-            if (centroMapa.lat >= cords[i].latitude) {deltaY = centroMapa.lat - cords[i].latitude} else {deltaY = cords[i].latitude - centroMapa.lat}
-            if (centroMapa.lng >= cords[i].longitude) {deltaX = centroMapa.lng - cords[i].longitude} else {deltaX = cords[i].longitude - centroMapa.lng}
-            distancia = ((deltaY**2) + (deltaX**2))**1/2
-            if (distancia > maiorDistancia) {
-                maiorDistancia = distancia
-            }
+            centro.push([cords[i].latitude, cords[i].longitude])
         }
-        
-        // Definindo o zoom a partir da distância entre o ponto central e o mais longe
-        // TODO: Depois do front configurar direito isso aqui
-        console.log(`Maior distância a partir do centro: ${maiorDistancia}`)
-        if (maiorDistancia >= 0) {
-            zoomMapa = 18
-            if (maiorDistancia > 0) {
-                zoomMapa = 12
-                if (maiorDistancia > 0.130) {
-                    zoomMapa = 9
-                    if (maiorDistancia > 0.375) {
-                        zoomMapa = 8
-                        if (maiorDistancia > 1.375) {
-                            zoomMapa = 5
-                            if (maiorDistancia > 22000) {
-                                zoomMapa = 1
-                            }
+        centroMapa = L.polygon(centro).getBounds().getCenter()
+    } else {
+        centroMapa = {lat: cords[0].latitude, lng: cords[0].longitude}
+    }
+
+    // Calculando distância entre o centro do mapa e todos os pontos e salvando o mais distante deles
+    maiorDistancia = 0
+    for (i = 0; i < cords.length; i++) {
+        if (centroMapa.lat >= cords[i].latitude) {deltaY = centroMapa.lat - cords[i].latitude} else {deltaY = cords[i].latitude - centroMapa.lat}
+        if (centroMapa.lng >= cords[i].longitude) {deltaX = centroMapa.lng - cords[i].longitude} else {deltaX = cords[i].longitude - centroMapa.lng}
+        distancia = ((deltaY**2) + (deltaX**2))**1/2
+        if (distancia > maiorDistancia) {
+            maiorDistancia = distancia
+        }
+    }
+    
+    // Definindo o zoom a partir da distância entre o ponto central e o mais longe
+    // TODO: Depois do front configurar direito isso aqui
+    console.log(`Maior distância a partir do centro: ${maiorDistancia}`)
+    if (maiorDistancia >= 0) {
+        zoomMapa = 18
+        if (maiorDistancia > 0) {
+            zoomMapa = 12
+            if (maiorDistancia > 0.130) {
+                zoomMapa = 9
+                if (maiorDistancia > 0.375) {
+                    zoomMapa = 8
+                    if (maiorDistancia > 1.375) {
+                        zoomMapa = 5
+                        if (maiorDistancia > 22000) {
+                            zoomMapa = 1
                         }
                     }
                 }
             }
         }
-
-        // Começando a realmente carregar o mapa com a API Leaflet
-        var LeafIcon = L.Icon.extend({
-            options: {
-                iconSize: [50, 50],
-                iconAnchor: [24, 50]
-            }
-        })
-        var map = L.map('map').setView([centroMapa.lat, centroMapa.lng], zoomMapa)
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map)
-        fetch(`/medidas/checarMediasTempTotens`, {
-            method: "GET"
-        }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    a
-                })
-            }
-        })
-        for (i = 0; i < cords.length; i++) {
-            L.marker([cords[i].latitude, cords[i].longitude], {icon: new LeafIcon({iconUrl: "./assets/img/totemAeroportoC.png"})}
-            ).addTo(map)
-            .bindPopup(`<b>Nome do Totem:</b><br>Totem ${cords[i].fkTotem-49999}<br><b>ID do Totem:</b><br>${cords[i].fkTotem}<br><b>Latitude:</b><br>${cords[i].latitude}°<br><b>Longitude:</b><br>${cords[i].longitude}°<br><b>Precisão da coleta:</b><br>${cords[i].precisao}m<br><b>Data da coleta:</b><br>${cords[i].dia}<br><b>Horário da coleta:</b><br>${cords[i].hora}<br><b>ID da Unidade:</b><br>${cords[i].idUnidade}`)
-            L.circle([cords[i].latitude, cords[i].longitude], {
-                color: '#3bd22d',
-                fillColor: '#11ee24',
-                fillOpacity: 0.2,
-                radius: cords[i].precisao,
-            }).addTo(map)
-        }
-
-        // Vejo todas as unidades cadastradas
-        unidades = []
-        for (i = 0; i < cords.length; i++) {
-            taAqui = false
-            for (f = 0; f < unidades.length; f++) {
-                if (unidades[f].idUnidade == cords[i].idUnidade) {
-                    taAqui = true
-                }
-            }
-            if (!taAqui) {
-                unidades.push(cords[i])
-            }
-        }
-
-        // Utilizo essa informação para plotar polígonos no mapa que envolvem todos os totens
-        for (i = 0; i < unidades.length; i++) {
-            cordsPoligono = []
-            for (f = 0; f < cords.length; f++) {
-                if (cords[f].idUnidade == unidades[i].idUnidade) {
-                    cordsPoligono.push([cords[f].latitude, cords[f].longitude])
-                }
-            }
-            L.polygon(cordsPoligono).addTo(map)
-            .bindPopup(`<b>Nome da Empresa:</b><br>${unidades[i].nomeEmpresa}<br><b>Local da Unidade:</b><br>${unidades[i].localUnidade}<br><b>ID da Unidade:</b><br>${unidades[i].idUnidade}`)
-        }
-
-        // Faço o mapa aparecer após o loading
-        virar(true)
-        setTimeout(() => {
-            botoesMapa.innerHTML = texto
-        }, "300")
     }
 
-    fetch(`/medidas/static-mapas`, {
-        method: "GET"
-    }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                criarMapa(resposta)
-            })
+    // Começando a realmente carregar o mapa com a API Leaflet
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [50, 50],
+            iconAnchor: [24, 50]
         }
     })
+    var map = L.map('map').setView([centroMapa.lat, centroMapa.lng], zoomMapa)
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map)
+    for (i = 0; i < cords.length; i++) {
+      if (carregarTotem != 'totens') {
+        plotarClimaTempo(cords[i].latitude, cords[i].longitude)
+      }
+      mediaAtual = ""
+      for (f = 0; f < mediasCores.length; f++) {
+        if (mediasCores[f].fkTotem == cords[i].fkTotem) {
+          mediaAtual = mediasCores[f].media
+          if (mediaAtual <= 10) {
+            icone = "A"
+          } else if (mediaAtual <= 25) {
+            icone = "B"
+          } else if (mediaAtual >= 80) {
+            icone = "E"
+          } else if (mediaAtual >= 70) {
+            icone = "D"
+          } else {
+            icone = "C"
+          }
+        }
+      }
+      L.marker([cords[i].latitude, cords[i].longitude], {icon: new LeafIcon({iconUrl: `./assets/img/totemAeroporto${icone}.png`})}
+      ).addTo(map)
+      .bindPopup(`<b>Nome do Totem:</b><br>Totem ${cords[i].fkTotem-49999}<br><b>ID do Totem:</b><br>${cords[i].fkTotem}<br><b>Latitude:</b><br>${cords[i].latitude}°<br><b>Longitude:</b><br>${cords[i].longitude}°<br><b>Precisão da coleta:</b><br>${cords[i].precisao}m<br><b>Média de Temperatura do dia:</b><br>${mediaAtual} °C<br><b>Data da coleta:</b><br>${cords[i].dia}<br><b>Horário da coleta:</b><br>${cords[i].hora}<br><b>ID da Unidade:</b><br>${cords[i].idUnidade}`)
+      L.circle([cords[i].latitude, cords[i].longitude], {
+          color: '#3bd22d',
+          fillColor: '#11ee24',
+          fillOpacity: 0.2,
+          radius: cords[i].precisao,
+      }).addTo(map)
+    }
+
+    // Vejo todas as unidades cadastradas
+    unidades = []
+    for (i = 0; i < cords.length; i++) {
+        taAqui = false
+        for (f = 0; f < unidades.length; f++) {
+            if (unidades[f].idUnidade == cords[i].idUnidade) {
+                taAqui = true
+            }
+        }
+        if (!taAqui) {
+            unidades.push(cords[i])
+        }
+    }
+
+    // Utilizo essa informação para plotar polígonos no mapa que envolvem todos os totens
+    for (i = 0; i < unidades.length; i++) {
+        cordsPoligono = []
+        for (f = 0; f < cords.length; f++) {
+            if (cords[f].idUnidade == unidades[i].idUnidade) {
+                cordsPoligono.push([cords[f].latitude, cords[f].longitude])
+            }
+        }
+        L.polygon(cordsPoligono).addTo(map)
+        .bindPopup(`<b>Nome da Empresa:</b><br>${unidades[i].nomeEmpresa}<br><b>Local da Unidade:</b><br>${unidades[i].localUnidade}<br><b>ID da Unidade:</b><br>${unidades[i].idUnidade}`)
+    }
+
+    // Faço o mapa aparecer após o loading
+    virar(true)
+    setTimeout(() => {
+        botoesMapa.innerHTML = texto
+    }, "300")
+  }
+
+  fetch(`/medidas/static-mapas`, {
+      method: "GET"
+  }).then(function (response) {
+      if (response.ok) {
+          response.json().then(function (resposta) {
+            var v1 = resposta
+            fetch(`/medidas/checarMediasTempTotens`, {
+                method: "GET"
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                      var v2 = resposta
+                      criarMapa(v1, v2)
+                      
+                    })
+                }
+            })
+          })
+      }
+  })
 </script>
 <script>
   // Temperatura do Totem - Média diária
@@ -551,7 +563,12 @@
     datasNecessitadas = []
     for (i = 0; i < 5; i++) {
       dataa = new Date(Date.now() - i * 24 * 60 * 60 * 1000)
-      datasNecessitadas.push(`${String(dataa.getFullYear())}/${String(dataa.getMonth()+1)}/${dataa.getDate()}`)
+      if (String(dataa.getDate()).length == 1) {
+        dia = `0${dataa.getDate()}`
+      } else {
+        dia = String(dataa.getDate())
+      }
+      datasNecessitadas.push(`${String(dataa.getFullYear())}/${String(dataa.getMonth()+1)}/${dia}`)
     }
     valoresUsaveis = []
     for (i = 0; i < resposta.length; i++) {
@@ -562,18 +579,27 @@
     valoresDoGrafico = []
     for (i = 0; i < datasNecessitadas.length; i++) {
       for (f = 0; f < valoresUsaveis.length; f++) {
+        console.log(datasNecessitadas[i])
+        console.log(valoresUsaveis[f].dia)
         if (datasNecessitadas[i] == valoresUsaveis[f].dia) {
           valoresDoGrafico.push([valoresUsaveis[f].minimo, valoresUsaveis[f].valor, valoresUsaveis[f].maximo])
           break
         }
       }
+      console.log(valoresDoGrafico.length)
+      console.log(i)
       if (valoresDoGrafico.length != i+1) {
         valoresDoGrafico.push([null, null, null])
       }
     }
     valoresDoGrafico = valoresDoGrafico.reverse()
-    datasNecessitadas = datasNecessitadas.reverse()
+    datasNecessitadasArray = datasNecessitadas.reverse()
+    datasNecessitadas = []
+    for (i = 0; i < datasNecessitadasArray.length; i++) {
+      datasNecessitadas.push(`${datasNecessitadasArray[i].substring(8)}/${datasNecessitadasArray[i].substring(5,7)}`)
+    }
     datasets = []
+    dados1 = []
     for (i = 0; i < 3; i++) {
       if (i == 0) {
         labela = 'Mínimo'
@@ -593,7 +619,9 @@
         dados.push(valoresDoGrafico[f][i])
       }
       datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: dados})
+      dados1.push(dados)
     }
+    chamarGrafico(dados1)
     Chart.defaults.color = '#fff'
     new Chart(
       graficoTestes,
@@ -626,69 +654,180 @@
   ====================================
   */
 
-  // dataa = new Date()
-  // dataFinal = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
-  // dataa = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
-  // dataInicial = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
-  // respostaFinal = []
-  // fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-23.5668698,-46.6608874/${dataInicial}/${dataFinal}?unitGroup=us&key=3HRNW8DH3UCLBY3XJ2N3XT2EX&contentType=json`, {
-  //     "method": "GET",
-  //     "headers": {}
-  // })
-  // .then(response => {
-  // if (response.ok) {
-  //   return response.json()
-  // }
-  //   throw response
-  // })
-  // .then(response => {
-  //   resposta = response
-  //   for (i = 0; i < resposta.days.length; i++) {
-  //     respostaFinal.push([((resposta.days[i].tempmin - 32) / 9) * 5, ((resposta.days[i].temp - 32) / 9) * 5, ((resposta.days[i].tempmax - 32) / 9) * 5, resposta.days[i].datetime])
-  //   }
-  //   const data = {
-  //     labels: [],
-  //     datasets: []
-  //   }
-  //   for (i = 0; i < respostaFinal.length; i++) {
-  //     data.labels.push(`${respostaFinal[i][3].substring(8,10)}/${respostaFinal[0][3].substring(5,7)}/${respostaFinal[0][3].substring(2,4)}`)
-  //   }
-  //   for (i = 0; i < 3; i++) {
-  //     if (i == 0) {
-  //       labela = 'Mínimo'
-  //       backgroundColora = '#3DA4C2'
-  //       borderColora = '#1EC1E1'
-  //     } else if (i == 1) {
-  //       labela = 'Média'
-  //       backgroundColora = '#fff8ff'
-  //       borderColora = '#ecf2f0'
-  //     } else if (i == 2) {
-  //       labela = 'Máximo'
-  //       backgroundColora = '#D6292C'
-  //       borderColora = '#D03A2F'
-  //     }
+  // Aqui eu desativo minha API
+  visualCrossingInativo = true
 
-  //     data.datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
-  //   }
-  //   Chart.defaults.color = '#fff'
-  //   new Chart(
-  //     graficoLinhas,
-  //     {
-  //         type: 'line',
-  //         data: data,
-  //         options: {}
-  //     }
-  //   )
-  // })
-  // .catch((errorResponse) => {
-  // if (errorResponse.text) {
-  //     errorResponse.text().then( errorMessage => {
-  //         console.log(errorMessage)
-  //     })
-  // } else {
-  //     console.log("Erro maluco") 
-  // }
-  // })
+  dataa = new Date()
+  dataFinal = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
+  dataa = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
+  dataInicial = `${String(dataa.getFullYear())}-${String(dataa.getMonth()+1)}-${dataa.getDate()}`
+  respostaFinal = []
+  function plotarClimaTempo(lat, lng) {
+    if (visualCrossingInativo) {
+      return
+    }
+    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lng}/${dataInicial}/${dataFinal}?unitGroup=us&key=3HRNW8DH3UCLBY3XJ2N3XT2EX&contentType=json`, {
+        "method": "GET",
+        "headers": {}
+    })
+    .then(response => {
+    if (response.ok) {
+      return response.json()
+    }
+      throw response
+    })
+    .then(response => {
+      resposta = response
+      for (i = 0; i < resposta.days.length; i++) {
+        respostaFinal.push([((resposta.days[i].tempmin - 32) / 9) * 5, ((resposta.days[i].temp - 32) / 9) * 5, ((resposta.days[i].tempmax - 32) / 9) * 5, resposta.days[i].datetime])
+      }
+      const data = {
+        labels: [],
+        datasets: []
+      }
+      for (i = 0; i < respostaFinal.length; i++) {
+        data.labels.push(`${respostaFinal[i][3].substring(8,10)}/${respostaFinal[0][3].substring(5,7)}`)
+      }
+      dados2 = []
+      for (i = 0; i < 3; i++) {
+        if (i == 0) {
+          labela = 'Mínimo'
+          backgroundColora = '#3DA4C2'
+          borderColora = '#1EC1E1'
+        } else if (i == 1) {
+          labela = 'Média'
+          backgroundColora = '#fff8ff'
+          borderColora = '#ecf2f0'
+        } else if (i == 2) {
+          labela = 'Máximo'
+          backgroundColora = '#D6292C'
+          borderColora = '#D03A2F'
+        }
+
+        data.datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
+        dados2.push([respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]])
+      }
+      chamarGrafico(dados2)
+      Chart.defaults.color = '#fff'
+      new Chart(
+        graficoLinhas,
+        {
+            type: 'line',
+            data: data,
+            options: {}
+        }
+      )
+    })
+    .catch((errorResponse) => {
+    if (errorResponse.text) {
+        errorResponse.text().then( errorMessage => {
+            console.log(errorMessage)
+        })
+    } else {
+        console.log("Erro maluco") 
+    }
+    })
+  }
+</script>
+<script>
+  /*
+  =======
+  ALERTAS
+  =======
+  */
+ primeiraChamada = true
+ function chamarGrafico(valores) {
+  if (primeiraChamada) {
+    primeiraChamada = false
+    firstVal = valores
+    return
+  }
+
+  function alertarPeriodicamente() {
+    metrica = firstVal[1][4]
+    if (!(metrica == null || valores[1][4] == null)) {
+      metricaComparativa = (27 - valores[1][4]) * 1.5
+      if (metrica <= (10 - (metricaComparativa))) {
+        verificar(metrica, `Perigo `, "baixa")
+      } else if (metrica <= (25 - (metricaComparativa))) {
+        verificar(metrica, `Alerta  `, "baixa")
+      } else if (metrica >= (80 - (metricaComparativa))) {
+        verificar(metrica, `Perigo `, "elevada")
+      } else if (metrica >= (70 - (metricaComparativa))) {
+        verificar(metrica, `Alerta  `, "elevada")
+      }
+    }
+  }
+  setInterval(alertarPeriodicamente, 15000)
+ }
+
+
+ 
+function alertas(empresa, componente, metrica, frase, descricao) {
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIxNDc5MDEsImVtYWlsIjoiZWtyYW4uY29udGF0b0BnbWFpbC5jb20iLCJhcHBsaWNhdGlvbiI6MzAwMjAyMTU3fX0.VGdCGMvgQ2bYrUL_YKLK7zO99GBuEcVR9ADkNOjcuiFqh7KgjfsrLqEj86kbg0SgJMZ-J0smfL7Qepn0NltFCg',
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      query: `mutation {           createCard(input: {             pipe_id:302731204,             title: "Card",             fields_attributes:[               {field_id: "nome_do_colaborador", field_value: "${empresa}"},{field_id: "cargo", field_value: "${frase}${descricao}${metrica}"},{field_id: "m_tricas", field_value:"${componente}: ${metrica}" }             ],           }) {               card {                 title               }             }           }`,
+    })
+  }
+  fetch('https://api.pipefy.com/graphql', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err))
+}
+
+function verificar(metrica, frase, intensidade) {
+  var componente = "cpu"
+  var empresa = sessionStorage.FK_EMPRESA
+  var nome = sessionStorage.NOME_EMPRESA
+  var frase = frase
+  var dataAtual = new Date()
+  var dia = dataAtual.getDate()
+  var mes = (dataAtual.getMonth() + 1)
+  var ano = dataAtual.getFullYear()
+  var horas = dataAtual.getHours()
+  var minutos = dataAtual.getMinutes()
+
+  if (frase == `Perigo `) {
+    Swal.fire("ALERTA", `cpu está sobrecarregada!`, "danger")
+  } else if (frase == `Alerta  `) {
+    Swal.fire("\                    \ CUIDADO", `cpu está ficando sobrecarregada!`, "warning");
+  }
+
+  var descricao = `A temperatura da ${componente} do totem ${carregarTotem} está ficando muito ${intensidade} Momento do alerta: dia ${dia}/${mes}/${ano} às ${horas}:${minutos}. Temperatura em celsius:`
+  
+  alertas(nome,componente,metrica,frase,descricao)            
+
+  fetch("/medidas/alertas", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      metricaServer: metrica,
+      fraseServer: frase,
+      componenteServer: componente,
+      fkTotemServer: carregarTotem,
+      empresaServer: empresa
+    })
+  }).then(function (resposta) {
+    console.log("entrei no fetch")
+    console.log("resposta: ", resposta)
+    if (resposta.ok) {
+      console.log("Inserts feitos com sucesso")    
+    } else {
+      console.log("Erro nos inserts")
+    }
+  }).catch(function (resposta) {
+    console.log(`#ERRO: ${resposta}`)
+  })
+  return
+}
 </script>
 <script>
   // variacao de cordenadas
