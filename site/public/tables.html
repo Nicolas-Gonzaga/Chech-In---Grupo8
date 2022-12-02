@@ -1,6 +1,6 @@
 <!--
 =========================================================
-* * Black Dashboard - v1.0.1
+* * Black Dashboard - v2.0.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard
@@ -223,17 +223,17 @@
             <div class="card ">
               <div class="card-header">
                 <h4 class="card-title"> Alertas</h4>
-                <select id="totens" onchange="mudarGrafico()">
-                  <option value="">-- Selecione um Totem</option>
-                  <option value="50000">Totem 1</option>
-                  <option value="50001">Totem 2</option>
-                  <option value="50002">Totem 3</option>
+                <select id="totens" class = "selecao" style ="cursor: pointer" onchange ="mudarGrafico()">
+                  <option class = "selecao" value="">-- Selecione um Totem</option>
+                  <option class = "selecao"value="50000">Totem 1</option>
+                  <option class = "selecao"value="50001">Totem 2</option>
+                  <option class = "selecao"value="50002">Totem 3</option>
                 </select>
 
               </div>
               <div class="card-body">
                 
-                <select id="selecionar" onchange="mudarSelect()">
+                <select id="selecionar" class ="selecao" onchange="mudarSelect()">
                 </select>
                 <div class="table-responsive">
                   <canvas id="chartTotem1"></canvas>
@@ -541,8 +541,8 @@
       const dados4 = {
         labels: [],
         datasets: [{
-          backgroundColor: ['rgba(211,70,177,0.7)', 'rgba(31,142,241,0.7)'],
-          borderColor: ['rgba(211,70,177,0.7)', 'rgba(31,142,241,0.7)'],
+          backgroundColor: ['#E9967A', '#F0E68C'],
+          borderColor: ['#E9967A', '#F0E68C'],
           data: [],
         }]
       };
@@ -558,7 +558,7 @@
 
 
       const config = {
-        type: 'pie',
+        type: 'doughnut',
         data: dados4,
         options: {}
       };
@@ -623,30 +623,24 @@
                 }
               }
             }); */
-            if(totens == "50000"){
-              myChart = myChart
-            } else if(totens == "50001"){
-              myChart= myChart2
-            } else if(totens == "50002"){
-              myChart  = myChart3
-            }
+          if(chartTotem1.style.display == "block"){
+            myChart2.destroy()
+            myChart3.destroy()
+          } 
+          else if(chartTotem2.style.display == "block"){
+            myChart.destroy()
+            myChart3.destroy()
+          }
+         else if(chartTotem3.style.display == "block"){
+            myChart.destroy()
+            myChart2.destroy()
+          }
           
-      setTimeout(() => atualizarGrafico(dados4, myChart), 15000)
       setTimeout(()=> verificar(dados4.qtdAlertas), 30000)
 
     }
-  
-  function atualizarGrafico(data, myChart) {
-
-    myChart.update();
-    
-    setTimeout(() => plotAlertas(), 500)
   }
-
   
-  
-
-  }
   let proximaAtualizacao;
 
   window.onload = plotAlertas()

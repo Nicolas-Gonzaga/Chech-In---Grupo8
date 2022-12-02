@@ -20469,5 +20469,10 @@ background-color: darkgrey;
   padding-left: 0;
   padding-right: 0;
 }
+.selecao{
+  background-color: #5F9EA0;
+  color: #F5F5F5;
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=dashboard-free.css.map */
