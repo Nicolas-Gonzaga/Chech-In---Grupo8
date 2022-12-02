@@ -1,20 +1,7 @@
 #conectando no banco
 import pyodbc 
 
-server = 'dbekran.database.windows.net'
-database = 'dbekran'
-username = '{222-1sis-grupo6@bandtec.com.br}'
-password = '{1sis@grupo6}'
-driver = '{ODBC Driver 18 for SQL Server}' 
+conn = "Server=tcp:dbekran.database.windows.net,3306;Database=dbekran;User ID=222-1sis-grupo6@bandtec.com.br;Password=1sis@grupo6;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 
-cnxn = pyodbc.connect(
-    DRIVER='{ODBC Driver 18 for SQL Server}',
-    SERVER='dbekran.database.windows.net',
-    DATABASE='dbekran',
-    UID='222-1sis-grupo6@bandtec.com.br@dbekran.database.windows.net',
-    PWD='1sis@grupo6',
-    Trusted_connection='yes'
-    #Integrated_Security='false'
-)
+cursor = pyodbc.Connection(conn)
 
-#connection = pyodbc.connect(cnxn) 
