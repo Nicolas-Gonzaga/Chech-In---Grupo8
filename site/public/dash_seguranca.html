@@ -48,7 +48,7 @@
   <link rel="stylesheet" href="assets/css/black-dashboard.css?v=1.0.0">
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet">
-   <!-- <script src="http://www.chartjs.org/dist/3.9.1/Chart.js"></script> -->
+  <!-- <script src="http://www.chartjs.org/dist/3.9.1/Chart.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Script para o modal do alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -226,7 +226,45 @@
                 <div class="row">
                   <div class="col-sm-6 text-left">
                     <h5 class="card-category">Portas Abertas</h5>
+                    <h2 class="card-title">STATUS</h2>
+                    <canvas id="graficoPortasAberta"></canvas>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                      <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
+                      <!-- <input type="radio" name="options" checked> -->
+                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
+                      <!-- <span class="d-block d-sm-none"> -->
+                      <!-- <i class="tim-icons icon-single-02"></i> -->
+                      </span>
+                      </label>
+                      <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
+                      <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
+                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
+                      <!-- <span class="d-block d-sm-none"> -->
+                      <!-- <i class="tim-icons icon-gift-2"></i> -->
+                      </span>
+                      </label>
+                      <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
+                      <!-- <input type="radio" class="d-none" name="options"> -->
+                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
+                      <!-- <span class="d-block d-sm-none"> -->
+                      <!-- <i class="tim-icons icon-tap-02"></i> -->
+                      </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart" >
+              <div class="card-header ">
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category">Portas Abertas</h5>
                     <h2 class="card-title">QUANTIDADE</h2>
+                    <div class="chart-area-"></div>
                     <canvas id="graficoPortas"></canvas>
                   </div>
                   <div class="col-sm-6">
@@ -264,43 +302,7 @@
             </div>
           </div>
         </div>
-        <div class="content">
-          <div class="row">
-            <div class="col-12">
-              <div class="card card-chart">
-                <div class="card-header ">
-                  <div class="row">
-                    <div class="col-sm-6 text-left">
-                      <h5 class="card-category">Portas Abertas</h5>
-                      <h2 class="card-title">STATUS</h2>
-                      <canvas id="graficoPortasAberta"></canvas>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                        <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
-                        <!-- <input type="radio" name="options" checked> -->
-                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
-                        <!-- <span class="d-block d-sm-none"> -->
-                        <!-- <i class="tim-icons icon-single-02"></i> -->
-                        </span>
-                        </label>
-                        <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
-                        <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
-                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
-                        <!-- <span class="d-block d-sm-none"> -->
-                        <!-- <i class="tim-icons icon-gift-2"></i> -->
-                        </span>
-                        </label>
-                        <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
-                        <!-- <input type="radio" class="d-none" name="options"> -->
-                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
-                        <!-- <span class="d-block d-sm-none"> -->
-                        <!-- <i class="tim-icons icon-tap-02"></i> -->
-                        </span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
+        
                 </div>
                 <div class="card-body-cpu">
                   <div class="chart-area-cpu">
@@ -310,178 +312,178 @@
               </div>
             </div>
           </div>
-  
 
-        <!-- SIDE BAR -->
-        <div class="fixed-plugin">
-          <div class="dropdown show-dropdown">
-            <a href="#" data-toggle="dropdown">
-              <i class="fa fa-cog fa-2x"> </i>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header-title"> FUNDO </li>
-              <li class="adjustments-line">
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                  <div class="badge-colors text-center">
-                    <span class="badge filter badge-primary active" data-color="primary"></span>
-                    <span class="badge filter badge-info" data-color="blue"></span>
-                    <span class="badge filter badge-success" data-color="dark"></span>
-                  </div>
-                  <div class="clearfix"></div>
-                </a>
-              </li>
-              <li class="adjustments-line text-center color-change">
-                <span class="color-label">MODO CLARO</span>
-                <span class="badge light-badge mr-2"></span>
-                <span class="badge dark-badge ml-2"></span>
-                <span class="color-label">MODO ESCURO</span>
-              </li>
-            </ul>
+
+          <!-- SIDE BAR -->
+          <div class="fixed-plugin">
+            <div class="dropdown show-dropdown">
+              <a href="#" data-toggle="dropdown">
+                <i class="fa fa-cog fa-2x"> </i>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header-title"> FUNDO </li>
+                <li class="adjustments-line">
+                  <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                      <span class="badge filter badge-primary active" data-color="primary"></span>
+                      <span class="badge filter badge-info" data-color="blue"></span>
+                      <span class="badge filter badge-success" data-color="dark"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </a>
+                </li>
+                <li class="adjustments-line text-center color-change">
+                  <span class="color-label">MODO CLARO</span>
+                  <span class="badge light-badge mr-2"></span>
+                  <span class="badge dark-badge ml-2"></span>
+                  <span class="color-label">MODO ESCURO</span>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <!--   Core JS Files   -->
-        <script src="assets/js/core/jquery.min.js"></script>
-        <script src="assets/js/core/popper.min.js"></script>
-        <script src="assets/js/core/bootstrap.min.js"></script>
-        <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-        <!--  Google Maps Plugin    -->
-        <!-- Place this tag in your head or just before your close body tag. -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-        <!-- Chart JS -->
-        <!-- <script src="assets/js/plugins/chartjs.min.js"></script>
+          <!--   Core JS Files   -->
+          <script src="assets/js/core/jquery.min.js"></script>
+          <script src="assets/js/core/popper.min.js"></script>
+          <script src="assets/js/core/bootstrap.min.js"></script>
+          <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+          <!--  Google Maps Plugin    -->
+          <!-- Place this tag in your head or just before your close body tag. -->
+          <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+          <!-- Chart JS -->
+          <!-- <script src="assets/js/plugins/chartjs.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-        <!--  Notifications Plugin    -->
-        <script src="assets/js/plugins/bootstrap-notify.js"></script>
-        <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
-        <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-        <script src="assets/demo/demo.js"></script>
-        <script>
-          $(document).ready(function () {
-            $().ready(function () {
-              $sidebar = $('.sidebar');
-              $navbar = $('.navbar');
-              $main_panel = $('.main-panel');
+          <!--  Notifications Plugin    -->
+          <script src="assets/js/plugins/bootstrap-notify.js"></script>
+          <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+          <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
+          <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+          <script src="assets/demo/demo.js"></script>
+          <script>
+            $(document).ready(function () {
+              $().ready(function () {
+                $sidebar = $('.sidebar');
+                $navbar = $('.navbar');
+                $main_panel = $('.main-panel');
 
-              $full_page = $('.full-page');
+                $full_page = $('.full-page');
 
-              $sidebar_responsive = $('body > .navbar-collapse');
-              sidebar_mini_active = true;
-              white_color = false;
+                $sidebar_responsive = $('body > .navbar-collapse');
+                sidebar_mini_active = true;
+                white_color = false;
 
-              window_width = $(window).width();
+                window_width = $(window).width();
 
-              fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
 
 
-              $('.fixed-plugin a').click(function (event) {
-                if ($(this).hasClass('switch-trigger')) {
-                  if (event.stopPropagation) {
-                    event.stopPropagation();
-                  } else if (window.event) {
-                    window.event.cancelBubble = true;
+                $('.fixed-plugin a').click(function (event) {
+                  if ($(this).hasClass('switch-trigger')) {
+                    if (event.stopPropagation) {
+                      event.stopPropagation();
+                    } else if (window.event) {
+                      window.event.cancelBubble = true;
+                    }
                   }
-                }
-              });
+                });
 
-              $('.fixed-plugin .background-color span').click(function () {
-                $(this).siblings().removeClass('active');
-                $(this).addClass('active');
+                $('.fixed-plugin .background-color span').click(function () {
+                  $(this).siblings().removeClass('active');
+                  $(this).addClass('active');
 
-                var new_color = $(this).data('color');
+                  var new_color = $(this).data('color');
 
-                if ($sidebar.length != 0) {
-                  $sidebar.attr('data', new_color);
-                }
+                  if ($sidebar.length != 0) {
+                    $sidebar.attr('data', new_color);
+                  }
 
-                if ($main_panel.length != 0) {
-                  $main_panel.attr('data', new_color);
-                }
+                  if ($main_panel.length != 0) {
+                    $main_panel.attr('data', new_color);
+                  }
 
-                if ($full_page.length != 0) {
-                  $full_page.attr('filter-color', new_color);
-                }
+                  if ($full_page.length != 0) {
+                    $full_page.attr('filter-color', new_color);
+                  }
 
-                if ($sidebar_responsive.length != 0) {
-                  $sidebar_responsive.attr('data', new_color);
-                }
-              });
+                  if ($sidebar_responsive.length != 0) {
+                    $sidebar_responsive.attr('data', new_color);
+                  }
+                });
 
-              $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
-                var $btn = $(this);
+                $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                  var $btn = $(this);
 
-                if (sidebar_mini_active == true) {
-                  $('body').removeClass('sidebar-mini');
-                  sidebar_mini_active = false;
-                  blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
-                } else {
-                  $('body').addClass('sidebar-mini');
-                  sidebar_mini_active = true;
-                  blackDashboard.showSidebarMessage('Sidebar mini activated...');
-                }
+                  if (sidebar_mini_active == true) {
+                    $('body').removeClass('sidebar-mini');
+                    sidebar_mini_active = false;
+                    blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                  } else {
+                    $('body').addClass('sidebar-mini');
+                    sidebar_mini_active = true;
+                    blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                  }
 
-                // we simulate the window Resize so the charts will get updated in realtime.
-                var simulateWindowResize = setInterval(function () {
-                  window.dispatchEvent(new Event('resize'));
-                }, 180);
+                  // we simulate the window Resize so the charts will get updated in realtime.
+                  var simulateWindowResize = setInterval(function () {
+                    window.dispatchEvent(new Event('resize'));
+                  }, 180);
 
-                // we stop the simulation of Window Resize after the animations are completed
-                setTimeout(function () {
-                  clearInterval(simulateWindowResize);
-                }, 1000);
-              });
-
-              $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
-                var $btn = $(this);
-
-                if (white_color == true) {
-
-                  $('body').addClass('change-background');
+                  // we stop the simulation of Window Resize after the animations are completed
                   setTimeout(function () {
-                    $('body').removeClass('change-background');
-                    $('body').removeClass('white-content');
-                  }, 900);
-                  white_color = false;
-                } else {
+                    clearInterval(simulateWindowResize);
+                  }, 1000);
+                });
 
-                  $('body').addClass('change-background');
-                  setTimeout(function () {
-                    $('body').removeClass('change-background');
-                    $('body').addClass('white-content');
-                  }, 900);
+                $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                  var $btn = $(this);
 
-                  white_color = true;
-                }
+                  if (white_color == true) {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                      $('body').removeClass('change-background');
+                      $('body').removeClass('white-content');
+                    }, 900);
+                    white_color = false;
+                  } else {
+
+                    $('body').addClass('change-background');
+                    setTimeout(function () {
+                      $('body').removeClass('change-background');
+                      $('body').addClass('white-content');
+                    }, 900);
+
+                    white_color = true;
+                  }
 
 
-              });
+                });
 
-              $('.light-badge').click(function () {
-                $('body').addClass('white-content');
-              });
+                $('.light-badge').click(function () {
+                  $('body').addClass('white-content');
+                });
 
-              $('.dark-badge').click(function () {
-                $('body').removeClass('white-content');
+                $('.dark-badge').click(function () {
+                  $('body').removeClass('white-content');
+                });
               });
             });
-          });
-        </script>
-        <script>
-          $(document).ready(function () {
-            // Javascript method's body can be found in assets/js/demos.js
-           // demo.initDashboardPageCharts();
+          </script>
+          <script>
+            $(document).ready(function () {
+              // Javascript method's body can be found in assets/js/demos.js
+              // demo.initDashboardPageCharts();
 
-          });
-        </script>
-        <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-        <script>
-          window.TrackJS &&
-            TrackJS.install({
-              token: "ee6fab19c5a04ac1a32a645abde4613a",
-              application: "black-dashboard-free"
             });
-        </script>
+          </script>
+          <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+          <script>
+            window.TrackJS &&
+              TrackJS.install({
+                token: "ee6fab19c5a04ac1a32a645abde4613a",
+                application: "black-dashboard-free"
+              });
+          </script>
 </body>
 
 <script>
@@ -547,223 +549,236 @@
     });
     proximaAtualizacao = setTimeout(() => obterDados(), 2000);
   }
-   */ 
+   */
+  obterDadosGraficoAnalise()
+  function obterDadosGraficoAnalise() {
+    let vetor_portas = []
+    let vetor_status = []
+
+    fetch(`/medidas/estadoPortas`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+
+
+          resposta.forEach(element => {
+            vetor_portas.push(element.porta)
+            vetor_status.push(element.statusPorta)
+          })
+
+          console.log("Vetor portas: " + vetor_portas);
+          console.log("Vetor status: " + vetor_status);
+
+          montarGraficoBarras(vetor_portas, vetor_status);
+          /* plotarGrafico(vetor_portas, 'graficoPortasAberta', vetor_status, resposta); 
+          {
+            for (i = 0; i < resposta.length; i++) {
+              var registro = resposta[i];
+              dados.labels.push(registro.vetor_portas)
+              dados.datasets[0].data.push(registro.vetor_status)
+            }
+          } */
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenÃ§Ã£o dos dados p/ grÃ¡fico: ${error.message}`);
+      });
+  }
+
+
+
+  function montarGraficoBarras(x, y) {
+    var ctx = document.getElementById('graficoPortasAberta').getContext('2d');
+
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: x,
+        datasets: [
+          {
+            data: y,
+            label : 'Estado das Portas',
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.2)',
+              
+            ],
+            borderColor: [
+              'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1
+          }]
+      },
+      options: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'faksdhf'
+        }
+      }
+    });
+    setInterval(function () {
+      atualizarGraficoBarras(myChart);
+    }, 5000)
+  }
+  function atualizarGraficoBarras(grafico) {
+    fetch(`/medidas/estadoPortas`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          let vetor_portas = []
+          let vetor_status = []
+          resposta.forEach(element => {
+            vetor_portas.push(element.porta)
+            vetor_status.push(element.statusPorta)
+          })
+          grafico.data.labels = vetor_portas;
+          grafico.data.datasets[0].data = vetor_status;
+          grafico.update();
+        })
+      }
+    })
+  }
 
   function obterDadosGrafico() {
 
 
-fetch(`/medidas/coletandoPortas`, { cache: 'no-store' }).then(function (response) {
-  if (response.ok) {
-    response.json().then(function (resposta) {
-      console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-      resposta.reverse();
-      plotarGrafico(resposta);
-    });
-  } else {
-    console.error('Nenhum dado encontrado ou erro na API');
+    fetch(`/medidas/coletandoPortas`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          plotarGrafico(resposta);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
   }
-})
-  .catch(function (error) {
-    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  });
-}
 
-// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-// Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-// A função *plotarGrafico* também invoca a função *atualizarGrafico*
-function plotarGrafico(resposta, id) {
-console.log('iniciando plotagem do gráfico...');
+  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+  // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+  function plotarGrafico(resposta, id) {
+    console.log('iniciando plotagem do gráfico...');
 
-var dados = {
-  labels: [],
-  datasets: [
-    {
-      yAxisID: 'yAxis',
-      xAxisID: 'xAxis',
-      label: 'Estado de Portas no Sistema',
-      borderColor: '#D346B1',
-      backgroundColor: 'rgba(211,70,177,0.01)',
-      fill: true,
-      data: []
+    var dados = {
+      labels: [],
+      datasets: [
+        {
+          yAxisID: 'yAxis',
+          xAxisID: 'xAxis',
+          label: 'Estado de Portas no Sistema',
+          borderColor: '#D346B1',
+          backgroundColor: 'rgba(211,70,177,0.01)',
+          fill: true,
+          data: []
+        }
+      ]
+
+    };
+
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      dados.labels.push(registro.horario)
+      dados.datasets[0].data.push(registro.qtdPorta)
     }
-  ]
 
-};
-
+    console.log(JSON.stringify(dados));
 
 
-for (i = 0; i < resposta.length; i++) {
-  var registro = resposta[i];
-  dados.labels.push(registro.horario)
-  dados.datasets[0].data.push(registro.portaAberta)
-}
-
-console.log(JSON.stringify(dados));
-
-
-window.lineChart = new Chart(graficoPortas, {
-  type: 'line',
-  data: dados,
-  options: {
-    plugins: {
-      legend: {
-        display: false,
-        labels: {
-          font: {
-            size: 70,
-            weight: "bold",
-            family: "arial"
+    window.lineChart = new Chart(graficoPortas, {
+      type: 'line',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+            labels: {
+              font: {
+                size: 70,
+                weight: "bold",
+                family: "arial"
+              }
+            }
+          },
+        },
+        responsive: true,
+        animation: { duration: 1000 },
+        hoverMode: 'index',
+        stacked: false,
+        tooltips: {
+          backgroundColor: 'rgba(0, 0, 0, 0.703)',
+        },
+        scales: {
+          yAxis: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              stepSize: 20,
+              color: "rgba(255,255,255,0.6)",
+            }
+          },
+          xAxis: {
+            ticks: {
+              color: "rgba(255,255,255,0.6)",
+            }
           }
         }
-      },
-    },
-    responsive: true,
-    animation: { duration: 1000 },
-    hoverMode: 'index',
-    stacked: false,
-    tooltips: {
-      backgroundColor: 'rgba(0, 0, 0, 0.703)',
-    },
-    scales: {
-      yAxis: {
-        beginAtZero: true,
-        max: 100,
-        ticks: {
-          stepSize: 20,
-          color: "rgba(255,255,255,0.6)",
-        }
-      },
-      xAxis: {
-        ticks: {
-          color: "rgba(255,255,255,0.6)",
-        }
       }
-    }
-  }
-})
+    })
 
 
 /* setTimeout(() => atualizarGrafico(id, dados), 2000);
  */}
 
 
-// Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-// buscando a última medida inserida em tabela contendo as capturas, 
+  // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+  // buscando a última medida inserida em tabela contendo as capturas, 
 
-//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-//     Para ajustar o "select", ajuste o comando sql em src/models
-function atualizarGrafico(dados) {
-console.log("ENTRANDO NO ATUALIZAR GRAFICO")
-console.log("---------------------------------")
-console.log(dados)
-console.log("---------------------------------")
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
+  function atualizarGrafico(dados) {
+    console.log("ENTRANDO NO ATUALIZAR GRAFICO")
+    console.log("---------------------------------")
+    console.log(dados)
+    console.log("---------------------------------")
 
-fetch(`/medidas/coletandoPortas`, { cache: 'no-store' }).then(function (response) {
-  if (response.ok) {
-    response.json().then(function (novoRegistro) {
-      console.log(`Dados atuais do gráfico: ${dados}`);
+    fetch(`/medidas/coletandoPortas`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (novoRegistro) {
+          console.log(`Dados atuais do gráfico: ${dados}`);
 
-      // tirando e colocando valores no gráfico
-      dados.labels.shift(); // apagar o primeiro
-      dados.labels.push(novoRegistro.horario); // incluir um novo momento
-      dados.datasets.data.push(novoRegistro.portaAberta) // incluir uma nova medida
-    
-      
-      /* dados.datasets[0].data.shift(); */  // apagar o primeiro de temperatura
-      /*  dados.datasets[0].data.push(novoRegistro[0].grafico_zonas); */ // incluir uma nova medida de temperatura
-
-      window.lineChart.update();
-      
-      // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-      proximaAtualizacao = setTimeout(() => atualizarGrafico(id,dados), 2000);
-    });
-  } else {
-    console.error('Nenhum dado encontrado ou erro na API');
-    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-  }
-})
-  .catch(function (error) {
-    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  });
-
-}
-  
-
-function obterDadosGraficoAnalise() {
-        let vetor_portas = []
-        let vetor_status = []
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch(`/medidas/estadoPortas`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+          // tirando e colocando valores no gráfico
+          dados.labels.shift(); // apagar o primeiro
+          dados.labels.push(novoRegistro.horario); // incluir um novo momento
+          dados.datasets.data.push(novoRegistro.portaAberta) // incluir uma nova medida
 
 
+          /* dados.datasets[0].data.shift(); */  // apagar o primeiro de temperatura
+          /*  dados.datasets[0].data.push(novoRegistro[0].grafico_zonas); */ // incluir uma nova medida de temperatura
 
-                    resposta.forEach(element => {
-                        vetor_portas.push(element.portas)
-                        vetor_status.push(element.statusPorta)
-                    })
+          window.lineChart.update();
 
-
-                    plotarGrafico(vetor_portas, 'graficoPortasAberta', vetor_status,resposta);{
-                      for (i = 0; i < resposta.length; i++) {
-                      var registro = resposta[i];
-                      dados.labels.push(registro.vetor_portas)
-                      dados.datasets[0].data.push(registro.vetor_status)
-}
-                    }
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenÃ§Ã£o dos dados p/ grÃ¡fico: ${error.message}`);
-            });
-    }
-    
-     var ctx = document.getElementById('graficoPortasAberta').getContext('2d');
-
-    var myChart = new Chart(ctx,{
-            type: 'bar',
-            data: {
-                labels: ['80','23','8080','443','21','3333','22','3389','3306'],
-                datasets: [
-                    {
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-    }]
-},
-            options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'faksdhf'
-                }
-            }
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(id, dados), 2000);
         });
-    
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+
+  }
 
 
 </script>

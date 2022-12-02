@@ -414,4 +414,5 @@ module.exports = {
     contarAlertasSemanal,
     estadoPortas,
     MemoryProcess
+    
 }

@@ -378,7 +378,7 @@ function processos() {
     return database.executar(instrucaoSql);
 }
 function coletandoPortas() {
-    var instrucao = `select top 9 portaAberta, horario from porta order by idPorta desc;`;
+    var instrucao = `select top 9 qtdPorta, horario from porta order by idPorta desc;`;
     return database.executar(instrucao);
 }
 
@@ -402,7 +402,7 @@ function dadosAlertas(empresa) {
     return database.executar(instrucaoSql);
 }
 function estadoPortas() {
-    var instrucao = `select top 9 porta,statusPorta from porta;`;
+    var instrucao = `select top 9 * from porta where horario != '' order by dia,horario desc ;`;
     return database.executar(instrucao);
 }
 function contarAlertasDiario(fkTotem) {
@@ -469,4 +469,5 @@ module.exports = {
     contarAlertasSemanal,
     estadoPortas,
     MemoryProcess
+    
 }

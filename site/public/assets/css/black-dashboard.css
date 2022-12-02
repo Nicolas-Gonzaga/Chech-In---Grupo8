@@ -20225,6 +20225,12 @@ background-color: darkgrey;
 .card-chart {
   overflow: hidden;
 }
+.card .card-chart{
+  width: 100%;
+  height: 400px;
+}
+
+
 
 .card-chart .card-header .card-title i {
   font-size: 16px;
@@ -20263,10 +20269,8 @@ background-color: darkgrey;
 .card-chart .chart-area {
   height: 220px;
   width: 100%;
- 
- 
-  
 } 
+
 
 .card-chart .card-footer {
   margin-top: 15px;
@@ -20286,6 +20290,10 @@ background-color: darkgrey;
   margin: 0;
 }
 
+.card-chart.card-chart-pie .chart-area {
+  padding: 10px 0 25px;
+  height: auto;
+}
 .card-chart.card-chart-pie .chart-area {
   padding: 10px 0 25px;
   height: auto;
