@@ -468,6 +468,6 @@ module.exports = {
     contarAlertasDiario,
     contarAlertasSemanal,
     estadoPortas,
-    MemoryProcess
+    
     
 }
