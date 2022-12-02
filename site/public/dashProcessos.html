@@ -37,6 +37,7 @@
   <!-- Script para o modal do alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="http://www.chartjs.org/dist/3.9.1/Chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -388,7 +389,8 @@
 </script>
 </html>
 <script>
-    fetch(`/medidas/processos`, {
+  function graficoprocess(){
+   fetch(`/medidas/processos`, {
         method: "GET"
     }).then(function (response) {
         if (response.ok) {
@@ -399,44 +401,420 @@
             })
         }
     })
-</script>
-<script>
-fetch(`/medidas/MemoryProcess`, {
+    
+    
+// fetch(`/medidas/MemoryProcess`, {
+//         method: "GET"
+//     }).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (resposta) {
+//               for (i = 0; i < resposta.length; i++) {
+//                 memoryprocess.innerHTML += `<div style="background-color: grey;">${JSON.stringify(resposta[i])}</div>`
+//               }
+//             })
+//         }
+//     }).catch(function (resposta) {
+//         console.log(`#ERRO: ${resposta}`);
+
+// 			});
+
+let proximaAtualizacao
+    obterDadosGrafico()
+  function obterDadosGrafico(id) {
+    const fkTotem = 50000
+
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+    fetch(`/medidas/processostop`, {
         method: "GET"
     }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
-              for (i = 0; i < resposta.length; i++) {
-                memoryprocess.innerHTML += `<div style="background-color: grey;">${JSON.stringify(resposta[i])}</div>`
-              }
-            })
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+            plotarGrafico(resposta);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
         }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    
 
-			});
-</script>
-<script>
-    new Chart(
-        graficoDonut,
+  }
+
+  function plotarGrafico(resposta, id) {
+    console.log('iniciando plotagem do gráfico...');
+
+    var dados = {
+      labels: [],
+      datasets: [
         {
-            type: 'doughnut',
-            data: {
-                labels: [
-                    'Janeiro',
-                    'Fevereiro',
-                    'Março',
-                    'Abril',
-                    'Maio',
-                    'Junho',
-                ],
-                datasets: [{
-                    label: 'Gastos e Despesas',
-                    backgroundColor: ['#F5222C', '#fd0402', '#e21d46', '#fb2304', '#ff4100', '#de2123'],
-                    data: [50, 5, 10, 20, 30, 5],
-                }]
-            },
-            options: {}
+          // yAxisID: 'yAxis',
+          // xAxisID: 'xAxis',
+          label: 'Porcentagem de uso da Memória por processo',
+          borderColor: '#D346B1',
+          backgroundColor: '',
+          // fill: true,
+          data: []
         }
-    )
+      ]
+
+    };
+    // var dados2 = {
+    //   labels: [],
+    //   datasets: [
+    //     {
+    //       yAxisID: 'yAxisRam',
+    //       xAxisID: 'xAxisRam',
+    //       label: 'Porcentagem de uso da RAM',
+    //       borderColor: 'rgba(31,142,241,1)',
+    //       backgroundColor: 'rgba(31,142,241,0.01)',
+    //       fill: true,
+    //       data: []
+    //     }
+    //   ]
+    // };
+
+    // var dados3 = {
+    //   labels: [],
+    //   datasets: [
+    //     {
+    //       yAxisID: 'yAxisDown',
+    //       xAxisID: 'xAxisDown',
+    //       label: 'Download',
+    //       borderColor: '#D346B1',
+    //       backgroundColor: 'rgba(211,70,177,0.01)',
+    //       fill: true,
+    //       data: []
+    //     },
+    //     {
+    //       yAxisID: 'yAxisUp',
+    //       xAxisID: 'xAxisUp',
+    //       label: 'Upload',
+    //       borderColor: 'rgba(31,142,241,1)',
+    //       backgroundColor: 'rgba(31,142,241,0.01)',
+    //       fill: true,
+    //       data: []
+    //     }
+    //   ]
+    // };
+
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      dados.labels.push(registro.Nome);
+      dados.datasets[0].data.push(registro.MemoryPercent);
+      
+    }
+
+    const config = {
+        type: 'doughnut',
+        data: dados,
+        options: {}
+      };
+
+    console.log(JSON.stringify(dados));
+
+
+   
+
+    /* var ctx = chartBig11.getContext('2d');  */
+    /*       var optionsTeste = {
+            options: {
+              responsive: true,
+              animation: { duration: 1000 },
+              hoverMode: 'index',
+              stacked: false,
+              title: {
+                display: false,
+                text: 'Dados capturados'
+              },
+              legend: {
+                display: false
+              },
+    
+              tooltips: {
+                backgroundColor: 'rgba(0, 0, 0, 0.703)',
+              },
+              scales: {
+                yAxis: {
+                  type: 'bar',
+                  display: true,
+                  position: 'left',
+                  beginAtZero: true,
+                  max: 30,
+                  min: 0,
+                    ticks: {
+                    fontColor: 'white',
+                    beginAtZero: true,
+                    max: 100,
+                    min: 0
+                  }, 
+    
+    
+                },
+                xAxes: [{
+                  ticks: {
+                    fontColor: 'white'
+                  }
+                }]
+              }
+            }
+          }
+     */
+    if (dados == undefined) {
+      res.status(400).send("Data undefined!")
+    };
+
+    // window.doughnutChart = new Chart(graficoDonut, {
+    //   type: 'doughnut',
+    //   data: dados,
+    //   options: {
+    //     plugins: {
+    //       legend: {
+    //         display: false,
+    //         labels: {
+    //           font: {
+    //             size: 70,
+    //             weight: "bold",
+    //             family: "arial"
+    //           }
+    //         }
+    //       },
+    //     },
+    //     responsive: true,
+    //     animation: { duration: 1000 },
+    //     hoverMode: 'index',
+    //     stacked: false,
+    //     tooltips: {
+    //       backgroundColor: 'rgba(0, 0, 0, 0.703)',
+    //     },
+    //     scales: {
+    //       yAxis: {
+    //         beginAtZero: true,
+    //         max: 100,
+    //         ticks: {
+    //           stepSize: 20,
+    //           color: "rgba(255,255,255,0.6)",
+    //         }
+    //       },
+    //       xAxis: {
+    //         ticks: {
+    //           color: "rgba(255,255,255,0.6)",
+    //         }
+    //       }
+    //     }
+    //   }
+    const myChart = new Chart(
+        document.getElementById('graficoDonut'),
+        config
+      );
+
+
+    // window.lineChart2 = new Chart(chartLinePurple, {
+    //   type: 'line',
+    //   data: dados2,
+    //   options: {
+    //     plugins: {
+    //       legend: {
+    //         display: false
+    //       },
+    //     },
+    //     responsive: true,
+    //     animation: { duration: 1000 },
+    //     hoverMode: 'index',
+    //     stacked: false,
+    //     title: {
+    //       display: false,
+    //       text: 'Dados capturados'
+    //     },
+    //     legend: {
+    //       display: false
+    //     },
+
+    //     tooltips: {
+    //       backgroundColor: 'rgba(0, 0, 0, 0.703)',
+    //     },
+    //     scales: {
+    //       yAxisRam: {
+    //         beginAtZero: true,
+    //         max: 100,
+    //       }
+    //     }
+    //   }
+    // })
+
+    // window.lineChart3 = new Chart(chartLineGreen1, {
+    //   type: 'line',
+    //   data: dados3,
+    //   options: {
+    //     plugins: {
+    //       legend: {
+    //         display: true
+    //       },
+    //     },
+    //     responsive: true,
+    //     animation: { duration: 1000 },
+    //     hoverMode: 'index',
+    //     stacked: false,
+    //     title: {
+    //       display: false,
+    //       text: 'Dados capturados'
+    //     },
+    //     legend: {
+    //       display: false
+    //     },
+
+    //     tooltips: {
+    //       backgroundColor: 'rgba(0, 0, 0, 0.703)',
+    //     },
+    //     scales: {
+    //       yAxisDown: {
+    //         beginAtZero: true,
+    //         max: 100,
+    //         display: false
+    //       },
+    //       xAxisDown: {
+    //         display: false
+    //       },
+    //       yAxisUp: {
+    //         beginAtZero: true,
+    //         max: 100,
+    //       },
+    //     }
+    //   }
+    // })
+
+    /*       window.grafico_barra = Chart.Line(ctx, {
+            data: dados,
+            options: {
+              responsive: true,
+              animation: { duration: 1000 },
+              hoverMode: 'index',
+              stacked: false,
+              title: {
+                display: false,
+                text: 'Dados capturados'
+              },
+              legend: {
+                display: false
+              },
+    
+              tooltips: {
+                backgroundColor: 'rgba(0, 0, 0, 0.703)',
+              },
+              scales: {
+                yAxes: [{
+                  type: 'linear',
+                  display: true,
+                  position: 'left',
+                  id: 'y-temperatura',
+                  ticks: {
+                    fontColor: 'white',
+                    beginAtZero: true,
+                    max: 100,
+                    min: 0
+                  },
+    
+    
+                }],
+                xAxes: [{
+                  ticks: {
+                    fontColor: 'white'
+                  }
+                }]
+              }
+            }
+          }); */
+
+    setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+  }
+
+
+  
+    // new Chart(
+    //     graficoDonut,
+    //     {
+    //         type: 'doughnut',
+    //         data: {
+    //             labels: [
+    //                 'Janeiro',
+    //                 'Fevereiro',
+    //                 'Março',
+    //                 'Abril',
+    //                 'Maio',
+    //                 'Junho',
+    //             ],
+    //             datasets: [{
+    //                 label: 'Gastos e Despesas',
+    //                 backgroundColor: ['#F5222C', '#fd0402', '#e21d46', '#fb2304', '#ff4100', '#de2123'],
+    //                 data: [50, 5, 10, 20, 30, 5],
+    //             }]
+    //         },
+    //         options: {}
+    //     }
+    // )
+
+    function atualizarGrafico( dados, myChart) {
+    console.log("ENTRANDO NO ATUALIZAR GRAFICO")
+    console.log("---------------------------------")
+  
+    console.log("---------------------------------")
+
+
+    // fetch(`/medidas/tempo-real-totem/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
+  //   //   if (response.ok) {
+  //   //     response.json().then(function (novoRegistro) {
+
+  //   //       console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+  //   //       console.log(`Dados atuais do gráfico: ${dados}`);
+  //   //       console.log(`Dados atuais do gráfico: ${dados2}`);
+
+  //         // tirando e colocando valores no gráfico
+  //         // dados.labels.shift(); // apagar o primeiro
+  //         // dados.labels.push(novoRegistro[0].horarioF); // incluir um novo momento
+  //         // dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
+  //         // dados.datasets[0].data.push(novoRegistro[0].cpuPercent);
+  //         // let cpu = novoRegistro[0].cpuPercent// incluir uma nova medida de temperatura
+  //         // setTimeout(verificar(cpu, "cpu"), 60000)
+  //         // dados2.labels.shift();
+  //         // dados2.labels.push(novoRegistro[0].horarioF);
+  //         // dados2.datasets[0].data.shift();
+  //         // dados2.datasets[0].data.push(novoRegistro[0].ramPercent);
+  //         // let ram = novoRegistro[0].ramPercent
+  //         // setTimeout(verificar(ram,"ram"), 60000)
+  //         // dados3.labels.shift();
+  //         // dados3.labels.push(novoRegistro[0].horarioF);
+  //         // dados3.datasets[0].data.shift();
+  //         // dados3.datasets[0].data.push(novoRegistro[0].mbDownload);
+  //         // dados3.datasets[1].data.shift();
+  //         // dados3.datasets[1].data.push(novoRegistro[0].mbUpload);
+
+
+  //         /* dados.datasets[0].data.shift(); */  // apagar o primeiro de temperatura
+  //         /*  dados.datasets[0].data.push(novoRegistro[0].grafico_zonas); */ // incluir uma nova medida de temperatura
+
+  //         myChart.update();
+  //         // window.lineChart2.update();
+  //         // window.lineChart3.update();
+
+  //         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+  //         proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTotem, dados, dados2, dados3), 20000);
+  //       });
+  //     } else {
+  //       console.error('Nenhum dado encontrado ou erro na API');
+  //       // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+  //     }
+  //   })
+  //     .catch(function (error) {
+  //       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  //     });
+myChart.update()
+  // }
+}
+  }
+window.onload = graficoprocess()
 </script>

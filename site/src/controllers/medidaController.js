@@ -299,6 +299,22 @@ function processos(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+function processosTOP(req, res) {
+
+    medidaModel.processosTOP().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function coletandoPortas(req, res) {
 
     medidaModel.coletandoPortas()
@@ -322,7 +338,7 @@ function dadosAlertas(req, res) {
 
     var empresa = req.params.empresa
     console.log('Cheguei aqui')
-        medidaModel.contarAlertas(empresa).then(function (resultado) {
+        medidaModel.dadosAlertas(empresa).then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -413,6 +429,6 @@ module.exports = {
     contarAlertasDiario,
     contarAlertasSemanal,
     estadoPortas,
-    
+    processosTOP
     
 }

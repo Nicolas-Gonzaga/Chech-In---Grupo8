@@ -31,6 +31,9 @@ router.get("/ultimaDisco/:idArmazem", function (req, res) {
 router.get("/mediaT1", function (req, res) {
     medidaController.mediaT1(req, res);
 });
+router.get("/processostop", function (req, res) {
+    medidaController.processosTOP(req, res);
+});
 
 router.get("/mediaT2", function (req, res) {
     medidaController.mediaT2(req, res);

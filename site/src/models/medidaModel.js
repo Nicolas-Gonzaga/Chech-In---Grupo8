@@ -377,6 +377,19 @@ function processos() {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+function processosTOP() {
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top 3 * from Processos as t1 join (select distinct Nome, max(id) as id from Processos group by Nome) as t2 on t1.id = t2.id order by t1.id desc`
+    } else {
+        console.log("\nEsta API só suporta rodar em ambiente cloud\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function coletandoPortas() {
     var instrucao = `select top 9 qtdPorta, horario from porta order by idPorta desc;`;
     return database.executar(instrucao);
@@ -387,7 +400,7 @@ function dadosAlertas(empresa) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select componente, metrica, descricao, fkTotem, format(horario, 'hh:mm:ss) as horario from alerta where format(horario, 'dd-MM-yyyy) = format(getdate(), 'dd-MM-yyyy) and empresa = '${empresa}'`;
+        instrucaoSql = `select componente, metrica, descricao, fkTotem, format(horario, 'hh:mm:ss') as horario from alerta where format(horario, 'dd-MM-yyyy') = format(getdate(), 'dd-MM-yyyy') and empresa = '${empresa}'`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql =
@@ -468,6 +481,6 @@ module.exports = {
     contarAlertasDiario,
     contarAlertasSemanal,
     estadoPortas,
-    
+    processosTOP
     
 }
