@@ -6,7 +6,6 @@ import pyodbc
 import datetime
 from datetime import date
 from datetime import datetime
-import numpy as np
 
 
 #----------------------------------------------------------------------------------------------------------
@@ -67,7 +66,7 @@ while True:
 
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client.settimeout(0.1)
-            codigo = client.connect_ex (('10.18.33.192', portaAtual))
+            codigo = client.connect_ex (('10.18.33.1', portaAtual))
 
             
             hora = datetime.now().strftime('%H:%M')
@@ -100,12 +99,6 @@ while True:
                     print(values)
                     cursor.execute(sql, values)
 
-                    sql = "INSERT INTO statusPorta (portas,porta1,porta2,porta3,porta4,porta5,porta6,porta7,porta8,porta9) VALUES (?,?,?,?,?,?,?,?,?,?)"
-                    values = [portaAtual,status_porta[0],status_porta[1],status_porta[2],status_porta[3],status_porta[4],status_porta[5],status_porta[6]
-                   ,status_porta[7],status_porta[8]]
-                    print(values)
-                    cursor.execute(sql, values)
-
                 fkTotem+=1
                 
         
@@ -114,4 +107,4 @@ while True:
                 print("------------------------------------------")
                 print("\r")
                 cnxn.commit()
-                time.sleep(10)
+                time.sleep(60)
