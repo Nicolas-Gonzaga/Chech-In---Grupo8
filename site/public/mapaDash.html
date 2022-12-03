@@ -147,7 +147,7 @@
         <div class="modal-dialog" role="document">
         </div>
       </div>
-      <div class="content">
+      <div class="content" id="paginaMaior">
         <div class="row">
           <div class="col-12">
             <div class="card card-chart">
@@ -196,30 +196,6 @@
           </div>
         </div>
         <script>if(carregarTotem!='totens'){aparecerTotem.style.display="flex"}</script>
-        <div class="row">
-          <div class="col-lg-6 col-md-12">
-            <div class="card card-tasks">
-              <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Coordenadas <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
-                <span style="color: white;">Gráfico de Variação</span>
-                <div style="padding: 2%; height:95%; width:95%;">
-                  <canvas id="graficoTestes" style="position: relative; height:100%; width:100%"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="card card-tasks">
-              <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Precisão da Coleta <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
-                <span style="color: white;">Gráfico de Variação</span>
-                <div style="padding: 20px; height:95%; width:95%;">
-                  <canvas id="graficoLinhas" style="position: relative; height:100%; width:100%"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
   </div>
   <!-- SIDE BAR -->
@@ -375,6 +351,8 @@
 </html>
 <script>
   //tudo que realmente importa
+  tempoTimeout = 0
+
   function virar(virado) {
     const classePostcardInner = document.querySelector('.postcardInner')
     if (virado == true) {
@@ -553,8 +531,7 @@
           })
       }
   })
-</script>
-<script>
+  
   // Temperatura do Totem - Média diária
 
   function plotarTempTotem(resposta) {
@@ -615,7 +592,7 @@
       datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: dados})
       dados1.push(dados)
     }
-    chamarGrafico(dados1)
+    chamarGrafico(dados1, "primeiro")
     Chart.defaults.color = '#fff'
     new Chart(
       graficoTestes,
@@ -681,7 +658,7 @@
       data.datasets.push({label: labela, backgroundColor: backgroundColora, borderColor: borderColora, data: [respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]]})
       dados2.push([respostaFinal[0][i], respostaFinal[1][i], respostaFinal[2][i], respostaFinal[3][i], respostaFinal[4][i]])
     }
-    chamarGrafico(dados2)
+    chamarGrafico(dados2, "segundo")
     Chart.defaults.color = '#fff'
     new Chart(
       graficoLinhas,
@@ -763,50 +740,51 @@
   =======
   */
   primeiraChamada = true
-  function chamarGrafico(valores) {
+  function chamarGrafico(valores, posicao) {
     if (primeiraChamada) {
       primeiraChamada = false
       firstVal = valores
       return
     }
-
-    function checarAlertasPeriodicamente() {
-      metrica = firstVal[1][4]
-      if (!(metrica == null || valores[1][4] == null)) {
-        metricaComparativa = (27 - valores[1][4]) * 1.5
-        if (metrica <= (10 - (metricaComparativa))) {
-          alertar("PERIGO", "baixa demais", metrica, "temperatura")
-        } else if (metrica <= (25 - (metricaComparativa))) {
-          alertar("ALERTA", "baixa demais", metrica, "temperatura")
-        } else if (metrica >= (80 - (metricaComparativa))) {
-          alertar("PERIGO", "elevada", metrica, "temperatura")
-        } else if (metrica >= (70 - (metricaComparativa))) {
-          alertar("ALERTA", "elevada", metrica, "temperatura")
-        } else {
-          console.log("Alerta não acionado")
-        }
-      } else {
-        console.log("Alertas desabilitados - Sem CPU Core de hoje")
-      }
+    if (posicao == "primeiro") {
+      valoresAtuais = firstVal
+      firstVal = valores
+    } else {
+      valoresAtuais = valores
     }
-    setTimeout(checarAlertasPeriodicamente, 3000)
+
+    metrica = firstVal[1][4]
+    if (!(metrica == null || valoresAtuais[1][4] == null)) {
+      metricaComparativa = (27 - valoresAtuais[1][4]) * 1.5
+      if (metrica <= (10 - (metricaComparativa))) {
+        alertar("PERIGO", "baixa demais", metrica, "temperatura")
+      } else if (metrica <= (25 - (metricaComparativa))) {
+        alertar("ALERTA", "baixa demais", metrica, "temperatura")
+      } else if (metrica >= (80 - (metricaComparativa))) {
+        alertar("PERIGO", "elevada", metrica, "temperatura")
+      } else if (metrica >= (70 - (metricaComparativa))) {
+        alertar("ALERTA", "elevada", metrica, "temperatura")
+      } else {
+        console.log("Alerta não acionado")
+      }
+    } else {
+      console.log("Alertas desabilitados - Sem CPU Core de hoje")
+    }
   }
 
   function alertar(frase, intensidade, metrica, tipo) {
-    console.log(tipo)
     if (tipo == "temperatura") {
-      console.log("b")
-      var descricao = `A temperatura da CPU do Totem ${carregarTotem} está ficando ${intensidade}`
-      var valor = `CPU: ${metrica} °C`
-      Swal.fire(frase, `${descricao}!<br>${valor}`, "warning")
+      desc = `A temperatura da CPU do Totem ${carregarTotem} está ficando ${intensidade}`
+      valor = `CPU: ${metrica} °C`
     } else if (tipo == "coordenadas") {
-      console.log("c")
-      var descricao = `As coordenadas do Totem ${carregarTotem} apresentam uma variação alta`
-      var valor = `Variação: ${metrica}m`
-      Swal.fire(frase, `${descricao}!<br>${valor}`, "warning")
+      desc = `As coordenadas do Totem ${carregarTotem} apresentam uma variação alta`
+      valor = `Variação: ${metrica}m`
     }
-    console.log("d")
-    alertarPipefy(frase, descricao, valor)
+    tempoTimeout += 3000
+    setTimeout(() => {
+      Swal.fire(frase, `${desc}!<br>${valor}`, "warning")
+    }, tempoTimeout)
+    alertarPipefy(frase, desc, valor)
   }
 
   function alertarPipefy(frase, descricao, valor) {
@@ -825,38 +803,152 @@
     .then(response => console.log(`Alerta enviado com sucesso ao Pipefy! \r\n ${JSON.stringify(response)}`))
     .catch(err => console.error(`Erro no POST do Pipefy \r\n ${JSON.stringify(err)}`))
   }
-</script>
-<script>
-  // variacao de cordenadas
+  
+  /*
+  ==================
+  FETCH DE VARIAÇÕES
+  ==================
+  */
 
-  // if (carregarTotem == "totens") {
-  //   enviado = ""
-  // } else {
-  //   enviado = ` where fkTotem = ${carregarTotem}`
-  // }
-  // fetch(`/medidas/variacao-cords/${enviado}`, {
-  //   method: "GET"
-  // }).then(function (response) {
-  //   if (response.ok) {
-  //     response.json().then(function (resposta) {
-  //       console.log(resposta)
-  //     })
-  //   }
-  // })
+  fetch(`/medidas/variacao-cords`, {
+    method: "GET"
+  }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        organizarVariacoes(resposta)
+      })
+    }
+  })
 
-  // fetch(`/medidas/tempTotens`, {
-  //   method: "GET"
-  // }).then(function (response) {
-  //   if (response.ok) {
-  //     response.json().then(function (resposta) {
-  //       for(i = 0; resposta.length; i++) {
-  //         console.log("/medidas/tempTotens")
-  //         console.log(resposta[i])
-  //       }
-  //     })
-  //   }
-  // })
-</script>
-<script>
-  // variacao de precisao da coleta
+  function organizarVariacoes(resposta) {
+    variacoesDatas = []
+    variacoesDados = []
+
+    // Pegando apenas os dados de 5 dias mais recentes
+    for (i = 0; i < resposta.length; i++) {
+      colocar = true
+      for (f = 0; f < variacoesDatas.length; f++) {
+        if (resposta[i].dia == variacoesDatas[f]) {
+          colocar = false
+        }
+      }
+      if (colocar && variacoesDatas.length < 5) {
+        variacoesDatas.push(resposta[i].dia)
+      }
+    }
+    
+    for (i = 0; i < resposta.length; i++) {
+      for (f = 0; f < variacoesDatas.length; f++) {
+        if (resposta[i].dia == variacoesDatas[f]) {
+          variacoesDados.push(resposta[i])
+        }
+      }
+    }
+
+    // Ordenando por fkTotem
+
+    variacoesDadosNovos = []
+
+    for (i = 0; i < variacoesDados.length; i++) {
+      colocar = true
+      for (f = 0; f < variacoesDadosNovos.length; f++) {
+        if (variacoesDados[i].fkTotem == variacoesDadosNovos[f][0]) {
+          colocar = false
+        }
+      }
+      if (colocar && variacoesDadosNovos.length < 5) {
+        variacoesDadosNovos.push([variacoesDados[i].fkTotem, []])
+      }
+    }
+    
+    for (i = 0; i < variacoesDados.length; i++) {
+      for (f = 0; f < variacoesDadosNovos.length; f++) {
+        if (variacoesDados[i].fkTotem == variacoesDadosNovos[f][0]) {
+          variacoesDadosNovos[f][1].push(variacoesDados[i])
+        }
+      }
+    }
+
+    variacoesDadosNovos = variacoesDadosNovos.reverse()
+
+    if (carregarTotem != "totens") {
+      for (i = 0; i < variacoesDadosNovos.length; i++) {
+        if (variacoesDadosNovos[i][0] == carregarTotem) {
+          variacoesDadosNovos = [variacoesDadosNovos[i]]
+        }
+      }
+    }
+
+    console.log(variacoesDadosNovos)
+
+    for (i = 0; i < variacoesDadosNovos.length; i++) {
+
+      graficoC = `c${variacoesDadosNovos[i][0]}`
+      graficoP = `p${variacoesDadosNovos[i][0]}`
+      
+      paginaMaior.innerHTML +=
+      `
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <div class="card card-tasks">
+              <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
+                <span style="color: white; margin-top: 5%;">Totem ${variacoesDadosNovos[i][0]-49999}</span>
+                <span style="font-size: 200%; color: white; display: flex;">Coordenadas <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="color: white;">Gráfico de Variação</span>
+                <div style="padding: 2%; height:95%; width:95%;">
+                  <canvas id="${graficoC}" style="position: relative; height:100%; width:100%;"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="card card-tasks">
+              <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
+                <span style="color: white; margin-top: 5%;">Totem ${variacoesDadosNovos[i][0]-49999}</span>
+                <span style="font-size: 200%; color: white; display: flex;">Precisão da Coleta <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="color: white;">Gráfico de Variação</span>
+                <div style="padding: 20px; height:95%; width:95%;">
+                  <canvas id="${graficoP}" style="position: relative; height:100%; width:100%;"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `
+
+      dadosGraficosMalucos = []
+      for (f = 0; f < variacoesDadosNovos[i][1].length; f++) {
+        dadosGraficosMalucos.push([[variacoesDadosNovos[i][1][f].dia]])
+      }
+
+      // window[graficoC].style.backgroundColor = 'red'
+      // Chart.defaults.color = '#fff'
+      // new Chart(
+      //   window[graficoC],
+      //   {
+      //       type: 'line',
+      //       data:
+      //       {
+      //           labels: variacoesDadosNovos[i][1].dia,
+      //           datasets: [1]
+      //       },
+      //       options: {}
+      //   }
+      // )
+    }
+
+    /*
+    =======================
+    VARIAÇÃO DE COORDENADAS
+    =======================
+    */
+    
+    /*
+    ==============================
+    VARIAÇÃO DE PRECISÃO DA COLETA
+    ==============================
+    */
+    
+  }
+  
 </script>

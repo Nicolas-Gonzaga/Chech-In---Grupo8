@@ -395,8 +395,10 @@
     }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
+              console.log(resposta)
+              processosList.innerHTML += `<div class="processoListado">PID: Nome: Cpu Percent: Memory Percent:</div>`
               for (i = 0; i < resposta.length; i++) {
-                processosList.innerHTML += `<div class="processoListado">${JSON.stringify(resposta[i])}</div>`
+                processosList.innerHTML += `<div class="processoListado">${resposta[i].pid} | ${resposta[i].Nome[1]} | ${resposta[i].CpuPercent} | ${resposta[i].MemoryPercent}</div>`
               }
             })
         }
@@ -505,9 +507,9 @@ let proximaAtualizacao
 
     for (i = 0; i < resposta.length; i++) {
       var registro = resposta[i];
-      dados.labels.push(registro.Nome);
+      dados.labels.push(registro.Nome[0]);
       dados.datasets[0].data.push(registro.MemoryPercent);
-      
+
     }
 
     const config = {

@@ -242,9 +242,7 @@ function buscarMedidasMapas(req, res) {
     });
 }
 function variacaoCordsMapas(req, res) {
-    var valor = req.params.valor
-
-    medidaModel.variacaoCordsMapas(valor).then(function (resultado) {
+    medidaModel.variacaoCordsMapas().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -430,5 +428,4 @@ module.exports = {
     contarAlertasSemanal,
     estadoPortas,
     processosTOP
-    
 }

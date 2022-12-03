@@ -297,11 +297,11 @@ function buscarMedidasMapas() {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function variacaoCordsMapas(valor) {
+function variacaoCordsMapas() {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select t1.* from geolocalizationLeitura t1
+        instrucaoSql = `select t1.latitude, t1.longitude, t1.precisao, t1.dia, t1.fkTotem from geolocalizationLeitura t1
         inner join (select max(idLocalization) as idLocalization from geolocalizationLeitura GROUP BY fkTotem, dia) t2
-            on t1.idLocalization = t2.idLocalization${valor};`
+        on t1.idLocalization = t2.idLocalization order by t1.idLocalization desc;`
     } else {
         console.log("\nEsta API só suporta rodar em ambiente cloud\n");
         return
@@ -482,5 +482,4 @@ module.exports = {
     contarAlertasSemanal,
     estadoPortas,
     processosTOP
-    
 }
