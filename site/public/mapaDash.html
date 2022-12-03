@@ -16,12 +16,9 @@
     <title>
     ēKran - Mapas
   </title>
-  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <!-- Nucleo Icons -->
-  
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="assets/css/nucleo-icons.css" rel="stylesheet">
   <!-- CSS Files -->
   <link rel="stylesheet" href="assets/css/black-dashboard.css?v=1.0.0">
@@ -31,8 +28,7 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
-<body class="">
+<body>
   <div class="wrapper">
     <div class="sidebar">
       <div class="sidebar-wrapper">
@@ -262,6 +258,7 @@
   <script src="assets/js/plugins/bootstrap-notify.js"></script>
   <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
   <script src="assets/demo/demo.js"></script>
+  
   <script>
     $(document).ready(function () {
       $().ready(function () {
@@ -759,83 +756,75 @@
     }
     })
   }
-</script>
-<script>
+
   /*
   =======
   ALERTAS
   =======
   */
- primeiraChamada = true
- function chamarGrafico(valores) {
-  if (primeiraChamada) {
-    primeiraChamada = false
-    firstVal = valores
-    return
-  }
+  primeiraChamada = true
+  function chamarGrafico(valores) {
+    if (primeiraChamada) {
+      primeiraChamada = false
+      firstVal = valores
+      return
+    }
 
-  function alertarPeriodicamente() {
-    metrica = firstVal[1][4]
-    if (!(metrica == null || valores[1][4] == null)) {
-      metricaComparativa = (27 - valores[1][4]) * 1.5
-      if (metrica <= (10 - (metricaComparativa))) {
-        verificar(metrica, `Perigo `, "baixa")
-      } else if (metrica <= (25 - (metricaComparativa))) {
-        verificar(metrica, `Alerta  `, "baixa")
-      } else if (metrica >= (80 - (metricaComparativa))) {
-        verificar(metrica, `Perigo `, "elevada")
-      } else if (metrica >= (70 - (metricaComparativa))) {
-        verificar(metrica, `Alerta  `, "elevada")
+    function checarAlertasPeriodicamente() {
+      metrica = firstVal[1][4]
+      if (!(metrica == null || valores[1][4] == null)) {
+        metricaComparativa = (27 - valores[1][4]) * 1.5
+        if (metrica <= (10 - (metricaComparativa))) {
+          alertar("PERIGO", "baixa demais", metrica, "temperatura")
+        } else if (metrica <= (25 - (metricaComparativa))) {
+          alertar("ALERTA", "baixa demais", metrica, "temperatura")
+        } else if (metrica >= (80 - (metricaComparativa))) {
+          alertar("PERIGO", "elevada", metrica, "temperatura")
+        } else if (metrica >= (70 - (metricaComparativa))) {
+          alertar("ALERTA", "elevada", metrica, "temperatura")
+        } else {
+          console.log("Alerta não acionado")
+        }
       } else {
-        verificar(metrica, `Alerta  `, "normal")
+        console.log("Alertas desabilitados - Sem CPU Core de hoje")
       }
     }
+    setTimeout(checarAlertasPeriodicamente, 3000)
   }
-  setInterval(alertarPeriodicamente, 15000)
- }
 
+  function alertar(frase, intensidade, metrica, tipo) {
+    console.log(tipo)
+    if (tipo == "temperatura") {
+      console.log("b")
+      var descricao = `A temperatura da CPU do Totem ${carregarTotem} está ficando ${intensidade}`
+      var valor = `CPU: ${metrica} °C`
+      Swal.fire(frase, `${descricao}!<br>${valor}`, "warning")
+    } else if (tipo == "coordenadas") {
+      console.log("c")
+      var descricao = `As coordenadas do Totem ${carregarTotem} apresentam uma variação alta`
+      var valor = `Variação: ${metrica}m`
+      Swal.fire(frase, `${descricao}!<br>${valor}`, "warning")
+    }
+    console.log("d")
+    alertarPipefy(frase, descricao, valor)
+  }
 
- 
-function alertas(empresa, componente, metrica, frase, descricao) {
-  const options = {
-    method: 'POST',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIxNDc5MDEsImVtYWlsIjoiZWtyYW4uY29udGF0b0BnbWFpbC5jb20iLCJhcHBsaWNhdGlvbiI6MzAwMjAyMTU3fX0.VGdCGMvgQ2bYrUL_YKLK7zO99GBuEcVR9ADkNOjcuiFqh7KgjfsrLqEj86kbg0SgJMZ-J0smfL7Qepn0NltFCg',
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      query: `mutation {           createCard(input: {             pipe_id:302731204,             title: "Card",             fields_attributes:[               {field_id: "nome_do_colaborador", field_value: "${empresa}"},{field_id: "cargo", field_value: "${frase}${descricao}${metrica}"},{field_id: "m_tricas", field_value:"${componente}: ${metrica}" }             ],           }) {               card {                 title               }             }           }`,
+  function alertarPipefy(frase, descricao, valor) {
+    fetch('https://api.pipefy.com/graphql', {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIxNDc5MDEsImVtYWlsIjoiZWtyYW4uY29udGF0b0BnbWFpbC5jb20iLCJhcHBsaWNhdGlvbiI6MzAwMjAyMTU3fX0.VGdCGMvgQ2bYrUL_YKLK7zO99GBuEcVR9ADkNOjcuiFqh7KgjfsrLqEj86kbg0SgJMZ-J0smfL7Qepn0NltFCg',
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: `mutation {createCard(input: {pipe_id:302731204,title:"Card",fields_attributes:[{field_id: "nome_do_colaborador", field_value: "${sessionStorage.NOME_EMPRESA}"},{field_id: "cargo", field_value: "${frase}:\r\n${descricao}\r\nMomento do alerta:\r\n${new Date().getDate()}/${(new Date().getMonth() + 1)}/${new Date().getFullYear()} às ${new Date().getHours()}:${new Date().getMinutes()}"},{field_id: "m_tricas", field_value:"${valor}"}],}) {card {title}}}`,
+      })
     })
+    .then(response => response.json())
+    .then(response => console.log(`Alerta enviado com sucesso ao Pipefy! \r\n ${JSON.stringify(response)}`))
+    .catch(err => console.error(`Erro no POST do Pipefy \r\n ${JSON.stringify(err)}`))
   }
-  fetch('https://api.pipefy.com/graphql', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err))
-}
-
-function verificar(metrica, frase, intensidade) {
-  var componente = "cpu"
-  var empresa = sessionStorage.FK_EMPRESA
-  var nome = sessionStorage.NOME_EMPRESA
-  var frase = frase
-  var dataAtual = new Date()
-  var dia = dataAtual.getDate()
-  var mes = (dataAtual.getMonth() + 1)
-  var ano = dataAtual.getFullYear()
-  var horas = dataAtual.getHours()
-  var minutos = dataAtual.getMinutes()
-
-  if (frase == `Perigo `) {
-    Swal.fire("ALERTA", `cpu está sobrecarregada!`, "danger")
-  } else if (frase == `Alerta  `) {
-    Swal.fire("\                    \ CUIDADO", `cpu está ficando sobrecarregada!`, "warning");
-  }
-
-  var descricao = `A temperatura da ${componente} do totem ${carregarTotem} está ficando muito ${intensidade} Momento do alerta: dia ${dia}/${mes}/${ano} às ${horas}:${minutos}. Temperatura em celsius:`
-  
-  alertas(nome,componente,metrica,frase,descricao)
-}
 </script>
 <script>
   // variacao de cordenadas
