@@ -410,15 +410,15 @@
         <span>Data da coleta</span>
         <span>Latitude</span>
         <span>Longitude</span>
-        <span>Distância a partir do anterior</span>
       </div>`
           for (i = 0; i < resposta.length; i++) {
             processosList.innerHTML +=  `
         <div class="itemListaCoords">
-          <span>${i+1}</span><span>${resposta[i].pid}</span>
           <span>${resposta[i].Nome[0]}</span>
+          <span>${resposta[i].pid}</span>
           <span>${resposta[i].CpuPercent}</span>
           <span>${resposta[i].MemoryPercent}</span>
+          
         </div>
         `
           
