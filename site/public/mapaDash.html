@@ -613,7 +613,9 @@
     }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
-              plotarTempTotem(resposta)
+              setTimeout(() => {
+                plotarTempTotem(resposta)
+              }, 300)
             })
         }
     })
@@ -815,7 +817,7 @@
   }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        organizarVariacoes(resposta)
+          organizarVariacoes(resposta)
       })
     }
   })
@@ -832,7 +834,7 @@
           colocar = false
         }
       }
-      if (colocar && variacoesDatas.length < 5) {
+      if (colocar && variacoesDatas.length < 9) {
         variacoesDatas.push(resposta[i].dia)
       }
     }
@@ -879,8 +881,6 @@
       }
     }
 
-    console.log(variacoesDadosNovos)
-
     for (i = 0; i < variacoesDadosNovos.length; i++) {
 
       graficoC = `c${variacoesDadosNovos[i][0]}`
@@ -894,9 +894,9 @@
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
                 <span style="color: white; margin-top: 5%;">Totem ${variacoesDadosNovos[i][0]-49999}</span>
                 <span style="font-size: 200%; color: white; display: flex;">Coordenadas <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
-                <span style="color: white;">Gráfico de Variação</span>
+                <span style="color: white;">Histórico de Variação</span>
                 <div style="padding: 2%; height:95%; width:95%;">
-                  <canvas id="${graficoC}" style="position: relative; height:100%; width:100%;"></canvas>
+                  <div id="${graficoC}" style="background-color: red; width: 100%; height: 100%;"></div>
                 </div>
               </div>
             </div>
@@ -915,26 +915,56 @@
           </div>
         </div>
       `
+    }
+    for (i = 0; i < variacoesDadosNovos.length; i++) {
 
-      dadosGraficosMalucos = []
+      graficoC = `c${variacoesDadosNovos[i][0]}`
+      graficoP = `p${variacoesDadosNovos[i][0]}`
+
+      dadosVariacoesDatas = []
+      dadosVariacoesPrecisao = []
+      dadosVariacoesLatitude = []
+      dadosVariacoesLongitude = []
+
       for (f = 0; f < variacoesDadosNovos[i][1].length; f++) {
-        dadosGraficosMalucos.push([[variacoesDadosNovos[i][1][f].dia]])
+        dadosVariacoesDatas.push(variacoesDadosNovos[i][1][f].dia)
+        dadosVariacoesLatitude.push(variacoesDadosNovos[i][1][f].latitude)
+        dadosVariacoesLongitude.push(variacoesDadosNovos[i][1][f].longitude)
       }
 
-      // window[graficoC].style.backgroundColor = 'red'
-      // Chart.defaults.color = '#fff'
-      // new Chart(
-      //   window[graficoC],
-      //   {
-      //       type: 'line',
-      //       data:
-      //       {
-      //           labels: variacoesDadosNovos[i][1].dia,
-      //           datasets: [1]
-      //       },
-      //       options: {}
-      //   }
-      // )
+      window[graficoC].innerHTML += `<div class="itemListaCoords" style="height: 40px"><span>Data</span><span>Latitude</span><span>Longitude</span><span>Distancia do<br> anterior</span></div>`
+      for (f = 0; f < dadosVariacoesDatas.length; f++) {
+        window[graficoC].innerHTML += `<div class="itemListaCoords"><span>${dadosVariacoesDatas[f]}</span><span>${dadosVariacoesLatitude[f]}</span><span>${dadosVariacoesLongitude[f]}</span><span>${dadosVariacoesDatas[f]}</span></div>`
+      }
+
+      // Para o grafico
+
+      dadosVariacoesDatas = []
+
+      for (f = 0; f < variacoesDadosNovos[i][1].length; f++) {
+        dadosVariacoesDatas.push(variacoesDadosNovos[i][1][f].dia.substring(0,5))
+      }
+
+      for (f = 0; f < variacoesDadosNovos[i][1].length; f++) {
+        dadosVariacoesPrecisao.push(variacoesDadosNovos[i][1][f].precisao)
+      }
+
+      dadosVariacoesPrecisao = dadosVariacoesPrecisao.reverse()
+      dadosVariacoesDatas = dadosVariacoesDatas.reverse()
+
+      Chart.defaults.color = '#fff'
+      new Chart (
+        window[graficoP],
+        {
+            type: 'line',
+            data:
+            {
+                labels: dadosVariacoesDatas,
+                datasets: [{label: 'Margem de Erro em Metros', backgroundColor: '#3DA4C2', borderColor: '#1EC1E1', data: dadosVariacoesPrecisao}]
+            },
+            options: {}
+        }
+      )
     }
 
     /*
