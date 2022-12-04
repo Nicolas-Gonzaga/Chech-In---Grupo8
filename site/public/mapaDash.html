@@ -896,7 +896,7 @@
                 <span style="font-size: 200%; color: white; display: flex;">Coordenadas <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Histórico de Variação</span>
                 <div style="padding: 2%; height:95%; width:95%;">
-                  <div id="${graficoC}" style="background-color: red; width: 100%; height: 100%;"></div>
+                  <div id="${graficoC}" style="border: 1px solid #007ee3; background-color: #004981; width: 100%; height: 100%;"></div>
                 </div>
               </div>
             </div>
@@ -922,7 +922,6 @@
       graficoP = `p${variacoesDadosNovos[i][0]}`
 
       dadosVariacoesDatas = []
-      dadosVariacoesPrecisao = []
       dadosVariacoesLatitude = []
       dadosVariacoesLongitude = []
 
@@ -932,14 +931,62 @@
         dadosVariacoesLongitude.push(variacoesDadosNovos[i][1][f].longitude)
       }
 
-      window[graficoC].innerHTML += `<div class="itemListaCoords" style="height: 40px"><span>Data</span><span>Latitude</span><span>Longitude</span><span>Distancia do<br> anterior</span></div>`
+      if(i == 0) {
+      console.log(dadosVariacoesLatitude)
+      console.log(dadosVariacoesLongitude)
+      }
+
+      //vai ser aqui distancia a partir do anterior
+
       for (f = 0; f < dadosVariacoesDatas.length; f++) {
-        window[graficoC].innerHTML += `<div class="itemListaCoords"><span>${dadosVariacoesDatas[f]}</span><span>${dadosVariacoesLatitude[f]}</span><span>${dadosVariacoesLongitude[f]}</span><span>${dadosVariacoesDatas[f]}</span></div>`
+        // if (dadosVariacoesLatitude[f] >= dadosVariacoesLatitude[f+1]) {deltaY = dadosVariacoesLatitude[f] - dadosVariacoesLatitude[f+1]} else {deltaY = dadosVariacoesLatitude[f+1] - dadosVariacoesLatitude[f]}
+        // if (dadosVariacoesLongitude[f] >= dadosVariacoesLongitude[f+1]) {deltaX = dadosVariacoesLongitude[f] - dadosVariacoesLongitude[f+1]} else {deltaX = dadosVariacoesLongitude[f+1] - dadosVariacoesLongitude[f]}
+        // distancia = ((deltaY**2) + (deltaX**2))**1/2
+        distancia = measure(dadosVariacoesLatitude[f], dadosVariacoesLongitude[f], dadosVariacoesLatitude[f+1], dadosVariacoesLongitude[f+1])
+        if(i == 0) {
+          if (Number.isNaN(distancia)) {
+            console.log(0)
+          } else {
+            console.log(distancia * 111.139)
+          }
+        }
+      }
+      function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+        var R = 6378.137; // Radius of earth in KM
+        var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180
+        var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2)
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+        var d = R * c;
+        return d * 1000; // meters
+      }
+
+      window[graficoC].innerHTML +=
+      `
+      <div class="itemListaCoords" style="height: 60px">
+        <span>Número na Lista</span>
+        <span>Data da coleta</span>
+        <span>Latitude</span>
+        <span>Longitude</span>
+        <span>Distância a partir do anterior</span>
+      </div>
+      `
+      for (f = 0; f < dadosVariacoesDatas.length; f++) {
+        window[graficoC].innerHTML +=
+        `
+        <div class="itemListaCoords">
+          <span>${f+1}</span><span>${dadosVariacoesDatas[f]}</span>
+          <span>${dadosVariacoesLatitude[f]}</span>
+          <span>${dadosVariacoesLongitude[f]}</span>
+          <span>${dadosVariacoesDatas[f]}</span>
+        </div>
+        `
       }
 
       // Para o grafico
 
       dadosVariacoesDatas = []
+      dadosVariacoesPrecisao = []
 
       for (f = 0; f < variacoesDadosNovos[i][1].length; f++) {
         dadosVariacoesDatas.push(variacoesDadosNovos[i][1][f].dia.substring(0,5))
@@ -960,25 +1007,11 @@
             data:
             {
                 labels: dadosVariacoesDatas,
-                datasets: [{label: 'Margem de Erro em Metros', backgroundColor: '#3DA4C2', borderColor: '#1EC1E1', data: dadosVariacoesPrecisao}]
+                datasets: [{label: 'Margem de Erro em Metros', backgroundColor: '#007ee3', borderColor: '#0061ad', data: dadosVariacoesPrecisao}]
             },
             options: {}
         }
       )
     }
-
-    /*
-    =======================
-    VARIAÇÃO DE COORDENADAS
-    =======================
-    */
-    
-    /*
-    ==============================
-    VARIAÇÃO DE PRECISÃO DA COLETA
-    ==============================
-    */
-    
   }
-  
 </script>
