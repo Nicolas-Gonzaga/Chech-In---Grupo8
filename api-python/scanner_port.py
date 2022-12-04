@@ -66,7 +66,7 @@ while True:
 
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client.settimeout(0.1)
-            codigo = client.connect_ex (('10.18.33.1', portaAtual))
+            codigo = client.connect_ex (('192.168.15.5', portaAtual))
 
             
             hora = datetime.now().strftime('%H:%M')
@@ -94,8 +94,8 @@ while True:
                 for i, portaAtual in enumerate(portas):                
                     
                     cursor = cnxn.cursor()
-                    sql = "INSERT INTO porta (fkTotem,horario,dia, qtdPorta, portas, statusPorta) VALUES (?,?,?,?,?,?)"
-                    values = [fkTotem,hora,dia,portas_aberta,portaAtual,status_porta[i]]
+                    sql = "INSERT INTO porta (fkTotem,portaAberta, portas, statusPorta,horario,dia) VALUES (?,?,?,?,?,?)"
+                    values = [fkTotem,portas_aberta,portaAtual,status_porta[i],hora,dia]
                     print(values)
                     cursor.execute(sql, values)
 
@@ -107,4 +107,4 @@ while True:
                 print("------------------------------------------")
                 print("\r")
                 cnxn.commit()
-                time.sleep(60)
+                time.sleep(5)
