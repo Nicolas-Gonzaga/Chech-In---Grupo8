@@ -380,15 +380,28 @@ function processos() {
 
 function processosTOP() {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 3 * from Processos as t1 join (select distinct Nome, max(id) as id from Processos group by Nome) as t2 on t1.id = t2.id order by t1.id desc`
+        instrucaoSql = `select top 3 * from Processos as t1 join (select distinct Nome, max(id) as id from Processos group by Nome) as t2 on t1.id = t2.id order by MemoryPercent desc;`
     } else {
         console.log("\nEsta API só suporta rodar em ambiente cloud\n");
         return
-    }
-
+    } 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+    function processosTOP2() {
+        if (process.env.AMBIENTE_PROCESSO == "producao") {
+            instrucaoSql = `select top 3 * from Processos as t1 join (select distinct Nome, max(id) as id from Processos group by Nome) as t2 on t1.id = t2.id order by CpuPercent desc;`
+        } else {
+            console.log("\nEsta API só suporta rodar em ambiente cloud\n");
+            return
+        }
+    
+        console.log("Executando a instrução SQL: \n" + instrucaoSql);
+        return database.executar(instrucaoSql);
+    }
+
+   
 
 function coletandoPortas() {
     var instrucao = `select top 9 qtdPorta, horario from porta order by idPorta desc;`;
@@ -481,5 +494,6 @@ module.exports = {
     contarAlertasDiario,
     contarAlertasSemanal,
     estadoPortas,
-    processosTOP
+    processosTOP,
+    processosTOP2
 }

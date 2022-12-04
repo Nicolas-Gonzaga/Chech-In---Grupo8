@@ -35,6 +35,10 @@ router.get("/processostop", function (req, res) {
     medidaController.processosTOP(req, res);
 });
 
+router.get("/processostop2", function (req, res) {
+    medidaController.processosTOP2(req, res);
+});
+
 router.get("/mediaT2", function (req, res) {
     medidaController.mediaT2(req, res);
 });

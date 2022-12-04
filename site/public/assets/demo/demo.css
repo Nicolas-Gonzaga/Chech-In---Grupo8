@@ -1,23 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 .tim-row {
   margin-bottom: 20px;
+}
+
+.itemListaCoords {
+  width: 100%;
+  height: 30px;
+  background-color: blue;
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.itemListaCoords:hover {
+  background-color: lightblue;
 }
 
 .processoListado {
   background-color: grey;
   border: 1px solid black;
 }
-
 .processoDonut1{
   width: 100%;
   height: 100%;
 }
-
 .tim-white-buttons {
   background-color: #777777;
 }
-
 .typography-line {
   padding-left: 25%;
   margin-bottom: 35px;
@@ -25,7 +36,6 @@
   display: block;
   width: 100%;
 }
-
 .typography-line span {
   bottom: 10px;
   color: #c0c1c2;
@@ -38,20 +48,16 @@
   width: 260px;
   text-transform: none;
 }
-
 .tim-row {
   padding-top: 60px;
 }
-
 .tim-row h3 {
   margin-top: 0;
 }
-
 .offline-doc .page-header {
   display: flex;
   align-items: center;
 }
-
 .offline-doc .footer {
   position: absolute;
   width: 100%;
@@ -60,7 +66,6 @@
   color: #fff;
   z-index: 1;
 }
-
 @media all and (min-width: 992px) {
   .sidebar .nav>li.active-pro {
     position: absolute;
@@ -68,35 +73,29 @@
     bottom: 10px;
   }
 }
-
 .card.card-upgrade .card-category {
   max-width: 530px;
   margin: 0 auto;
 }
-
 /* .card-body-cpu{
   height: 55vh;
 } */
-
 #chartBig11,#chartLinePurple1,#chartLineGreen1{
   height:100% !important;
   width:100% !important;
   margin: 0 auto ;
 }
-
 #CountryChart1{
   height:100% !important;
   width:80% !important;
   margin: 0 auto ;
 }
-
 .carousel{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50vh;
 }
-
 .totem {
   /* background-color: red; */
   margin: 0 auto;
@@ -109,23 +108,19 @@
   padding: 4% 2% 2% 2%;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.563)
 }
-
 .totem h1{
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   text-align: center;
 }
-
 .medias-componentes p{
   margin-bottom: 5%;
   font-size: 1.5em;
 }
-
 .menu-totens{
   display: flex;
   justify-content: right;
 }
-
 .menu-totens p{
   margin: 0% 3%;
   border: white 1px solid;
@@ -133,24 +128,18 @@
   cursor: pointer;
   user-select: none;
 }
-
 .menuTotemCurrent{
   background-color: #0065B5;
 }
-
-
-
 .postcard {
   width: 1100px;
   height: 475px;
 }
-
 .postcardPlaceholder {
   width: 100%;
   height: 100%;
   perspective: 1000px;
 }
-
 .postcardInner {
   position: relative;
   width: 100%;
@@ -159,11 +148,9 @@
   transition: transform 0.3s;
   transform-style: preserve-3d;
 }
-
 .virado {
   transform: rotateY(180deg);
 }
-
 .postcardFront, .postcardBack {
   position: absolute;
   width: 100%;
@@ -175,20 +162,17 @@
   align-items: center;
   justify-content: center;
 }
-
 .postcardBack {
   background-color: red;
   color: white;
   transform: rotateY(180deg)
 }
-
 .postcardBtn {
   position: absolute;
   z-index: 2;
   right: 10px;
   top: 5px;
 }
-
 .indicador-metricas{
   width: 35vw;
   height: 2vh;
@@ -199,7 +183,6 @@
   position: relative;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.417);
 }
-
 .indicador{
   position: absolute;
   width: 1vw;
@@ -208,7 +191,6 @@
   border-radius: 100%;
   left:30%;
 }
-
 @media screen and (max-width: 990px){
   .totem{
     width: 50vw;
@@ -219,8 +201,6 @@
     font-size: 1em;
   }
 }
-
-
 @media screen and (min-width: 990px){
   .card-body-cpu{
     height: 60vh;

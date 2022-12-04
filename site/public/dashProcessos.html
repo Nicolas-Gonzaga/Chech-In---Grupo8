@@ -2,12 +2,12 @@
 <html lang="pt">
 
 <head>
- 
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/icon-ekran.png">
   <link rel="icon" type="image/png" href="assets/img/icon-ekran.png">
-    <title>
+  <title>
     ēKran - Processos
   </title>
   <!-- Google Fonts -->
@@ -98,7 +98,7 @@
               <p>Cadastrar funcionário</p>
             </a>
           </li>
-          <li >
+          <li>
             <a href="mapaDash.html?totens">
               <i class="tim-icons icon-square-pin"></i>
               <p>Mapas</p>
@@ -207,8 +207,9 @@
         <div class="row">
           <div class="col-12">
             <div class="card card-chart">
-              <div class="card-header" style="height: 500px; display: flex; align-items: center; justify-content: center;">
-                <div id="processosList"  style="width: 100%; height: 100%;"></div>
+              <div class="card-header"
+                style="height: 500px; display: flex; align-items: center; justify-content: center;">
+                <div id="processosList" style="width: 100%; height: 100%;"></div>
               </div>
             </div>
           </div>
@@ -216,6 +217,7 @@
         <div class="row">
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
+              <h2 class="memoria">% de uso da memória</h2>
               <div class="processoDonut1" style="display: flex; align-items: center; justify-content: center">
                 <canvas id="graficoDonut"></canvas>
               </div>
@@ -223,217 +225,208 @@
           </div>
           <!-- HISTORICO -->
           <div class="col-lg-6 col-md-12">
-            <div class="card card-tasks" style="height: 500px; display: flex; align-items: center; justify-content: center;">
-              <div id="memoryprocess" style="width: 100%; height: 100%; background-color:white"></div>
+            <div class="card card-tasks">
+              <h2>% de uso da CPU</h2>
+              <div class="processoDonut1" style="display: flex; align-items: center; justify-content: center">
+                <canvas id="graficoDonut2"></canvas>
+              </div>
+              <div id="memoryprocess"></div>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- SIDE BAR -->
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-        <i class="fa fa-cog fa-2x"> </i>
-      </a>
-      <ul class="dropdown-menu">
-        <li class="header-title"> FUNDO </li>
-        <li class="adjustments-line">
-          <a href="javascript:void(0)" class="switch-trigger background-color">
-            <div class="badge-colors text-center">
-              <span class="badge filter badge-primary active" data-color="primary"></span>
-              <span class="badge filter badge-info" data-color="blue"></span>
-              <span class="badge filter badge-success" data-color="dark"></span>
-            </div>
-            <div class="clearfix"></div>
-          </a>
-        </li>
-        <li class="adjustments-line text-center color-change">
-          <span class="color-label">MODO CLARO</span>
-          <span class="badge light-badge mr-2"></span>
-          <span class="badge dark-badge ml-2"></span>
-          <span class="color-label">MODO ESCURO</span>
-        </li>
-      </ul>
+    <!-- SIDE BAR -->
+    <div class="fixed-plugin">
+      <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+          <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="header-title"> FUNDO </li>
+          <li class="adjustments-line">
+            <a href="javascript:void(0)" class="switch-trigger background-color">
+              <div class="badge-colors text-center">
+                <span class="badge filter badge-primary active" data-color="primary"></span>
+                <span class="badge filter badge-info" data-color="blue"></span>
+                <span class="badge filter badge-success" data-color="dark"></span>
+              </div>
+              <div class="clearfix"></div>
+            </a>
+          </li>
+          <li class="adjustments-line text-center color-change">
+            <span class="color-label">MODO CLARO</span>
+            <span class="badge light-badge mr-2"></span>
+            <span class="badge dark-badge ml-2"></span>
+            <span class="color-label">MODO ESCURO</span>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <!--   Core JS Files   -->
-  <script src="assets/js/core/jquery.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap.min.js"></script>
-  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chart JS -->
-  <script src="assets/js/plugins/chartjs.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
-  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-  <script src="assets/demo/demo.js"></script>
-  <script>
-    $(document).ready(function () {
-      $().ready(function () {
-        $sidebar = $('.sidebar');
-        $navbar = $('.navbar');
-        $main_panel = $('.main-panel');
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chart JS -->
+    <script src="assets/js/plugins/chartjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
+    <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+    <script src="assets/demo/demo.js"></script>
+    <script>
+      $(document).ready(function () {
+        $().ready(function () {
+          $sidebar = $('.sidebar');
+          $navbar = $('.navbar');
+          $main_panel = $('.main-panel');
 
-        $full_page = $('.full-page');
+          $full_page = $('.full-page');
 
-        $sidebar_responsive = $('body > .navbar-collapse');
-        sidebar_mini_active = true;
-        white_color = false;
+          $sidebar_responsive = $('body > .navbar-collapse');
+          sidebar_mini_active = true;
+          white_color = false;
 
-        window_width = $(window).width();
+          window_width = $(window).width();
 
-        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
+          fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
 
-        $('.fixed-plugin a').click(function (event) {
-          if ($(this).hasClass('switch-trigger')) {
-            if (event.stopPropagation) {
-              event.stopPropagation();
-            } else if (window.event) {
-              window.event.cancelBubble = true;
+
+          $('.fixed-plugin a').click(function (event) {
+            if ($(this).hasClass('switch-trigger')) {
+              if (event.stopPropagation) {
+                event.stopPropagation();
+              } else if (window.event) {
+                window.event.cancelBubble = true;
+              }
             }
-          }
-        });
+          });
 
-        $('.fixed-plugin .background-color span').click(function () {
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
+          $('.fixed-plugin .background-color span').click(function () {
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
 
-          var new_color = $(this).data('color');
+            var new_color = $(this).data('color');
 
-          if ($sidebar.length != 0) {
-            $sidebar.attr('data', new_color);
-          }
+            if ($sidebar.length != 0) {
+              $sidebar.attr('data', new_color);
+            }
 
-          if ($main_panel.length != 0) {
-            $main_panel.attr('data', new_color);
-          }
+            if ($main_panel.length != 0) {
+              $main_panel.attr('data', new_color);
+            }
 
-          if ($full_page.length != 0) {
-            $full_page.attr('filter-color', new_color);
-          }
+            if ($full_page.length != 0) {
+              $full_page.attr('filter-color', new_color);
+            }
 
-          if ($sidebar_responsive.length != 0) {
-            $sidebar_responsive.attr('data', new_color);
-          }
-        });
+            if ($sidebar_responsive.length != 0) {
+              $sidebar_responsive.attr('data', new_color);
+            }
+          });
 
-        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
-          var $btn = $(this);
+          $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+            var $btn = $(this);
 
-          if (sidebar_mini_active == true) {
-            $('body').removeClass('sidebar-mini');
-            sidebar_mini_active = false;
-            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
-          } else {
-            $('body').addClass('sidebar-mini');
-            sidebar_mini_active = true;
-            blackDashboard.showSidebarMessage('Sidebar mini activated...');
-          }
+            if (sidebar_mini_active == true) {
+              $('body').removeClass('sidebar-mini');
+              sidebar_mini_active = false;
+              blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+            } else {
+              $('body').addClass('sidebar-mini');
+              sidebar_mini_active = true;
+              blackDashboard.showSidebarMessage('Sidebar mini activated...');
+            }
 
-          // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function () {
-            window.dispatchEvent(new Event('resize'));
-          }, 180);
+            // we simulate the window Resize so the charts will get updated in realtime.
+            var simulateWindowResize = setInterval(function () {
+              window.dispatchEvent(new Event('resize'));
+            }, 180);
 
-          // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function () {
-            clearInterval(simulateWindowResize);
-          }, 1000);
-        });
-
-        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
-          var $btn = $(this);
-
-          if (white_color == true) {
-
-            $('body').addClass('change-background');
+            // we stop the simulation of Window Resize after the animations are completed
             setTimeout(function () {
-              $('body').removeClass('change-background');
-              $('body').removeClass('white-content');
-            }, 900);
-            white_color = false;
-          } else {
+              clearInterval(simulateWindowResize);
+            }, 1000);
+          });
 
-            $('body').addClass('change-background');
-            setTimeout(function () {
-              $('body').removeClass('change-background');
-              $('body').addClass('white-content');
-            }, 900);
+          $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+            var $btn = $(this);
 
-            white_color = true;
-          }
+            if (white_color == true) {
+
+              $('body').addClass('change-background');
+              setTimeout(function () {
+                $('body').removeClass('change-background');
+                $('body').removeClass('white-content');
+              }, 900);
+              white_color = false;
+            } else {
+
+              $('body').addClass('change-background');
+              setTimeout(function () {
+                $('body').removeClass('change-background');
+                $('body').addClass('white-content');
+              }, 900);
+
+              white_color = true;
+            }
 
 
-        });
+          });
 
-        $('.light-badge').click(function () {
-          $('body').addClass('white-content');
-        });
+          $('.light-badge').click(function () {
+            $('body').addClass('white-content');
+          });
 
-        $('.dark-badge').click(function () {
-          $('body').removeClass('white-content');
+          $('.dark-badge').click(function () {
+            $('body').removeClass('white-content');
+          });
         });
       });
-    });
-  </script>
+    </script>
 </body>
 </script>
+
 </html>
 <script>
-  function graficoprocess(){
-   fetch(`/medidas/processos`, {
-        method: "GET"
+  function graficoprocess() {
+    fetch(`/medidas/processos`, {
+      method: "GET"
     }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-              console.log(resposta)
-              processosList.innerHTML += `<div class="processoListado">PID: Nome: Cpu Percent: Memory Percent:</div>`
-              for (i = 0; i < resposta.length; i++) {
-                processosList.innerHTML += `<div class="processoListado">${resposta[i].pid} | ${resposta[i].Nome[1]} | ${resposta[i].CpuPercent} | ${resposta[i].MemoryPercent}</div>`
-              }
-            })
-        }
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(resposta)
+          processosList.innerHTML += `<div class="processoListado">PID: Nome: Cpu Percent: Memory Percent:</div>`
+          for (i = 0; i < resposta.length; i++) {
+            processosList.innerHTML += `<div class="processoListado">${resposta[i].pid} | ${resposta[i].Nome[1]} | ${resposta[i].CpuPercent} | ${resposta[i].MemoryPercent}</div>`
+          }
+        })
+      }
     })
-    
-    
-// fetch(`/medidas/MemoryProcess`, {
-//         method: "GET"
-//     }).then(function (response) {
-//         if (response.ok) {
-//             response.json().then(function (resposta) {
-//               for (i = 0; i < resposta.length; i++) {
-//                 memoryprocess.innerHTML += `<div style="background-color: grey;">${JSON.stringify(resposta[i])}</div>`
-//               }
-//             })
-//         }
-//     }).catch(function (resposta) {
-//         console.log(`#ERRO: ${resposta}`);
 
-// 			});
 
-let proximaAtualizacao
+    let proximaAtualizacao2
+    let proximaAtualizacao
     obterDadosGrafico()
-  function obterDadosGrafico(id) {
-    const fkTotem = 50000
+    function obterDadosGrafico(id) {
+      const fkTotem = 50000
 
-    if (proximaAtualizacao != undefined) {
-      clearTimeout(proximaAtualizacao);
-    }
-    fetch(`/medidas/processostop`, {
+      if (proximaAtualizacao != undefined) {
+        clearTimeout(proximaAtualizacao);
+      }
+      fetch(`/medidas/processostop`, {
         method: "GET"
-    }).then(function (response) {
+      }).then(function (response) {
         if (response.ok) {
-            response.json().then(function (resposta) {
-              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
             plotarGrafico(resposta);
           });
@@ -444,379 +437,159 @@ let proximaAtualizacao
         .catch(function (error) {
           console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
-    
 
-  }
-
-  function plotarGrafico(resposta, id) {
-    console.log('iniciando plotagem do gráfico...');
-
-    var dados = {
-      labels: [],
-      datasets: [
-        {
-          // yAxisID: 'yAxis',
-          // xAxisID: 'xAxis',
-          label: 'Porcentagem de uso da Memória por processo',
-          borderColor: '#D346B1',
-          backgroundColor: '',
-          // fill: true,
-          data: []
-        }
-      ]
-
-    };
-    // var dados2 = {
-    //   labels: [],
-    //   datasets: [
-    //     {
-    //       yAxisID: 'yAxisRam',
-    //       xAxisID: 'xAxisRam',
-    //       label: 'Porcentagem de uso da RAM',
-    //       borderColor: 'rgba(31,142,241,1)',
-    //       backgroundColor: 'rgba(31,142,241,0.01)',
-    //       fill: true,
-    //       data: []
-    //     }
-    //   ]
-    // };
-
-    // var dados3 = {
-    //   labels: [],
-    //   datasets: [
-    //     {
-    //       yAxisID: 'yAxisDown',
-    //       xAxisID: 'xAxisDown',
-    //       label: 'Download',
-    //       borderColor: '#D346B1',
-    //       backgroundColor: 'rgba(211,70,177,0.01)',
-    //       fill: true,
-    //       data: []
-    //     },
-    //     {
-    //       yAxisID: 'yAxisUp',
-    //       xAxisID: 'xAxisUp',
-    //       label: 'Upload',
-    //       borderColor: 'rgba(31,142,241,1)',
-    //       backgroundColor: 'rgba(31,142,241,0.01)',
-    //       fill: true,
-    //       data: []
-    //     }
-    //   ]
-    // };
-
-    for (i = 0; i < resposta.length; i++) {
-      var registro = resposta[i];
-      dados.labels.push(registro.Nome[0]);
-      dados.datasets[0].data.push(registro.MemoryPercent);
 
     }
 
-    const config = {
+    function plotarGrafico(resposta, id) {
+      console.log('iniciando plotagem do gráfico...');
+
+      var dados = {
+        labels: [],
+        datasets: [
+          {
+            // yAxisID: 'yAxis',
+            // xAxisID: 'xAxis',
+            label: 'Porcentagem de uso da Memória por processo',
+            borderColor: '#D346B1',
+            backgroundColor: 'white',
+            // fill: true,
+            data: []
+          }
+        ]
+
+      };
+
+      for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.labels.push(registro.Nome[0]);
+        dados.datasets[0].data.push(registro.MemoryPercent);
+
+      }
+
+      const config = {
         type: 'doughnut',
         data: dados,
         options: {}
       };
 
-    console.log(JSON.stringify(dados));
+      console.log(JSON.stringify(dados));
 
 
-   
 
-    /* var ctx = chartBig11.getContext('2d');  */
-    /*       var optionsTeste = {
-            options: {
-              responsive: true,
-              animation: { duration: 1000 },
-              hoverMode: 'index',
-              stacked: false,
-              title: {
-                display: false,
-                text: 'Dados capturados'
-              },
-              legend: {
-                display: false
-              },
-    
-              tooltips: {
-                backgroundColor: 'rgba(0, 0, 0, 0.703)',
-              },
-              scales: {
-                yAxis: {
-                  type: 'bar',
-                  display: true,
-                  position: 'left',
-                  beginAtZero: true,
-                  max: 30,
-                  min: 0,
-                    ticks: {
-                    fontColor: 'white',
-                    beginAtZero: true,
-                    max: 100,
-                    min: 0
-                  }, 
-    
-    
-                },
-                xAxes: [{
-                  ticks: {
-                    fontColor: 'white'
-                  }
-                }]
-              }
-            }
-          }
-     */
-    if (dados == undefined) {
-      res.status(400).send("Data undefined!")
-    };
+      if (dados == undefined) {
+        res.status(400).send("Data undefined!")
+      };
 
-    // window.doughnutChart = new Chart(graficoDonut, {
-    //   type: 'doughnut',
-    //   data: dados,
-    //   options: {
-    //     plugins: {
-    //       legend: {
-    //         display: false,
-    //         labels: {
-    //           font: {
-    //             size: 70,
-    //             weight: "bold",
-    //             family: "arial"
-    //           }
-    //         }
-    //       },
-    //     },
-    //     responsive: true,
-    //     animation: { duration: 1000 },
-    //     hoverMode: 'index',
-    //     stacked: false,
-    //     tooltips: {
-    //       backgroundColor: 'rgba(0, 0, 0, 0.703)',
-    //     },
-    //     scales: {
-    //       yAxis: {
-    //         beginAtZero: true,
-    //         max: 100,
-    //         ticks: {
-    //           stepSize: 20,
-    //           color: "rgba(255,255,255,0.6)",
-    //         }
-    //       },
-    //       xAxis: {
-    //         ticks: {
-    //           color: "rgba(255,255,255,0.6)",
-    //         }
-    //       }
-    //     }
-    //   }
-    const myChart = new Chart(
+      const myChart = new Chart(
         document.getElementById('graficoDonut'),
         config
       );
 
+      setTimeout(() => atualizarGrafico(dados, myChart), 20000);
+    }
 
-    // window.lineChart2 = new Chart(chartLinePurple, {
-    //   type: 'line',
-    //   data: dados2,
-    //   options: {
-    //     plugins: {
-    //       legend: {
-    //         display: false
-    //       },
-    //     },
-    //     responsive: true,
-    //     animation: { duration: 1000 },
-    //     hoverMode: 'index',
-    //     stacked: false,
-    //     title: {
-    //       display: false,
-    //       text: 'Dados capturados'
-    //     },
-    //     legend: {
-    //       display: false
-    //     },
+    function atualizarGrafico(dados, myChart) {
 
-    //     tooltips: {
-    //       backgroundColor: 'rgba(0, 0, 0, 0.703)',
-    //     },
-    //     scales: {
-    //       yAxisRam: {
-    //         beginAtZero: true,
-    //         max: 100,
-    //       }
-    //     }
-    //   }
-    // })
+      console.log("ENTRANDO NO ATUALIZAR GRAFICO")
+      console.log("---------------------------------")
 
-    // window.lineChart3 = new Chart(chartLineGreen1, {
-    //   type: 'line',
-    //   data: dados3,
-    //   options: {
-    //     plugins: {
-    //       legend: {
-    //         display: true
-    //       },
-    //     },
-    //     responsive: true,
-    //     animation: { duration: 1000 },
-    //     hoverMode: 'index',
-    //     stacked: false,
-    //     title: {
-    //       display: false,
-    //       text: 'Dados capturados'
-    //     },
-    //     legend: {
-    //       display: false
-    //     },
 
-    //     tooltips: {
-    //       backgroundColor: 'rgba(0, 0, 0, 0.703)',
-    //     },
-    //     scales: {
-    //       yAxisDown: {
-    //         beginAtZero: true,
-    //         max: 100,
-    //         display: false
-    //       },
-    //       xAxisDown: {
-    //         display: false
-    //       },
-    //       yAxisUp: {
-    //         beginAtZero: true,
-    //         max: 100,
-    //       },
-    //     }
-    //   }
-    // })
 
-    /*       window.grafico_barra = Chart.Line(ctx, {
-            data: dados,
-            options: {
-              responsive: true,
-              animation: { duration: 1000 },
-              hoverMode: 'index',
-              stacked: false,
-              title: {
-                display: false,
-                text: 'Dados capturados'
-              },
-              legend: {
-                display: false
-              },
-    
-              tooltips: {
-                backgroundColor: 'rgba(0, 0, 0, 0.703)',
-              },
-              scales: {
-                yAxes: [{
-                  type: 'linear',
-                  display: true,
-                  position: 'left',
-                  id: 'y-temperatura',
-                  ticks: {
-                    fontColor: 'white',
-                    beginAtZero: true,
-                    max: 100,
-                    min: 0
-                  },
-    
-    
-                }],
-                xAxes: [{
-                  ticks: {
-                    fontColor: 'white'
-                  }
-                }]
-              }
-            }
-          }); */
+      myChart.destroy()
+       proximaAtualizacao =  setTimeout(() => obterDadosGrafico(dados, myChart), 1000);
+    }
 
-    setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+
+
+
+
+    obterDadosGrafico2()
+    function obterDadosGrafico2(id) {
+      const fkTotem = 50000
+
+      if (proximaAtualizacao2 != undefined) {
+        clearTimeout(proximaAtualizacao2);
+      }
+      fetch(`/medidas/processostop2`, {
+        method: "GET"
+      }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+            plotarGrafico2(resposta);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+
+
+    }
+
+    function plotarGrafico2(resposta, id) {
+      console.log('iniciando plotagem do gráfico...');
+
+      var dados2 = {
+        labels: [],
+        datasets: [
+          {
+            // yAxisID: 'yAxis',
+            // xAxisID: 'xAxis',
+            label: 'Porcentagem de uso da CPU por processo',
+            borderColor: '#D346B1',
+            backgroundColor: 'white',
+            // fill: true,
+            data: []
+          }
+        ]
+
+      };
+
+      for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados2.labels.push(registro.Nome[0]);
+        dados2.datasets[0].data.push(registro.CpuPercent);
+
+      }
+
+      const config = {
+        type: 'doughnut',
+        data: dados2,
+        options: {}
+      };
+
+      console.log(JSON.stringify(dados2));
+
+
+      if (dados2 == undefined) {
+        res.status(400).send("Data undefined!")
+      };
+
+      const myChart1 = new Chart(
+        document.getElementById('graficoDonut2'),
+        config
+      );
+
+      setTimeout(() => atualizarGrafico2(dados2, myChart1), 20000);
+    }
+
+    function atualizarGrafico2(dados2, myChart1) {
+      console.log("ENTRANDO NO ATUALIZAR GRAFICO")
+
+
+
+      myChart1.destroy()
+      // myChart1.update()
+      proximaAtualizacao2 = setTimeout(() => obterDadosGrafico2(dados2), 1000);
+
+
+    }
+
   }
-
-
-  
-    // new Chart(
-    //     graficoDonut,
-    //     {
-    //         type: 'doughnut',
-    //         data: {
-    //             labels: [
-    //                 'Janeiro',
-    //                 'Fevereiro',
-    //                 'Março',
-    //                 'Abril',
-    //                 'Maio',
-    //                 'Junho',
-    //             ],
-    //             datasets: [{
-    //                 label: 'Gastos e Despesas',
-    //                 backgroundColor: ['#F5222C', '#fd0402', '#e21d46', '#fb2304', '#ff4100', '#de2123'],
-    //                 data: [50, 5, 10, 20, 30, 5],
-    //             }]
-    //         },
-    //         options: {}
-    //     }
-    // )
-
-    function atualizarGrafico( dados, myChart) {
-    console.log("ENTRANDO NO ATUALIZAR GRAFICO")
-    console.log("---------------------------------")
-  
-    console.log("---------------------------------")
-
-
-    // fetch(`/medidas/tempo-real-totem/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
-  //   //   if (response.ok) {
-  //   //     response.json().then(function (novoRegistro) {
-
-  //   //       console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-  //   //       console.log(`Dados atuais do gráfico: ${dados}`);
-  //   //       console.log(`Dados atuais do gráfico: ${dados2}`);
-
-  //         // tirando e colocando valores no gráfico
-  //         // dados.labels.shift(); // apagar o primeiro
-  //         // dados.labels.push(novoRegistro[0].horarioF); // incluir um novo momento
-  //         // dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-  //         // dados.datasets[0].data.push(novoRegistro[0].cpuPercent);
-  //         // let cpu = novoRegistro[0].cpuPercent// incluir uma nova medida de temperatura
-  //         // setTimeout(verificar(cpu, "cpu"), 60000)
-  //         // dados2.labels.shift();
-  //         // dados2.labels.push(novoRegistro[0].horarioF);
-  //         // dados2.datasets[0].data.shift();
-  //         // dados2.datasets[0].data.push(novoRegistro[0].ramPercent);
-  //         // let ram = novoRegistro[0].ramPercent
-  //         // setTimeout(verificar(ram,"ram"), 60000)
-  //         // dados3.labels.shift();
-  //         // dados3.labels.push(novoRegistro[0].horarioF);
-  //         // dados3.datasets[0].data.shift();
-  //         // dados3.datasets[0].data.push(novoRegistro[0].mbDownload);
-  //         // dados3.datasets[1].data.shift();
-  //         // dados3.datasets[1].data.push(novoRegistro[0].mbUpload);
-
-
-  //         /* dados.datasets[0].data.shift(); */  // apagar o primeiro de temperatura
-  //         /*  dados.datasets[0].data.push(novoRegistro[0].grafico_zonas); */ // incluir uma nova medida de temperatura
-
-  //         myChart.update();
-  //         // window.lineChart2.update();
-  //         // window.lineChart3.update();
-
-  //         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-  //         proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTotem, dados, dados2, dados3), 20000);
-  //       });
-  //     } else {
-  //       console.error('Nenhum dado encontrado ou erro na API');
-  //       // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-  //     }
-  //   })
-  //     .catch(function (error) {
-  //       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  //     });
-myChart.update()
-  // }
-}
-  }
-window.onload = graficoprocess()
+  window.onload = graficoprocess()
 </script>
