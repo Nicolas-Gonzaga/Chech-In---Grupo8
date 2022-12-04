@@ -107,4 +107,4 @@ while True:
                 print("------------------------------------------")
                 print("\r")
                 cnxn.commit()
-                time.sleep(5)
+                time.sleep(60)
