@@ -137,7 +137,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Mapas</a>
+            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Processos</a>
           </div>
           <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -216,8 +216,9 @@
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-12">
-            <div class="card card-tasks">
-              <h2 class="memoria">% de uso da memória</h2>
+            <div class="card card-tasks"
+              style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
+              <span style="font-size: 200%; color: white; display: flex;">Uso da Memória</span>
               <div class="processoDonut1" style="display: flex; align-items: center; justify-content: center">
                 <canvas id="graficoDonut"></canvas>
               </div>
@@ -225,8 +226,9 @@
           </div>
           <!-- HISTORICO -->
           <div class="col-lg-6 col-md-12">
-            <div class="card card-tasks">
-              <h2>% de uso da CPU</h2>
+            <div class="card card-tasks"
+              style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
+              <span style="font-size: 200%; color: white; display: flex;">Uso da CPU</span>
               <div class="processoDonut1" style="display: flex; align-items: center; justify-content: center">
                 <canvas id="graficoDonut2"></canvas>
               </div>
@@ -403,9 +405,23 @@
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(resposta)
-          processosList.innerHTML += `<div class="processoListado">PID: Nome: Cpu Percent: Memory Percent:</div>`
+          processosList.innerHTML += `<div class="itemListaCoords" style="height: 60px">
+        <span>Número na Lista</span>
+        <span>Data da coleta</span>
+        <span>Latitude</span>
+        <span>Longitude</span>
+        <span>Distância a partir do anterior</span>
+      </div>`
           for (i = 0; i < resposta.length; i++) {
-            processosList.innerHTML += `<div class="processoListado">${resposta[i].pid} | ${resposta[i].Nome[1]} | ${resposta[i].CpuPercent} | ${resposta[i].MemoryPercent}</div>`
+            processosList.innerHTML +=  `
+        <div class="itemListaCoords">
+          <span>${i+1}</span><span>${resposta[i].pid}</span>
+          <span>${resposta[i].Nome[0]}</span>
+          <span>${resposta[i].CpuPercent}</span>
+          <span>${resposta[i].MemoryPercent}</span>
+        </div>
+        `
+          
           }
         })
       }
@@ -497,7 +513,7 @@
 
 
       myChart.destroy()
-       proximaAtualizacao =  setTimeout(() => obterDadosGrafico(dados, myChart), 1000);
+      proximaAtualizacao = setTimeout(() => obterDadosGrafico(dados, myChart), 1000);
     }
 
 
