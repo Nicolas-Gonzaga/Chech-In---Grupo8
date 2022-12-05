@@ -39,6 +39,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="http://www.chartjs.org/dist/3.9.1/Chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body class="">
@@ -209,7 +210,19 @@
             <div class="card card-chart">
               <div class="card-header"
                 style="height: 500px; display: flex; align-items: center; justify-content: center;">
-                <div id="processosList" style="width: 100%; height: 100%;"></div>
+                <div class="tableFixHead">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Nome</th>
+                        <th>Pid</th>
+                        <th>Uso da CPU</th>
+                        <th>Uso da MEM</th>
+                      </tr>
+                    </thead>
+                  <tbody id="processosListBanco">
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -405,23 +418,17 @@
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(resposta)
-          processosList.innerHTML += `<div class="itemListaCoords" style="height: 60px">
-        <span>Número na Lista</span>
-        <span>Data da coleta</span>
-        <span>Latitude</span>
-        <span>Longitude</span>
-      </div>`
           for (i = 0; i < resposta.length; i++) {
-            processosList.innerHTML +=  `
-        <div class="itemListaCoords">
-          <span>${resposta[i].Nome[0]}</span>
-          <span>${resposta[i].pid}</span>
-          <span>${resposta[i].CpuPercent}</span>
-          <span>${resposta[i].MemoryPercent}</span>
-          
-        </div>
+            processosListBanco.innerHTML += `
+                    <tr>
+                 
+                      <td>${resposta[i].Nome[0]}</td>
+                      <td>${resposta[i].pid}</td>
+                        <td>${resposta[i].CpuPercent}</td>
+                          <td>${resposta[i].MemoryPercent}</td>
+                    </tr>
         `
-          
+
           }
         })
       }
