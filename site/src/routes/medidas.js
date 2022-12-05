@@ -88,6 +88,12 @@ router.get("/contarAlertasDiario/:fkTotem", function (req, res) {
 router.get("/contarAlertasSemanal/:fkTotem", function (req, res) {
     medidaController.contarAlertasSemanal(req, res)
 })
+router.get("/criticidadeDiaria/:fkTotem", function (req, res) {
+    medidaController.criticidadeDiaria(req, res)
+})
+router.get("/criticidadeSemanal/:fkTotem", function (req, res) {
+    medidaController.criticidadeSemanal(req, res)
+})
 
 router.get("/coletandoPortas", function (req, res) {
     medidaController.coletandoPortas(req, res);

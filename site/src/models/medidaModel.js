@@ -471,6 +471,46 @@ function contarAlertasSemanal(fkTotem) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function criticidadeDiaria(fkTotem) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', descricao from alerta where fkTotem = ${fkTotem} and DAY(horario) = DAY(current_timestamp)  group by descricao;
+        `
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql =
+            `select cpuPercent, ramPercent, horario, date_format(horario, '%H:%i') as horarioF from LoocaLeitura join Leitura on fkLeitura = idLeitura order by fkLeitura desc limit ${limite_linhas}`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function criticidadeSemanal(fkTotem) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select count (idAlerta) as 'qtdAlertas', descricao from alerta where fkTotem = ${fkTotem} and datepart(week, current_timestamp) = datepart(week, horario)  group by descricao;
+        `
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql =
+            `select cpuPercent, ramPercent, horario, date_format(horario, '%H:%i') as horarioF from LoocaLeitura join Leitura on fkLeitura = idLeitura order by fkLeitura desc limit ${limite_linhas}`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     buscarUltimasMedidas,
@@ -494,6 +534,8 @@ module.exports = {
     contarAlertasDiario,
     contarAlertasSemanal,
     estadoPortas,
+    criticidadeDiaria,
+    criticidadeSemanal,
     processosTOP,
     processosTOP2
 }

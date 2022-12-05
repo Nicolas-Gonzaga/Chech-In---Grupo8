@@ -400,6 +400,42 @@ console.log('Cheguei aqui')
         res.status(500).json(erro.sqlMessage);
     });
 }
+function criticidadeDiaria(req, res) {
+
+    const limite_linhas = 3;
+
+    var fkTotem = req.params.fkTotem
+console.log('Cheguei aqui')
+    medidaModel.criticidadeDiaria(fkTotem).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+function criticidadeSemanal(req, res) {
+
+    const limite_linhas = 3;
+
+    var fkTotem = req.params.fkTotem
+console.log('Cheguei aqui')
+    medidaModel.criticidadeSemanal(fkTotem).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 function estadoPortas(req, res) {
 
     medidaModel.estadoPortas()
@@ -443,5 +479,7 @@ module.exports = {
     contarAlertasSemanal,
     estadoPortas,
     processosTOP,
+    criticidadeDiaria,
+    criticidadeSemanal,
     processosTOP2
 }

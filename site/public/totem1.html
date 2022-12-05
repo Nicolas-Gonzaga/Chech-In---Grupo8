@@ -48,7 +48,7 @@
   <link rel="stylesheet" href="assets/css/black-dashboard.css?v=1.0.0">
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet">
-  <script src="http://www.chartjs.org/dist/3.9.1/Chart.js"></script>
+  <script src="http://www.chartjs.org/dist/4.0.1/Chart.js"></script>
   <!-- Script para o modal do alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -896,6 +896,7 @@ setTimeout(verificar(disco, "disco"), 10000)
 
   function obterDadosGrafico(id) {
     const fkTotem = 50000
+    console.log("entrei no obter dos graficos")
 
     if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
