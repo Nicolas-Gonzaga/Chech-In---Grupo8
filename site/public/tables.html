@@ -219,42 +219,53 @@
       <!-- HITORICO -->
       <div class="content" style="align-items:center">
         <div class="row">
-          <div class="col-md-12">
-            <div class="card" style="height: 50%; width: 50%;">
+          <div class="col-md-12" style="display:flex;">
+            <div class="card" style="width: 50%; text-align: center;" >
+              <select id="totens" class="selecao" style="cursor: pointer; width: 32%;" onchange="mudarGrafico()">
+                <option class="seilaa" value="">-- Selecione um Totem</option>
+                <option class="seilaa" value="50000">Totem 1</option>
+                <option class="seilaa" value="50001">Totem 2</option>
+                <option class="seilaa" value="50002">Totem 3</option>
+              </select>
+              <select id="selecionar" class="selecao" style="width: 32%;" onchange="mudarSelect()">
+              </select>
+              <h4 class="card-title"> Alertas por componente</h4>
+              <div class="card card-tasks"
+              style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:
+              100%">
               <div class="card-header">
-                <h4 class="card-title"> Alertas por componente</h4>
 
-                <select id="totens" class="selecao" style="cursor: pointer" onchange="mudarGrafico()">
-                  <option  value="">-- Selecione um Totem</option>
-                  <option  value="50000">Totem 1</option>
-                  <option  value="50001">Totem 2</option>
-                  <option  value="50002">Totem 3</option>
-                </select>
-                <select id="selecionar" class="selecao" onchange="mudarSelect()">
-                </select>
+                
 
               </div>
-              <div class="card-body" style="display: flex;">
+            
 
                 <div class="table-responsive">
                   <canvas id="chartTotem1"></canvas>
                   <canvas id="chartTotem2"></canvas>
                   <canvas id="chartTotem3"></canvas>
                 </div>
+              
               </div>
               </div>
-              <div class="card " style="height: 50%; width: 50%;">
+              <div class="card"
+              style="width: 50%; align-items: center;">
+              <h4 class="card-title" style="position: relative; margin-top: 2.5rem; "> Criticidade dos Alertas</h4>
+              <div class="card card-tasks"
+              style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
                 <div class="card-header">
-                  <h4 class="card-title"> Criticidade dos Alertas</h4>
 
 
                 </div>
-                <div class="card-body" style="display: flex;">
-                  <div class="table-responsive">
-                    <canvas id="chartCritico"></canvas>
+                
+                  <div class="table-responsive" style="justify-content: center;">
+                    <canvas id="chartCritico" style="position: relative; ;"></canvas>
                   </div>
-                </div>
+                
+              </div>
 
+              </div>
+              </div>
               </div>
 
 
@@ -727,7 +738,9 @@ obterDadosGrafico2(1)
       const config2 = {
         type: 'doughnut',
         data: dados5,
-        options: {}
+        options: {
+         
+        }
       };
 
 
