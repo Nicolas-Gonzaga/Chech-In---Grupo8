@@ -71,10 +71,6 @@ router.get("/MemoryProcess", function (req, res) {
     medidaController.MemoryProcess(req, res)
 })
 
-router.get("/coletandoPortas", function (req, res) {
-    medidaController.coletandoPortas(req, res);
-})
-
 router.get("/dadosAlertas/:empresa", function (req, res) {
     medidaController.dadosAlertas(req, res)
 })

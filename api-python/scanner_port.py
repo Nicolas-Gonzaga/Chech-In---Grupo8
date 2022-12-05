@@ -66,7 +66,7 @@ while True:
 
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client.settimeout(0.1)
-            codigo = client.connect_ex (('192.168.15.5', portaAtual))
+            codigo = client.connect_ex (('112.168.15.1', portaAtual))
 
             
             hora = datetime.now().strftime('%H:%M')
@@ -107,4 +107,4 @@ while True:
                 print("------------------------------------------")
                 print("\r")
                 cnxn.commit()
-                time.sleep(60)
+                time.sleep(5)

@@ -390,10 +390,7 @@ function processosTOP() {
     return database.executar(instrucaoSql);
 }
 
-function coletandoPortas() {
-    var instrucao = `select top 9 qtdPorta, horario from porta order by idPorta desc;`;
-    return database.executar(instrucao);
-}
+
 
 function dadosAlertas(empresa) {
 
@@ -473,7 +470,6 @@ module.exports = {
     buscarMedidasMapas,
     buscarEmpresa,
     processos,
-    coletandoPortas,
     variacaoCordsMapas,
     temperaturaComparativaMapas,
     checarMediasTempTotens,

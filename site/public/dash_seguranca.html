@@ -221,13 +221,13 @@
       <div class="content">
         <div class="row">
           <div class="col-12">
-            <div class="card card-chart">
+            <div class="card card-chart" style="width: 600px;height: 550px;">
               <div class="card-header ">
                 <div class="row">
                   <div class="col-sm-6 text-left">
                     <h5 class="card-category">Portas Abertas</h5>
                     <h2 class="card-title">STATUS</h2>
-                    <canvas id="graficoPortasAberta"></canvas>
+                    <canvas id="graficoPortasAberta"style="position: relative; height: 150%; width: 120%; display: block; box-sizing: border-box;"></canvas>
                   </div>
                   <div class="col-sm-6">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -255,45 +255,7 @@
                     </div>
                   </div>
                 </div>
-      <div class="content">
-        <div class="row">
-          <div class="col-12">
-            <div class="card card-chart" >
-              <div class="card-header ">
-                <div class="row">
-                  <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Portas Abertas</h5>
-                    <h2 class="card-title">QUANTIDADE</h2>
-                    <div class="chart-area-"></div>
-                    <canvas id="graficoPortas"></canvas>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                      <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
-                      <!-- <input type="radio" name="options" checked> -->
-                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
-                      <!-- <span class="d-block d-sm-none"> -->
-                      <!-- <i class="tim-icons icon-single-02"></i> -->
-                      </span>
-                      </label>
-                      <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
-                      <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
-                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
-                      <!-- <span class="d-block d-sm-none"> -->
-                      <!-- <i class="tim-icons icon-gift-2"></i> -->
-                      </span>
-                      </label>
-                      <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
-                      <!-- <input type="radio" class="d-none" name="options"> -->
-                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
-                      <!-- <span class="d-block d-sm-none"> -->
-                      <!-- <i class="tim-icons icon-tap-02"></i> -->
-                      </span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      
               <div class="card-body-cpu">
                 <div class="chart-area-cpu">
                   <canvas id="chartBig11"></canvas>
@@ -304,16 +266,181 @@
         </div>
         
                 </div>
-                <div class="card-body-cpu">
-                  <div class="chart-area-cpu">
-                    <canvas id="chartBig11"></canvas>
+                
+            <!-- HISTORICO -->
+            <div class="col-lg-6 col-md-12">
+              <div class="card " style="width: 1200px;">
+                <div class="card-header" >
+                  <h4 class="card-title"> Histórico do dia de 3 em 3 horas</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table tablesorter " id="">
+                      <thead class=" text-primary">
+                        <tr>
+                          <th>
+                            Leitura
+                          </th>
+                          <th>
+                            CPU
+                          </th>
+                          <th>
+                            RAM
+                          </th>
+                          <th>
+                            DISCO
+                          </th>
+                          <th class="text-center">
+                            HORA
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <td>
+                          1
+                        </td>
+                        <td>
+                          36%
+                        </td>
+                        <td>
+                          68%
+                        </td>
+                        <td>
+                          43%
+                        </td>
+                        <td class="text-center">
+                          00:00:00
+                        </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            2
+                          </td>
+                          <td>
+                            41%
+                          </td>
+                          <td>
+                            69%
+                          </td>
+                          <td>
+                            56%
+                          </td>
+                          <td class="text-center">
+                            03:00:00
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            3
+                          </td>
+                          <td>
+                            21%
+                          </td>
+                          <td>
+                            57%
+                          </td>
+                          <td>
+                            32%
+                          </td>
+                          <td class="text-center">
+                            06:00:00
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            4
+                          </td>
+                          <td>
+                            32%
+                          </td>
+                          <td>
+                            67%
+                          </td>
+                          <td>
+                            41%
+                          </td>
+                          <td class="text-center">
+                            09:00:00
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            5
+                          </td>
+                          <td>
+                            46%
+                          </td>
+                          <td>
+                            78%
+                          </td>
+                          <td>
+                            56%
+                          </td>
+                          <td class="text-center">
+                            12:00:00
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            6
+                          </td>
+                          <td>
+                            28%
+                          </td>
+                          <td>
+                            58%
+                          </td>
+                          <td>
+                            39%
+                          </td>
+                          <td class="text-center">
+                            15:00:00
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            7
+                          </td>
+                          <td>
+                            47%
+                          </td>
+                          <td>
+                            34%
+                          </td>
+                          <td>
+                            65%
+                          </td>
+                          <td class="text-center">
+                            18:00:00
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            8
+                          </td>
+                          <td>
+                            67%
+                          </td>
+                          <td>
+                            48%
+                          </td>
+                          <td>
+                            74%
+                          </td>
+                          <td class="text-center">
+                            21:00:00
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
+        </div>
+      </div>
+    </div>
           <!-- SIDE BAR -->
           <div class="fixed-plugin">
             <div class="dropdown show-dropdown">
