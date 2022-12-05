@@ -29,6 +29,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  <div id="caixinhaInfo"></div>
   <div class="wrapper">
     <div class="sidebar">
       <div class="sidebar-wrapper">
@@ -175,7 +176,7 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Temperatura do Totem <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Temperatura do Totem <img onmouseover="izinhoOver(true, 'Sobre', 'As linhas Máximo e Mínimo representam as temperaturas extremas alcançadas nesse dia, enquanto a linha Valor representa o último registro')" onmouseout="izinhoOver(false, '', '')" src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Média diária em °C</span>
                 <div style="padding: 2%; height:95%; width:95%;">
                   <canvas id="graficoTestes" style="position: relative; height:100%; width:100%"></canvas>
@@ -186,7 +187,7 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
-                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Temperatura da Região <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="margin-top: 5%; font-size: 200%; color: white; display: flex;">Temperatura da Região <img onmouseover="izinhoOver(true, 'Sobre', 'As linhas Máximo e Mínimo representam as temperaturas dos dois extremos alcançadas nesse mesmo dia em anos anteriores, enquanto o Valor representa a última temperatura registrada nesse dia')" onmouseout="izinhoOver(false, '', '')" src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Média diária em °C</span>
                 <div style="padding: 20px; height:95%; width:95%;">
                   <canvas id="graficoLinhas" style="position: relative; height:100%; width:100%"></canvas>
@@ -577,7 +578,7 @@
         backgroundColora = '#3DA4C2'
         borderColora = '#1EC1E1'
       } else if (i == 1) {
-        labela = 'Média'
+        labela = 'Valor'
         backgroundColora = '#fff8ff'
         borderColora = '#ecf2f0'
       } else if (i == 2) {
@@ -648,7 +649,7 @@
         backgroundColora = '#3DA4C2'
         borderColora = '#1EC1E1'
       } else if (i == 1) {
-        labela = 'Média'
+        labela = 'Valor'
         backgroundColora = '#fff8ff'
         borderColora = '#ecf2f0'
       } else if (i == 2) {
@@ -893,7 +894,7 @@
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
                 <span style="color: white; margin-top: 5%;">Totem ${variacoesDadosNovos[i][0]-49999}</span>
-                <span style="font-size: 200%; color: white; display: flex;">Coordenadas <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="font-size: 200%; color: white; display: flex;">Coordenadas <img onmouseover="izinhoOver(true, 'Sobre', 'Aqui temos o quanto a posição de um totem variou com o tempo, para checar se foi movido recentemente')" onmouseout="izinhoOver(false, '', '')" src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Histórico de Variação</span>
                 <div style="padding: 2%; height:95%; width:95%;">
                   <div id="${graficoC}" style="border: 1px solid #007ee3; background-color: #004981; width: 100%; height: 100%;"></div>
@@ -905,7 +906,7 @@
             <div class="card card-tasks">
               <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height:100%; width:100%">
                 <span style="color: white; margin-top: 5%;">Totem ${variacoesDadosNovos[i][0]-49999}</span>
-                <span style="font-size: 200%; color: white; display: flex;">Precisão da Coleta <img src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
+                <span style="font-size: 200%; color: white; display: flex;">Precisão da Coleta <img onmouseover="izinhoOver(true, 'Sobre', 'Aqui temos o raio em metros da precisão de coleta, este valor também é representado no círculo verde em volta de cada totem no mapa')" onmouseout="izinhoOver(false, '', '')" src="./assets/img/letter_i_PNG11.png" width="25px" height="25px" style="margin-left: 10px; margin-top: 8px;"></span>
                 <span style="color: white;">Gráfico de Variação</span>
                 <div style="padding: 20px; height:95%; width:95%;">
                   <canvas id="${graficoP}" style="position: relative; height:100%; width:100%;"></canvas>
@@ -931,34 +932,20 @@
         dadosVariacoesLongitude.push(variacoesDadosNovos[i][1][f].longitude)
       }
 
-      if(i == 0) {
-      console.log(dadosVariacoesLatitude)
-      console.log(dadosVariacoesLongitude)
-      }
-
-      //vai ser aqui distancia a partir do anterior
+      dadosVariacoesDistancias = []
 
       for (f = 0; f < dadosVariacoesDatas.length; f++) {
-        // if (dadosVariacoesLatitude[f] >= dadosVariacoesLatitude[f+1]) {deltaY = dadosVariacoesLatitude[f] - dadosVariacoesLatitude[f+1]} else {deltaY = dadosVariacoesLatitude[f+1] - dadosVariacoesLatitude[f]}
-        // if (dadosVariacoesLongitude[f] >= dadosVariacoesLongitude[f+1]) {deltaX = dadosVariacoesLongitude[f] - dadosVariacoesLongitude[f+1]} else {deltaX = dadosVariacoesLongitude[f+1] - dadosVariacoesLongitude[f]}
-        // distancia = ((deltaY**2) + (deltaX**2))**1/2
-        distancia = measure(dadosVariacoesLatitude[f], dadosVariacoesLongitude[f], dadosVariacoesLatitude[f+1], dadosVariacoesLongitude[f+1])
-        if(i == 0) {
-          if (Number.isNaN(distancia)) {
-            console.log(0)
-          } else {
-            console.log(distancia * 111.139)
-          }
-        }
-      }
-      function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
-        var R = 6378.137; // Radius of earth in KM
-        var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180
-        var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180
-        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2)
+        var R = 6378.137
+        var dLat = dadosVariacoesLatitude[f+1] * Math.PI / 180 - dadosVariacoesLatitude[f] * Math.PI / 180
+        var dLon = dadosVariacoesLongitude[f+1] * Math.PI / 180 - dadosVariacoesLongitude[f] * Math.PI / 180
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(dadosVariacoesLatitude[f] * Math.PI / 180) * Math.cos(dadosVariacoesLatitude[f+1] * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2)
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-        var d = R * c;
-        return d * 1000; // meters
+        var distancia = R * c
+        if (Number.isNaN(distancia)) {
+          dadosVariacoesDistancias.push(0)
+        } else {
+          dadosVariacoesDistancias.push(distancia)
+        }
       }
 
       window[graficoC].innerHTML +=
@@ -968,17 +955,18 @@
         <span>Data da coleta</span>
         <span>Latitude</span>
         <span>Longitude</span>
-        <span>Distância a partir do anterior</span>
+        <span>Diferença do anterior em Km</span>
       </div>
       `
       for (f = 0; f < dadosVariacoesDatas.length; f++) {
         window[graficoC].innerHTML +=
         `
         <div class="itemListaCoords">
-          <span>${f+1}</span><span>${dadosVariacoesDatas[f]}</span>
+          <span>${f+1}</span>
+          <span>${dadosVariacoesDatas[f]}</span>
           <span>${dadosVariacoesLatitude[f]}</span>
           <span>${dadosVariacoesLongitude[f]}</span>
-          <span>${dadosVariacoesDatas[f]}</span>
+          <span>${dadosVariacoesDistancias[f].toFixed(3)}</span>
         </div>
         `
       }
@@ -1012,6 +1000,27 @@
             options: {}
         }
       )
+    }
+  }
+
+  function izinhoOver(aparecer, titulo, desc) {
+    x = event.clientX
+    y = event.clientY
+
+    if (aparecer) {
+      caixinhaInfo.style.visibility = "visible"
+      caixinhaInfo.style.top = `${y+5}px`
+      caixinhaInfo.style.left = `${x+5}px`
+      caixinhaInfo.innerHTML =
+      `
+      <b>${titulo}</b>
+      <span style="text-align: center;">${desc}</span>
+      `
+    } else {
+      caixinhaInfo.style.visibility = "hidden"
+      caixinhaInfo.style.top = `0px`
+      caixinhaInfo.style.left = `0px`
+      return
     }
   }
 </script>
