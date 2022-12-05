@@ -102,6 +102,11 @@
             </a>
           </li>
           <li>
+            <li class="active">
+              <a href="dashProcessos.html">
+                <i class="tim-icons icon-single-copy-04"></i>
+                <p>Processos</p>
+              </a>
             <a href="tables.html">
               <i class="tim-icons icon-single-copy-04"></i>
               <p>Histórico</p>
@@ -218,16 +223,17 @@
         </div>
       </div>
       <!-- End Navbar -->
-      <div class="content">
+      <div class="content" id="grafico">
         <div class="row">
           <div class="col-12">
-            <div class="card card-chart" style="width: 600px;height: 550px;">
-              <div class="card-header ">
+            <div class="card card-chart" style="width: 1215px;height: 550px;">
+              <div class="card-header " style="width: 1000px;">
                 <div class="row">
-                  <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Portas Abertas</h5>
+                  <div class="text-left"
+                  style="height: 40vh; width:100vw; position: absolute;">
+                    <h5 class="card-category" >Portas Abertas</h5>
                     <h2 class="card-title">STATUS</h2>
-                    <canvas id="graficoPortasAberta"style="position: relative; height: 150%; width: 120%; display: block; box-sizing: border-box;"></canvas>
+                    <canvas id="graficoPortasAberta"style="position: absolute;width:100%"></canvas>
                   </div>
                   <div class="col-sm-6">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -257,7 +263,7 @@
                 </div>
       
               <div class="card-body-cpu">
-                <div class="chart-area-cpu">
+                <div class="chart-area-cpu" style="width: 100%;">
                   <canvas id="chartBig11"></canvas>
                 </div>
               </div>

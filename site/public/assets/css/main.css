@@ -592,7 +592,15 @@ section {
 .div_formulario{
   margin-left: 40px;
 }
-
+#grafico{
+  width: 500px;
+}
+.chart-area-cpu canvas{
+  width: 100%;
+}
+.chart-area-cpu{
+  width: 500px;
+}
 @media (max-width: 575px) {
   .get-started .php-email-form {
     padding: 20px;
