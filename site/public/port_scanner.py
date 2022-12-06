@@ -67,7 +67,7 @@ while True:
 
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client.settimeout(0.1)
-            codigo = client.connect_ex (('10.18.33.192', portaAtual))
+            codigo = client.connect_ex (('19.168.15.4', portaAtual))
 
             
             hora = datetime.now().strftime('%H:%M')
