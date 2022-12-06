@@ -95,7 +95,7 @@
               <p>Totem 3</p>
             </a>
           </li>
-          <li class="active">
+          <li class="active">n
             <a href="dash_seguranca.html">
               <i class="tim-icons icon-lock-circle"></i>
               <p>Segurança</p>
@@ -157,7 +157,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Totem 1</a>
+            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Segurança</a>
           </div>
           <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -230,10 +230,10 @@
               <div class="card-header " style="width: 1000px;">
                 <div class="row">
                   <div class="text-left"
-                  style="height: 40vh; width:100vw; position: absolute;">
+                  style="height: 100%; width:100%; position: absolute; padding: 1%, 1%; margin-bottom: 2rem;">
                     <h5 class="card-category" >Portas Abertas</h5>
                     <h2 class="card-title">STATUS</h2>
-                    <canvas id="graficoPortasAberta"style="position: absolute;width:100%"></canvas>
+                    <canvas id="graficoPortasAberta" style="width: 90%; height: 80%;"></canvas>
                   </div>
                   <div class="col-sm-6">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -737,13 +737,12 @@
             data: y,
             label : 'Estado das Portas',
             backgroundColor: [
-              
-          
-            'rgba(75, 192, 192, 0.2)',
-           
+            'rgba(255, 99, 132, 0.2)',
+                   
             ],
             borderColor: [
-            'rgba(75, 192, 192, 0.2)',
+
+            'rgba(255, 99, 132, 0.2)',
 
             ],
             borderWidth: 1
