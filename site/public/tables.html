@@ -260,6 +260,8 @@
                 
                   <div class="table-responsive" style="justify-content: center;">
                     <canvas id="chartCritico" style="position: relative; ;"></canvas>
+                    <canvas id="chartCritico2" style="position: relative; ;"></canvas>
+                    <canvas id="chartCritico3" style="position: relative; ;"></canvas>
                   </div>
                 
               </div>
@@ -439,16 +441,25 @@
       chartTotem1.style.display = "block"
       chartTotem2.style.display = "none"
       chartTotem3.style.display = "none"
+      chartCritico.style.display = "block"
+      chartCritico2.style.display = "none"
+      chartCritico3.style.display = "none"
     } else if (totens.value == "50001") {
       chartTotem1.style.display = "none"
       chartTotem2.style.display = "block"
       chartTotem3.style.display = "none"
-
+      chartCritico.style.display = "none"
+      chartCritico2.style.display = "block"
+      chartCritico3.style.display = "none"
+      
     } else if (totens.value == "50002") {
       chartTotem1.style.display = "none"
       chartTotem2.style.display = "none"
       chartTotem3.style.display = "block"
-
+      chartCritico.style.display = "none"
+      chartCritico2.style.display = "none"
+      chartCritico3.style.display = "block"
+      
 
     }
     plotAlertas()
@@ -556,7 +567,7 @@
 obterDadosGrafico2(1)
     function obterDadosGrafico2(fkTotem) {
       var fkTotem = totens.value
-      if (fkTotem == 'diario') {
+      if (modoGrafico == 'diario') {
         fetch(`/medidas/criticidadeDiaria/${fkTotem}`, { cache: 'no-store' }).then(function (response2) {
           if (response2.ok) {
             response2.json().then(function (resposta) {
@@ -705,18 +716,18 @@ obterDadosGrafico2(1)
         myChart.destroy()
         myChart2.destroy()
       }
-
+      
       setTimeout(() => verificar(dados4), 30000)
 
     }
     function plotarGrafico2(resposta) {
-
+      var cor = ""
       console.log("Entrei no plotar")
       const dados5 = {
         labels: [],
         datasets: [{
-          backgroundColor: ['#FFFF00', '#FF0000'],
-          borderColor: ['#FFFF00', '#FF0000'],
+          backgroundColor: ['#FF0000', '#FFFF00'],
+          borderColor: ['#FF0000', '#FFFF00'],
           data: [],
         }]
       };
@@ -734,7 +745,7 @@ obterDadosGrafico2(1)
 
 
 
-
+      
       const config2 = {
         type: 'doughnut',
         data: dados5,
@@ -747,20 +758,28 @@ obterDadosGrafico2(1)
 
 
       
-
-
-
+      
+      
+      
       const myChart4 = new Chart(
         document.getElementById('chartCritico'),
         config2
       );
+      const myChart5 = new Chart(
+        document.getElementById('chartCritico2'),
+        config2
+      );
+      const myChart6 = new Chart(
+        document.getElementById('chartCritico3'),
+        config2
+      );
      
      
-
-
-
-
-
+      
+      
+      
+      
+      
       /*       window.grafico_barra = Chart.Line(ctx, {
               data: dados,
               options: {
@@ -803,7 +822,20 @@ obterDadosGrafico2(1)
               }
             }); */
       
-      setTimeout(() => verificar(dados5), 30000)
+          
+          if (chartCritico.style.display == "block") {
+          myChart5.destroy()
+          myChart6.destroy()
+          }
+          else if (chartCritico2.style.display == "block") {
+          myChart4.destroy()
+          myChart6.destroy()
+          }
+          else if (chartCritico3.style.display == "block") {
+          myChart4.destroy()
+          myChart5.destroy()
+          }
+      
 
     }
   }
