@@ -1,4 +1,27 @@
-const cacheName = 'teste'
+/* importScripts('/app/firebase-messaging-sw.js'); */
+
+self.addEventListener('fetch', function (event) {
+});
+
+self.addEventListener("beforeinstallprompt", (event) => {
+  fireTracking("Add to homescreen shown");
+  //will not work for chrome, untill fixed
+  event.userChoice.then(choiceResult => {
+    fireTracking(`User clicked ${choiceResult}`);
+  });
+  //This is to prevent `beforeinstallprompt` event that triggers again on `Add` or `Cancel` click
+  window.removeEventListener(
+    "beforeinstallprompt",
+    fireAddToHomeScreenImpression
+  );
+});
+
+//Track web app install by user
+self.addEventListener("appinstalled", event => {
+  fireTracking("PWA app installed by user!!! Hurray");
+});
+
+/* const cacheName = 'teste'
 
 self.addEventListener('install', function(event){
     event.waitUntil(
@@ -54,4 +77,4 @@ async function networkAndCache(req){
         const cached = await cache.match(req);
         return cached
     }
-}
+} */
