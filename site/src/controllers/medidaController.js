@@ -122,7 +122,7 @@ function buscarMedidasTempoRealporTotem(req, res) {
 function buscarMedidaTotem(req, res) {
     var fkTotem = req.params.fkTotem
     console.log(fkTotem)
-    const limite_linhas = 6;
+    const limite_linhas = 5;
 
 
     console.log(`Recuperando medidas em tempo real`);

@@ -6,7 +6,7 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top ${limite_linhas} cpuPercent, ramPercent, horario as horarioF 
+        instrucaoSql = `select top ${limite_linhas} cpuPercent, ramPercent, mbDownload, mbUpload, horario as horarioF 
         from LoocaLeitura join Leitura on fkLeitura = Leitura.idLeitura order by fkLeitura 
         desc;`;
 
@@ -33,7 +33,7 @@ function buscarMedidaTotem(fkTotem, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top ${limite_linhas} cpuPercent, ramPercent, horario as horarioF from 
+        instrucaoSql = `select top ${limite_linhas} cpuPercent, ramPercent, mbDownload, mbUpload, horario as horarioF from 
         LoocaLeitura join Leitura on fkLeitura = Leitura.idLeitura where fkTotem = ${fkTotem} 
         order by fkLeitura desc;`;
 
@@ -45,7 +45,7 @@ function buscarMedidaTotem(fkTotem, limite_linhas) {
         date_format(momento, '%H:%i:%s') as momento_grafico
     from registros  
     order by idRegistros desc limit ${limite_linhas}` */
-            `select cpuPercent, ramPercent, horario, date_format(horario, '%H:%i') as horarioF from LoocaLeitura join Leitura on fkLeitura = idLeitura where fkTotem = ${fkTotem} order by fkLeitura desc limit ${limite_linhas}`;
+            `select cpuPercent, ramPercent, mbUpload, mbDownload, horario, date_format(horario, '%H:%i') as horarioF from LoocaLeitura join Leitura on fkLeitura = idLeitura where fkTotem = ${fkTotem} order by fkLeitura desc limit ${limite_linhas}`;
 
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -74,7 +74,7 @@ function buscarMedidasEmTempoReal(idAquario) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 1 cpuPercent, ramPercent, horario as horarioF from 
+        instrucaoSql = `select top 1 cpuPercent, ramPercent, mbUpload, mbDownload, horario as horarioF from 
         LoocaLeitura join Leitura on fkLeitura = Leitura.idLeitura order by fkLeitura;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -112,7 +112,7 @@ function buscarMedidasTempoRealporTotem(fkTotem) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 1 cpuPercent, ramPercent, horario as horarioF from 
+        instrucaoSql = `select top 1 cpuPercent, ramPercent, mbUpload, mbDownload, horario as horarioF from 
         LoocaLeitura join Leitura on fkLeitura = Leitura.idLeitura where fkTotem = ${fkTotem} 
         order by Leitura.idLeitura desc;`;
 

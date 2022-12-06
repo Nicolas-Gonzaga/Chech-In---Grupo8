@@ -117,7 +117,7 @@
               <p>Cadastrar funcionário</p>
             </a>
           </li>
-          <li >
+          <li>
             <a href="mapaDash.html?totens">
               <i class="tim-icons icon-square-pin"></i>
               <p>Mapas</p>
@@ -156,7 +156,9 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Totem 1 <img onclick="location.href=`mapaDash.html?${Number(window.location.pathname.substring(6,window.location.pathname.indexOf('.html')))+49999}`" src="./assets/img/map-icon2.png" width="35px" height="35px" style="margin-left: 10px;"></a>
+            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Totem 1 <img
+                onclick="location.href=`mapaDash.html?${Number(window.location.pathname.substring(6,window.location.pathname.indexOf('.html')))+49999}`"
+                src="./assets/img/map-icon2.png" width="35px" height="35px" style="margin-left: 10px;"></a>
           </div>
           <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -284,19 +286,6 @@
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">Desempenho Kbps</h5>
-                <h3 class="card-title">Internet</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartLineGreen1"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
                 <h5 class="card-category">Desempenho %</h5>
                 <h3 class="card-title">Disco</h3>
               </div>
@@ -307,238 +296,15 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 col-md-12">
-            <div class="card card-tasks">
-              <div class="card-header ">
-                <h6 class="title d-inline">Histórico alertas</h6>
-                <p class="card-category d-inline">hoje</p>
-              </div>
-              <div class="card-body ">
-                <div class="table-full-width table-responsive">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">ESTADO CRÍTICO TOTEM 1 - 18:30:22</p>
-                          <p class="text-muted">100% RAM</p>
-                        </td>
-                        <td class="td-actions text-right">
-                          <!-- <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
-                            <i class="tim-icons icon-pencil"></i>
-                          </button> -->
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">ESTADO DE ALERTA TOTEM 1 - 13:34:24</p>
-                          <p class="text-muted">85% RAM</p>
-                        </td>
-                        <td class="td-actions text-right">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">ESTADO DE ALERTA TOTEM 1 - 08:45:23</p>
-                          <p class="text-muted">85% CPU</p>
-                        </td>
-                        <td class="td-actions text-right">
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- HISTORICO -->
-          <div class="col-lg-6 col-md-12">
-            <div class="card ">
+          <div class="col-lg-4">
+            <div class="card card-chart">
               <div class="card-header">
-                <h4 class="card-title"> Histórico do dia de 3 em 3 horas</h4>
+                <h5 class="card-category">Desempenho Kbps</h5>
+                <h3 class="card-title">Internet</h3>
               </div>
               <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table tablesorter " id="">
-                    <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          Leitura
-                        </th>
-                        <th>
-                          CPU
-                        </th>
-                        <th>
-                          RAM
-                        </th>
-                        <th>
-                          DISCO
-                        </th>
-                        <th class="text-center">
-                          HORA
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <td>
-                        1
-                      </td>
-                      <td>
-                        36%
-                      </td>
-                      <td>
-                        68%
-                      </td>
-                      <td>
-                        43%
-                      </td>
-                      <td class="text-center">
-                        00:00:00
-                      </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          41%
-                        </td>
-                        <td>
-                          69%
-                        </td>
-                        <td>
-                          56%
-                        </td>
-                        <td class="text-center">
-                          03:00:00
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          3
-                        </td>
-                        <td>
-                          21%
-                        </td>
-                        <td>
-                          57%
-                        </td>
-                        <td>
-                          32%
-                        </td>
-                        <td class="text-center">
-                          06:00:00
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          4
-                        </td>
-                        <td>
-                          32%
-                        </td>
-                        <td>
-                          67%
-                        </td>
-                        <td>
-                          41%
-                        </td>
-                        <td class="text-center">
-                          09:00:00
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          5
-                        </td>
-                        <td>
-                          46%
-                        </td>
-                        <td>
-                          78%
-                        </td>
-                        <td>
-                          56%
-                        </td>
-                        <td class="text-center">
-                          12:00:00
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          6
-                        </td>
-                        <td>
-                          28%
-                        </td>
-                        <td>
-                          58%
-                        </td>
-                        <td>
-                          39%
-                        </td>
-                        <td class="text-center">
-                          15:00:00
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          7
-                        </td>
-                        <td>
-                          47%
-                        </td>
-                        <td>
-                          34%
-                        </td>
-                        <td>
-                          65%
-                        </td>
-                        <td class="text-center">
-                          18:00:00
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          8
-                        </td>
-                        <td>
-                          67%
-                        </td>
-                        <td>
-                          48%
-                        </td>
-                        <td>
-                          74%
-                        </td>
-                        <td class="text-center">
-                          21:00:00
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="chart-area">
+                  <canvas id="chartLineGreen1"></canvas>
                 </div>
               </div>
             </div>
@@ -722,8 +488,8 @@
 
 <script>
   function alertas(empresa, componente, metrica, frase, descricao) {
-    
-	
+
+
 
     const options = {
       method: 'POST',
@@ -734,91 +500,91 @@
       },
       body: JSON.stringify({
         query: `mutation {           createCard(input: {             pipe_id:302731204,             title: "Card",             fields_attributes:[               {field_id: "nome_do_colaborador", field_value: "${empresa}"},{field_id: "cargo", field_value: "${frase}${descricao}${metrica}"},{field_id: "m_tricas", field_value:"${componente}: ${metrica}" }             ],           }) {               card {                 title               }             }           }`,
-       
+
 
       })
-    
-  };
-  fetch('https://api.pipefy.com/graphql', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err))
- // Return current card in the context
 
-}
+    };
+    fetch('https://api.pipefy.com/graphql', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err))
+    // Return current card in the context
 
-function verificar(metrica, componente) {
-  const fkTotem = 50000
-  
-  
-  var empresa = sessionStorage.FK_EMPRESA
-  var nome = sessionStorage.NOME_EMPRESA
-            var frase = ""
-            var dataAtual = new Date();
-            var dia = dataAtual.getDate();
-            var mes = (dataAtual.getMonth() + 1);
-            var ano = dataAtual.getFullYear();
-            var horas = dataAtual.getHours();
-            var minutos = dataAtual.getMinutes();
-                      
-            var descricao = `O ${componente} do totem ${fkTotem}está ficando sobrecarregado Momento  do alerta: dia ${dia}/${mes}/${ano} às ${horas}:${minutos}. Porcentagem de uso:`
-            
-            // incluir uma nova medida de temperatura 
-            if(metrica >=70){
-              if (metrica >= 70 && metrica < 80) {
-                Swal.fire("\                    \ CUIDADO", `${componente} está ficando sobrecarregada!`, "warning");
-                frase = `Alerta  `
-                console.log('Cheguei aqui')
-                
-              } else if (metrica >= 80) {
-                Swal.fire("ALERTA", `${componente} está sobrecarregada!`, "danger");
-                frase = `Perigo `
-              }
-              alertas(nome,componente,metrica,frase, descricao);
-            
-            
-        
-            console.log("INICIANDO O FETCH");
-            
-              
-			// Enviando o valor da nova input
-        fetch("/medidas/alertas", {
-				method: "POST",
-				headers: {
+  }
+
+  function verificar(metrica, componente) {
+    const fkTotem = 50000
+
+
+    var empresa = sessionStorage.FK_EMPRESA
+    var nome = sessionStorage.NOME_EMPRESA
+    var frase = ""
+    var dataAtual = new Date();
+    var dia = dataAtual.getDate();
+    var mes = (dataAtual.getMonth() + 1);
+    var ano = dataAtual.getFullYear();
+    var horas = dataAtual.getHours();
+    var minutos = dataAtual.getMinutes();
+
+    var descricao = `O ${componente} do totem ${fkTotem}está ficando sobrecarregado Momento  do alerta: dia ${dia}/${mes}/${ano} às ${horas}:${minutos}. Porcentagem de uso:`
+
+    // incluir uma nova medida de temperatura 
+    if (metrica >= 70) {
+      if (metrica >= 70 && metrica < 80) {
+        Swal.fire("\                    \ CUIDADO", `${componente} está ficando sobrecarregada!`, "warning");
+        frase = `Alerta  `
+        console.log('Cheguei aqui')
+
+      } else if (metrica >= 80) {
+        Swal.fire("ALERTA", `${componente} está sobrecarregada!`, "danger");
+        frase = `Perigo `
+      }
+      alertas(nome, componente, metrica, frase, descricao);
+
+
+
+      console.log("INICIANDO O FETCH");
+
+
+      // Enviando o valor da nova input
+      fetch("/medidas/alertas", {
+        method: "POST",
+        headers: {
           "Content-Type": "application/json"
-				},
-				body: JSON.stringify({
+        },
+        body: JSON.stringify({
           // crie um atributo que recebe o valor recuperado aqui
-					// Agora vá para o arquivo routes/usuario.js
-					metricaServer: metrica,
-					fraseServer: frase,
+          // Agora vá para o arquivo routes/usuario.js
+          metricaServer: metrica,
+          fraseServer: frase,
           componenteServer: componente,
           fkTotemServer: fkTotem,
           empresaServer: empresa
-					
-				})
-			}).then(function (resposta) {
-				console.log("entrei no fetch");
-				console.log("resposta: ", resposta);
-        
-				if (resposta.ok) {
-                console.log("Inserts feitos com sucesso");
-                
-              } else {
-                console.log("Erro nos inserts");
-				}
-			}).catch(function (resposta) {
+
+        })
+      }).then(function (resposta) {
+        console.log("entrei no fetch");
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          console.log("Inserts feitos com sucesso");
+
+        } else {
+          console.log("Erro nos inserts");
+        }
+      }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
 
-			});
-    
-      
+      });
+
+
       return false;
-      
+
     }
 
   }
-  
+
   function disk() {
     obterDadosGrafico()
     function obterDadosGrafico(id) {
@@ -863,11 +629,19 @@ function verificar(metrica, componente) {
       const config = {
         type: 'pie',
         data: dados4,
-        options: {}
+        options: {
+          plugins:{
+            legend:{
+              labels:{
+                color: 'white'
+              }
+            }
+          }
+        }
       };
       let disco = contaLivre
 
-setTimeout(verificar(disco, "disco"), 10000)
+      setTimeout(verificar(disco, "disco"), 10000)
 
       const myChart = new Chart(
         document.getElementById('CountryChart1'),
@@ -1073,7 +847,7 @@ setTimeout(verificar(disco, "disco"), 10000)
             beginAtZero: true,
             max: 100,
             ticks: {
-              stepSize: 20,
+              stepSize: 10,
               color: "rgba(255,255,255,0.6)",
             }
           },
@@ -1112,9 +886,17 @@ setTimeout(verificar(disco, "disco"), 10000)
           backgroundColor: 'rgba(0, 0, 0, 0.703)',
         },
         scales: {
+          xAxisRam: {
+            ticks: {
+              color: "rgba(255,255,255,0.6)",
+            }
+          },
           yAxisRam: {
             beginAtZero: true,
             max: 100,
+            ticks: {
+              color: "rgba(255,255,255,0.6)",
+            }
           }
         }
       }
@@ -1126,7 +908,9 @@ setTimeout(verificar(disco, "disco"), 10000)
       options: {
         plugins: {
           legend: {
-            display: true
+            labels:{
+              color: 'white'
+            }
           },
         },
         responsive: true,
@@ -1151,12 +935,23 @@ setTimeout(verificar(disco, "disco"), 10000)
             display: false
           },
           xAxisDown: {
-            display: false
+            display: false, 
+            ticks: {
+                color: "rgba(255,255,255,0.6)",
+              }
           },
           yAxisUp: {
             beginAtZero: true,
             max: 100,
+            ticks: {
+              color: "rgba(255,255,255,0.6)",
+            },
           },
+          xAxisUp: {
+              ticks: {
+                color: "rgba(255,255,255,0.6)",
+              }
+            }
         }
       }
     })
@@ -1239,7 +1034,7 @@ setTimeout(verificar(disco, "disco"), 10000)
           dados2.datasets[0].data.shift();
           dados2.datasets[0].data.push(novoRegistro[0].ramPercent);
           let ram = novoRegistro[0].ramPercent
-          setTimeout(verificar(ram,"ram"), 60000)
+          setTimeout(verificar(ram, "ram"), 60000)
           dados3.labels.shift();
           dados3.labels.push(novoRegistro[0].horarioF);
           dados3.datasets[0].data.shift();
