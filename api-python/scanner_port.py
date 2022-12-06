@@ -9,6 +9,7 @@ from datetime import datetime
 
 
 #----------------------------------------------------------------------------------------------------------
+
 #Iniciando a conexão com a Azure
 
 # https://learn.microsoft.com/pt-br/azure/azure-sql/database/connect-query-python?view=azuresql
@@ -20,7 +21,7 @@ while True:
 
     config = {
     'host':'dbekran',
-    'user':'eKranAdm@dbeKran',
+    'user':'eKranAdm',
     'password':'1sis@grupo6',
     'database':'dbeKran',
     'client_flags': [mysql.connector.ClientFlag.SSL],
@@ -66,7 +67,7 @@ while True:
 
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client.settimeout(0.1)
-            codigo = client.connect_ex (('112.168.15.1', portaAtual))
+            codigo = client.connect_ex (('10.18.33.192', portaAtual))
 
             
             hora = datetime.now().strftime('%H:%M')
@@ -107,4 +108,4 @@ while True:
                 print("------------------------------------------")
                 print("\r")
                 cnxn.commit()
-                time.sleep(5)
+                time.sleep(15)
