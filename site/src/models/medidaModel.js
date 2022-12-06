@@ -428,7 +428,7 @@ function dadosAlertas(empresa) {
     return database.executar(instrucaoSql);
 }
 function estadoPortas() {
-    var instrucao = `select top 9 * from porta where horario != '' order by dia,horario desc ;`;
+    var instrucao = `select * from porta t1 join (select max(idPorta) as idPorta from porta group by portas) t2 on t1.idPorta = t2.idPorta;`;
     return database.executar(instrucao);
 }
 function contarAlertasDiario(fkTotem) {

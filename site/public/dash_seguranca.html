@@ -95,7 +95,7 @@
               <p>Totem 3</p>
             </a>
           </li>
-          <li class="active">
+          <li>
             <a href="dash_seguranca.html">
               <i class="tim-icons icon-lock-circle"></i>
               <p>Segurança</p>
@@ -152,7 +152,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Totem 1</a>
+            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Segurança</a>
           </div>
           <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -221,13 +221,14 @@
       <div class="content">
         <div class="row">
           <div class="col-12">
-            <div class="card card-chart">
-              <div class="card-header ">
+            <div class="card card-chart" style="width: 1215px;height: 590px">
+              <div class="card-header "  style="width: 1000px;">
                 <div class="row">
-                  <div class="col-sm-6 text-left">
+                  <div class="text-left" 
+                  style="height: 100%; width:100%; position: absolute; padding: 1%, 1%; margin-bottom: 2rem;">
                     <h5 class="card-category">Portas Abertas</h5>
                     <h2 class="card-title">STATUS</h2>
-                    <canvas id="graficoPortasAberta"></canvas>
+                    <canvas id="graficoPortasAberta" style="width: 90%; height: 80%;"></canvas>
                   </div>
                   <div class="col-sm-6">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -255,65 +256,7 @@
                     </div>
                   </div>
                 </div>
-      <div class="content">
-        <div class="row">
-          <div class="col-12">
-            <div class="card card-chart" >
-              <div class="card-header ">
-                <div class="row">
-                  <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Portas Abertas</h5>
-                    <h2 class="card-title">QUANTIDADE</h2>
-                    <div class="chart-area-"></div>
-                    <canvas id="graficoPortas"></canvas>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                      <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
-                      <!-- <input type="radio" name="options" checked> -->
-                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
-                      <!-- <span class="d-block d-sm-none"> -->
-                      <!-- <i class="tim-icons icon-single-02"></i> -->
-                      </span>
-                      </label>
-                      <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
-                      <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
-                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
-                      <!-- <span class="d-block d-sm-none"> -->
-                      <!-- <i class="tim-icons icon-gift-2"></i> -->
-                      </span>
-                      </label>
-                      <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
-                      <!-- <input type="radio" class="d-none" name="options"> -->
-                      <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
-                      <!-- <span class="d-block d-sm-none"> -->
-                      <!-- <i class="tim-icons icon-tap-02"></i> -->
-                      </span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body-cpu">
-                <div class="chart-area-cpu">
-                  <canvas id="chartBig11"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-                </div>
-                <div class="card-body-cpu">
-                  <div class="chart-area-cpu">
-                    <canvas id="chartBig11"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
+      
           <!-- SIDE BAR -->
           <div class="fixed-plugin">
             <div class="dropdown show-dropdown">
@@ -568,10 +511,10 @@
             vetor_status.push(element.statusPorta)
           })
 
-          console.log("Vetor portas: " + vetor_portas);
-          console.log("Vetor status: " + vetor_status);
+          console.log("Vetor portas: " + vetor_portas)
+          console.log("Vetor status: " + vetor_status)
 
-          montarGraficoBarras(vetor_portas, vetor_status);
+          montarGraficoBarras(vetor_portas, vetor_status)
           /* plotarGrafico(vetor_portas, 'graficoPortasAberta', vetor_status, resposta); 
           {
             for (i = 0; i < resposta.length; i++) {
