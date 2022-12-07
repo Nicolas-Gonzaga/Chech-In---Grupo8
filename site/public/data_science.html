@@ -43,18 +43,19 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <!-- Nucleo Icons -->
-  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-icons.css" rel="stylesheet">
   <!-- CSS Files -->
   <link rel="stylesheet" href="assets/css/black-dashboard.css?v=1.0.0">
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="assets/demo/demo.css" rel="stylesheet" />
-  <script src="http://www.chartjs.org/dist/3.9.1/Chart.js"></script>
+  <link href="assets/demo/demo.css" rel="stylesheet">
+  <script src="http://www.chartjs.org/dist/4.0.1/Chart.js"></script>
   <!-- Script para o modal do alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="">
+  
   <div class="wrapper">
     <div class="sidebar">
       <!--
@@ -76,13 +77,13 @@
               <p>Geral</p>
             </a>
           </li>
-          <li>
+          <li >
             <a href="totem1.html">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Totem 1</p>
             </a>
           </li>
-          <li class="active">
+          <li>
             <a href="totem2.html">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Totem 2</p>
@@ -111,6 +112,7 @@
               <p>Histórico</p>
             </a>
           </li>
+         
           <li>
             <a href="funcionario.html">
               <i class="tim-icons icon-badge"></i>
@@ -162,7 +164,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Totem 2 <img
+            <a class="navbar-brand" id="totem" href="javascript:void(0)">Dashboard - Totem 1 <img
                 onclick="location.href=`mapaDash.html?${Number(window.location.pathname.substring(6,window.location.pathname.indexOf('.html')))+49999}`"
                 src="./assets/img/map-icon2.png" width="35px" height="35px" style="margin-left: 10px;"></a>
           </div>
@@ -203,7 +205,7 @@
                   <p class="d-lg-none">
                     Log out
                   </p>
-                </a>
+                </a>p
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
                   <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
@@ -237,8 +239,8 @@
               <div class="card-header ">
                 <div class="row">
                   <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Desempenho %</h5>
-                    <h2 class="card-title">CPU</h2>
+                    <h5 class="card-category">Dados de Venda</h5>
+                    <h2 class="card-title">São Paulo</h2>
                   </div>
                   <div class="col-sm-6">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -268,54 +270,254 @@
                 </div>
               </div>
               <div class="card-body-cpu">
-                <div class="chart-area-cpu">
-                  <canvas id="chartBig11"></canvas>
+                <div class="chart-area-cpu" style="justify-content: center;">
+                  <div>
+                  <img src="./assets/img/graficos/plot.png" style="margin-left: 10%;" width="80%">
+                  </div>
+                  <!-- <canvas id="chartBig11"></canvas> -->
                 </div>
               </div>
-            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Desempenho %</h5>
-                <h3 class="card-title">Memória</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartLinePurple"></canvas>
+
+        <div class="content">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-chart">
+                <div class="card-header ">
+                  <div class="row">
+                    <div class="col-sm-6 text-left">
+                      <h5 class="card-category">Detalhes de venda</h5>
+                      <h2 class="card-title">São Paulo</h2>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                        <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
+                        <!-- <input type="radio" name="options" checked> -->
+                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
+                        <!-- <span class="d-block d-sm-none"> -->
+                        <!-- <i class="tim-icons icon-single-02"></i> -->
+                        </span>
+                        </label>
+                        <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
+                        <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
+                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
+                        <!-- <span class="d-block d-sm-none"> -->
+                        <!-- <i class="tim-icons icon-gift-2"></i> -->
+                        </span>
+                        </label>
+                        <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
+                        <!-- <input type="radio" class="d-none" name="options"> -->
+                        <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
+                        <!-- <span class="d-block d-sm-none"> -->
+                        <!-- <i class="tim-icons icon-tap-02"></i> -->
+                        </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+                <div class="card-body-cpu">
+                  <div class="chart-area-cpu" style="justify-content: center;">
+                    <div>
+                    <img src="./assets/img/graficos/plot2.png" style="margin-left: 10%;" width="80%">
+                    </div>
+                    <!-- <canvas id="chartBig11"></canvas> -->
+                  </div>
+                </div>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Desempenho %</h5>
-                <h3 class="card-title">Disco</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="CountryChart1"></canvas>
-                </div>
+
+          <div class="content">
+            <div class="row">
+              <div class="col-12">
+                <div class="card card-chart">
+                  <div class="card-header ">
+                    <div class="row">
+                      <div class="col-sm-6 text-left">
+                        <h5 class="card-category">Diagnóstico de modelo</h5>
+                        <h2 class="card-title">São Paulo</h2>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                          <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
+                          <!-- <input type="radio" name="options" checked> -->
+                          <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
+                          <!-- <span class="d-block d-sm-none"> -->
+                          <!-- <i class="tim-icons icon-single-02"></i> -->
+                          </span>
+                          </label>
+                          <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
+                          <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
+                          <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
+                          <!-- <span class="d-block d-sm-none"> -->
+                          <!-- <i class="tim-icons icon-gift-2"></i> -->
+                          </span>
+                          </label>
+                          <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
+                          <!-- <input type="radio" class="d-none" name="options"> -->
+                          <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
+                          <!-- <span class="d-block d-sm-none"> -->
+                          <!-- <i class="tim-icons icon-tap-02"></i> -->
+                          </span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body-cpu">
+                    <div class="chart-area-cpu" style="justify-content: center;">
+                      <div>
+                      <img src="./assets/img/graficos/plot3.png" style="margin-left: 10%;" width="80%">
+                      </div>
+                      <!-- <canvas id="chartBig11"></canvas> -->
+                    </div>
+                  </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Desempenho Kbps</h5>
-                <h3 class="card-title">Internet</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartLineGreen1"></canvas>
+            <div class="content">
+              <div class="row">
+                <div class="col-12">
+                  <div class="card card-chart">
+                    <div class="card-header ">
+                      <div class="row">
+                        <div class="col-sm-6 text-left">
+                          <h5 class="card-category">Validando Previsões</h5>
+                          <h2 class="card-title">São Paulo</h2>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                            <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
+                            <!-- <input type="radio" name="options" checked> -->
+                            <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
+                            <!-- <span class="d-block d-sm-none"> -->
+                            <!-- <i class="tim-icons icon-single-02"></i> -->
+                            </span>
+                            </label>
+                            <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
+                            <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
+                            <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
+                            <!-- <span class="d-block d-sm-none"> -->
+                            <!-- <i class="tim-icons icon-gift-2"></i> -->
+                            </span>
+                            </label>
+                            <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
+                            <!-- <input type="radio" class="d-none" name="options"> -->
+                            <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
+                            <!-- <span class="d-block d-sm-none"> -->
+                            <!-- <i class="tim-icons icon-tap-02"></i> -->
+                            </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body-cpu">
+                      <div class="chart-area-cpu" style="justify-content: center;">
+                        <div>
+                        <img src="./assets/img/graficos/plot4.png" style="margin-left: 15%;" width="70%">
+                        </div>
+                        <!-- <canvas id="chartBig11"></canvas> -->
+                      </div>
+                    </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+              <div class="content">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card card-chart">
+                      <div class="card-header ">
+                        <div class="row">
+                          <div class="col-sm-6 text-left">
+                            <h5 class="card-category">Previsões</h5>
+                            <h2 class="card-title">São Paulo</h2>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                              <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
+                              <!-- <input type="radio" name="options" checked> -->
+                              <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
+                              <!-- <span class="d-block d-sm-none"> -->
+                              <!-- <i class="tim-icons icon-single-02"></i> -->
+                              </span>
+                              </label>
+                              <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
+                              <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
+                              <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
+                              <!-- <span class="d-block d-sm-none"> -->
+                              <!-- <i class="tim-icons icon-gift-2"></i> -->
+                              </span>
+                              </label>
+                              <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
+                              <!-- <input type="radio" class="d-none" name="options"> -->
+                              <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
+                              <!-- <span class="d-block d-sm-none"> -->
+                              <!-- <i class="tim-icons icon-tap-02"></i> -->
+                              </span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body-cpu">
+                        <div class="chart-area-cpu" style="justify-content: center;">
+                          <div>
+                          <img src="./assets/img/graficos/plot5.png" style="margin-left: 15%;" width="70%">
+                          </div>
+                          <!-- <canvas id="chartBig11"></canvas> -->
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="content">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card card-chart">
+                        <div class="card-header ">
+                          <div class="row">
+                            <div class="col-sm-6 text-left">
+                              <h5 class="card-category">Comparação de Estados</h5>
+                              <h2 class="card-title">São Paulo</h2>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                                <!-- <label class="btn btn-sm btn-primary btn-simple active" id="0"> -->
+                                <!-- <input type="radio" name="options" checked> -->
+                                <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Dia</span> -->
+                                <!-- <span class="d-block d-sm-none"> -->
+                                <!-- <i class="tim-icons icon-single-02"></i> -->
+                                </span>
+                                </label>
+                                <!-- <label class="btn btn-sm btn-primary btn-simple" id="1"> -->
+                                <!-- <input type="radio" class="d-none d-sm-none" name="options"> -->
+                                <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Mês</span> -->
+                                <!-- <span class="d-block d-sm-none"> -->
+                                <!-- <i class="tim-icons icon-gift-2"></i> -->
+                                </span>
+                                </label>
+                                <!-- <label class="btn btn-sm btn-primary btn-simple" id="2"> -->
+                                <!-- <input type="radio" class="d-none" name="options"> -->
+                                <!-- <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Ano</span> -->
+                                <!-- <span class="d-block d-sm-none"> -->
+                                <!-- <i class="tim-icons icon-tap-02"></i> -->
+                                </span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body-cpu">
+                          <div class="chart-area-cpu" style="justify-content: center;">
+                            <div>
+                            <img src="./assets/img/graficos/plot6.png" style="margin-left: 10%;" width="80%">
+                            </div>
+                            <!-- <canvas id="chartBig11"></canvas> -->
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <button style="background-color: #0065B3; color: white; width: 10%;"  onclick="window.location.href = 'data_science_rj.html'">Rio de Janeiro</button>
       </div>
     </div>
   </div>
@@ -363,7 +565,7 @@
   <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
   <!-- Black Dashboard DEMO methods, don't include it in your project! -->
   <script src="assets/demo/demo.js"></script>
-  <script>
+  <!-- <script>
     $(document).ready(function () {
       $().ready(function () {
         $sidebar = $('.sidebar');
@@ -488,10 +690,15 @@
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "black-dashboard-free"
       });
-  </script>
+  </script> -->
 </body>
-<script>
+
+
+<!-- <script>
   function alertas(empresa, componente, metrica, frase, descricao) {
+
+
+
     const options = {
       method: 'POST',
       headers: {
@@ -500,16 +707,22 @@
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        query: `mutation {           createCard(input: {             pipe_id:302731204,             title: "Card",             fields_attributes:[               {field_id: "nome_do_colaborador", field_value: "${empresa}"},{field_id: "cargo", field_value: "${componente}"},{field_id: "m_tricas", field_value: " ${frase}${descricao}${metrica}"}             ],           }) {               card {                 title               }             }           }`
+        query: `mutation {           createCard(input: {             pipe_id:302731204,             title: "Card",             fields_attributes:[               {field_id: "nome_do_colaborador", field_value: "${empresa}"},{field_id: "cargo", field_value: "${frase}${descricao}${metrica}"},{field_id: "m_tricas", field_value:"${componente}: ${metrica}" }             ],           }) {               card {                 title               }             }           }`,
+
+
       })
+
     };
     fetch('https://api.pipefy.com/graphql', options)
       .then(response => response.json())
       .then(response => console.log(response))
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
+    // Return current card in the context
+
   }
+
   function verificar(metrica, componente) {
-    const fkTotem = 50001
+    const fkTotem = 50000
 
 
     var empresa = sessionStorage.FK_EMPRESA
@@ -521,12 +734,13 @@
     var ano = dataAtual.getFullYear();
     var horas = dataAtual.getHours();
     var minutos = dataAtual.getMinutes();
+
     var descricao = `O ${componente} do totem ${fkTotem}está ficando sobrecarregado Momento  do alerta: dia ${dia}/${mes}/${ano} às ${horas}:${minutos}. Porcentagem de uso:`
 
     // incluir uma nova medida de temperatura 
     if (metrica >= 70) {
       if (metrica >= 70 && metrica < 80) {
-        Swal.fire("CUIDADO", `${componente} está ficando sobrecarregada!`, "warning");
+        Swal.fire("\                    \ CUIDADO", `${componente} está ficando sobrecarregada!`, "warning");
         frase = `Alerta  `
         console.log('Cheguei aqui')
 
@@ -579,7 +793,6 @@
 
   }
 
-
   function disk() {
     obterDadosGrafico()
     function obterDadosGrafico(id) {
@@ -604,6 +817,7 @@
 
 
     function plotarGrafico(resposta) {
+      const fkTotem = 50000
       console.log("Entrei no plotar")
       const dados4 = {
         labels: ['Livre', 'Ocupado'],
@@ -624,9 +838,9 @@
         type: 'pie',
         data: dados4,
         options: {
-          plugins: {
-            legend: {
-              labels: {
+          plugins:{
+            legend:{
+              labels:{
                 color: 'white'
               }
             }
@@ -635,7 +849,7 @@
       };
       let disco = contaLivre
 
-
+      setTimeout(verificar(disco, "disco"), 10000)
 
       const myChart = new Chart(
         document.getElementById('CountryChart1'),
@@ -649,8 +863,8 @@
 
   let proximaAtualizacao;
 
-  window.onload = disk(), obterDadosGrafico(1);
-  // O gráfico é construído com três funções:
+  window.onload = disk(), obterDadosGrafico(1); -->
+  <!-- // O gráfico é construído com três funções:
   // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
   // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
   // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
@@ -663,7 +877,8 @@
   //     Para ajustar o "select", ajuste o comando sql em src/models
 
   function obterDadosGrafico(id) {
-    const fkTotem = 50001
+    const fkTotem = 50000
+    console.log("entrei no obter dos graficos")
 
     if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
@@ -684,85 +899,85 @@
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
 
-  }
+  } -->
 
-
+<!-- 
   // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
   // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
   // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-  function plotarGrafico(resposta, id) {
-    console.log('iniciando plotagem do gráfico...');
-    const fkTotem = 50001
+  // function plotarGrafico(resposta, id) {
+  //   console.log('iniciando plotagem do gráfico...');
+  //   const fkTotem = 50000
 
-    var dados = {
-      labels: [],
-      datasets: [
-        {
-          yAxisID: 'yAxis',
-          xAxisID: 'xAxis',
-          label: 'Porcentagem de uso da CPU',
-          borderColor: '#D346B1',
-          backgroundColor: 'rgba(211,70,177,0.01)',
-          fill: true,
-          data: []
-        }
-      ]
+  //   var dados = {
+  //     labels: [],
+  //     datasets: [
+  //       {
+  //         yAxisID: 'yAxis',
+  //         xAxisID: 'xAxis',
+  //         label: 'Porcentagem de uso da CPU',
+  //         borderColor: '#D346B1',
+  //         backgroundColor: 'rgba(211,70,177,0.01)',
+  //         fill: true,
+  //         data: []
+  //       }
+  //     ]
 
-    };
-    var dados2 = {
-      labels: [],
-      datasets: [
-        {
-          yAxisID: 'yAxisRam',
-          xAxisID: 'xAxisRam',
-          label: 'Porcentagem de uso da RAM',
-          borderColor: 'rgba(31,142,241,1)',
-          backgroundColor: 'rgba(31,142,241,0.01)',
-          fill: true,
-          data: []
-        }
-      ]
-    };
+  //   };
+  //   var dados2 = {
+  //     labels: [],
+  //     datasets: [
+  //       {
+  //         yAxisID: 'yAxisRam',
+  //         xAxisID: 'xAxisRam',
+  //         label: 'Porcentagem de uso da RAM',
+  //         borderColor: 'rgba(31,142,241,1)',
+  //         backgroundColor: 'rgba(31,142,241,0.01)',
+  //         fill: true,
+  //         data: []
+  //       }
+  //     ]
+  //   };
 
-    var dados3 = {
-      labels: [],
-      datasets: [
-        {
-          yAxisID: 'yAxisDown',
-          xAxisID: 'xAxisDown',
-          label: 'Download',
-          borderColor: '#D346B1',
-          backgroundColor: 'rgba(211,70,177,0.01)',
-          fill: true,
-          data: []
-        },
-        {
-          yAxisID: 'yAxisUp',
-          xAxisID: 'xAxisUp',
-          label: 'Upload',
-          borderColor: 'rgba(31,142,241,1)',
-          backgroundColor: 'rgba(31,142,241,0.01)',
-          fill: true,
-          data: []
-        }
-      ]
-    };
+  //   var dados3 = {
+  //     labels: [],
+  //     datasets: [
+  //       {
+  //         yAxisID: 'yAxisDown',
+  //         xAxisID: 'xAxisDown',
+  //         label: 'Download',
+  //         borderColor: '#D346B1',
+  //         backgroundColor: 'rgba(211,70,177,0.01)',
+  //         fill: true,
+  //         data: []
+  //       },
+  //       {
+  //         yAxisID: 'yAxisUp',
+  //         xAxisID: 'xAxisUp',
+  //         label: 'Upload',
+  //         borderColor: 'rgba(31,142,241,1)',
+  //         backgroundColor: 'rgba(31,142,241,0.01)',
+  //         fill: true,
+  //         data: []
+  //       }
+  //     ]
+  //   };
 
-    for (i = 0; i < resposta.length; i++) {
-      var registro = resposta[i];
-      dados.labels.push(registro.horarioF);
-      dados.datasets[0].data.push(registro.cpuPercent);
-      dados2.labels.push(registro.horarioF)
-      dados2.datasets[0].data.push(registro.ramPercent)
-      dados3.labels.push(registro.horarioF)
-      dados3.datasets[0].data.push(registro.mbDownload)
-      dados3.datasets[1].data.push(registro.mbUpload)
-    }
+    // for (i = 0; i < resposta.length; i++) {
+    //   var registro = resposta[i];
+    //   dados.labels.push(registro.horarioF);
+    //   dados.datasets[0].data.push(registro.cpuPercent);
+    //   dados2.labels.push(registro.horarioF)
+    //   dados2.datasets[0].data.push(registro.ramPercent)
+    //   dados3.labels.push(registro.horarioF)
+    //   dados3.datasets[0].data.push(registro.mbDownload)
+    //   dados3.datasets[1].data.push(registro.mbUpload)
+    // }
 
 
 
-    console.log(JSON.stringify(dados));
-    console.log(JSON.stringify(dados2));
+    // console.log(JSON.stringify(dados));
+    // console.log(JSON.stringify(dados2));
 
     /* var ctx = chartBig11.getContext('2d');  */
     /*       var optionsTeste = {
@@ -901,7 +1116,7 @@
       options: {
         plugins: {
           legend: {
-            labels: {
+            labels:{
               color: 'white'
             }
           },
@@ -928,10 +1143,10 @@
             display: false
           },
           xAxisDown: {
-            display: false,
+            display: false, 
             ticks: {
-              color: "rgba(255,255,255,0.6)",
-            }
+                color: "rgba(255,255,255,0.6)",
+              }
           },
           yAxisUp: {
             beginAtZero: true,
@@ -941,10 +1156,10 @@
             },
           },
           xAxisUp: {
-            ticks: {
-              color: "rgba(255,255,255,0.6)",
+              ticks: {
+                color: "rgba(255,255,255,0.6)",
+              }
             }
-          }
         }
       }
     })
@@ -991,8 +1206,8 @@
             }
           }); */
 
-    setTimeout(() => atualizarGrafico(fkTotem, dados, dados2, dados3), 2000);
-  }
+  //   setTimeout(() => atualizarGrafico(fkTotem, dados, dados2, dados3), 2000);
+  // }
 
 
   // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
@@ -1000,62 +1215,63 @@
 
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
-  function atualizarGrafico(fkTotem, dados, dados2, dados3) {
-    console.log("ENTRANDO NO ATUALIZAR GRAFICO")
-    console.log("---------------------------------")
-    console.log(dados2)
-    console.log("---------------------------------")
+  // function atualizarGrafico(fkTotem, dados, dados2, dados3) {
+  //   console.log("ENTRANDO NO ATUALIZAR GRAFICO")
+  //   console.log("---------------------------------")
+  //   console.log(dados2)
+  //   console.log("---------------------------------")
 
 
-    fetch(`/medidas/tempo-real-totem/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (novoRegistro) {
+    // fetch(`/medidas/tempo-real-totem/${fkTotem}`, { cache: 'no-store' }).then(function (response) {
+    //   if (response.ok) {
+    //     response.json().then(function (novoRegistro) {
 
-          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-          console.log(`Dados atuais do gráfico: ${dados}`);
-          console.log(`Dados atuais do gráfico: ${dados2}`);
+    //       console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+    //       console.log(`Dados atuais do gráfico: ${dados}`);
+    //       console.log(`Dados atuais do gráfico: ${dados2}`);
 
-          // tirando e colocando valores no gráfico
-          dados.labels.shift(); // apagar o primeiro
-          dados.labels.push(novoRegistro[0].horarioF); // incluir um novo momento
-          dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-          dados.datasets[0].data.push(novoRegistro[0].cpuPercent);
-          let cpu = novoRegistro[0].cpuPercent// incluir uma nova medida de temperatura
-          verificar(cpu, "CPU")
-          dados2.labels.shift();
-          dados2.labels.push(novoRegistro[0].horarioF);
-          dados2.datasets[0].data.shift();
-          dados2.datasets[0].data.push(novoRegistro[0].ramPercent);
-          let ram = novoRegistro[0].ramPercent
-          verificar(ram, "RAM")
-          dados3.labels.shift();
-          dados3.labels.push(novoRegistro[0].horarioF);
-          dados3.datasets[0].data.shift();
-          dados3.datasets[0].data.push(novoRegistro[0].mbDownload);
-          dados3.datasets[1].data.shift();
-          dados3.datasets[1].data.push(novoRegistro[0].mbUpload);
+    //       // tirando e colocando valores no gráfico
+    //       dados.labels.shift(); // apagar o primeiro
+    //       dados.labels.push(novoRegistro[0].horarioF); // incluir um novo momento
+    //       dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
+    //       dados.datasets[0].data.push(novoRegistro[0].cpuPercent);
+    //       let cpu = novoRegistro[0].cpuPercent// incluir uma nova medida de temperatura
+    //       setTimeout(verificar(cpu, "cpu"), 60000)
+    //       dados2.labels.shift();
+    //       dados2.labels.push(novoRegistro[0].horarioF);
+    //       dados2.datasets[0].data.shift();
+    //       dados2.datasets[0].data.push(novoRegistro[0].ramPercent);
+    //       let ram = novoRegistro[0].ramPercent
+    //       setTimeout(verificar(ram, "RAM"), 60000)
+    //       dados3.labels.shift();
+    //       dados3.labels.push(novoRegistro[0].horarioF);
+    //       dados3.datasets[0].data.shift();
+    //       dados3.datasets[0].data.push(novoRegistro[0].mbDownload);
+    //       dados3.datasets[1].data.shift();
+    //       dados3.datasets[1].data.push(novoRegistro[0].mbUpload);
 
 
-          /* dados.datasets[0].data.shift(); */  // apagar o primeiro de temperatura
-          /*  dados.datasets[0].data.push(novoRegistro[0].grafico_zonas); */ // incluir uma nova medida de temperatura
+    //       /* dados.datasets[0].data.shift(); */  // apagar o primeiro de temperatura
+    //       /*  dados.datasets[0].data.push(novoRegistro[0].grafico_zonas); */ // incluir uma nova medida de temperatura
 
-          window.lineChart.update();
-          window.lineChart2.update();
-          window.lineChart3.update();
+    //       window.lineChart.update();
+    //       window.lineChart2.update();
+    //       window.lineChart3.update();
 
-          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTotem, dados, dados2, dados3), 20000);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
+    //       // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+    //       proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTotem, dados, dados2, dados3), 20000);
+    //     });
+    //   } else {
+    //     console.error('Nenhum dado encontrado ou erro na API');
+    //     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+    //   }
+    // })
+    //   .catch(function (error) {
+    //     console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    //   });
 
-  }
-</script>
+  //}
+
+</script> -->
 
 </html>
