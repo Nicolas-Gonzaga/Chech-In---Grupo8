@@ -6,9 +6,11 @@ import banco.QueryCreate
 import com.github.britooo.looca.api.core.Looca
 import org.json.JSONObject
 import org.jsoup.Jsoup
+import oshi.SystemInfo
 import java.io.File
 import java.time.LocalDate
 import java.time.LocalTime
+import kotlin.math.pow
 
 fun main() {
     val tipoBanco = 3
@@ -38,7 +40,7 @@ fun main() {
             cursor.insertCrawler(it, cursor.selectIdLeitura(hora, data))
         }
         println("\r\n\r\nInserção única do Looca:\r\n")
-        println("cpuPercent | diskPercent | ramPercent | fkLeitura")
+        println("cpuPercent | diskPercent | ramPercent | mbUpload | mbDownload | fkLeitura")
         Thread.sleep(500)
         cursor.insertLooca(lista, cursor.selectIdLeitura(hora, data))
         fkTotem++
@@ -145,14 +147,21 @@ fun apiBrabaEkran():MutableList<String> {
         File("C:");} else {
         File("/")
     }
+    val oshi = SystemInfo().hardware.networkIFs[0]
 
     val disco = 100 - ((particao.freeSpace.toDouble()/1024/1024/1024) * 100 / (looca.grupoDeDiscos.discos[0].tamanho.toDouble()/1024/1024/1024))
     val ram = 100 - ((looca.memoria.disponivel.toDouble()/1024/1024/1024) * 100 / (looca.memoria.total.toDouble()/1024/1024/1024))
-    val valoresPadroes = mutableListOf<Double>(looca.processador.uso, disco, ram)
+    val mbRecv = oshi.bytesRecv * 10.0.pow(-6)
+    val mbSent = oshi.bytesSent * 10.0.pow(-6)
+    val valoresPadroes = mutableListOf<Double>(looca.processador.uso, disco, ram, mbRecv, mbSent)
 
     val lista = mutableListOf<String>()
     for (f in 0 until valoresPadroes.size) {
-        val formatado = String.format("%.2f", valoresPadroes[f])
+        val formatado = if (f > 2) {
+            String.format("%.3f", valoresPadroes[f])
+        } else {
+            String.format("%.2f", valoresPadroes[f])
+        }
         val index = formatado.indexOf(",")
         lista += if (index != -1) {
             formatado.substring(0, index) + "." + formatado.substring(index + 1)

@@ -30,10 +30,10 @@ class Query (private val jdbcTemplate: JdbcTemplate) {
     }
     fun insertLooca(valores:MutableList<String>, fkLeitura:Int) {
         jdbcTemplate.update("""
-            insert into loocaLeitura (cpuPercent, diskPercent, ramPercent, fkLeitura) values
-            (?, ?, ?, ?)
-        """, valores[0], valores[1], valores[2], fkLeitura)
-        println("${valores[0]} - ${valores[1]} - ${valores[2]} - $fkLeitura\r\n")
+            insert into loocaLeitura (cpuPercent, diskPercent, ramPercent, mbUpload, mbDownload, fkLeitura) values
+            (?, ?, ?, ?, ?, ?)
+        """, valores[0], valores[1], valores[2], valores[3], valores[4], fkLeitura)
+        println("${valores[0]} - ${valores[1]} - ${valores[2]} - ${valores[3]} - ${valores[4]} - $fkLeitura\r\n")
     }
     fun insertCrawler(valores:List<String>, fkLeitura:Int) {
         jdbcTemplate.update("""
