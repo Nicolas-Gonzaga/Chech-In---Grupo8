@@ -24,7 +24,7 @@ fun main() {
     if(tipoBanco != 3) {QueryCreate(Conexao().getJdbcTemplate(tipoBanco)).createTable(tipoBanco)}
 
     var fkTotem = 50000
-        while (true) {
+    while (true) {
         val hora = LocalTime.now().toString().substring(0, 8)
         var data = "${LocalDate.now()}"
         data = data.substring(0, 4) + "/" + data.substring(5, 7) + "/" + data.substring(8, 10)
@@ -151,8 +151,8 @@ fun apiBrabaEkran():MutableList<String> {
 
     val disco = 100 - ((particao.freeSpace.toDouble()/1024/1024/1024) * 100 / (looca.grupoDeDiscos.discos[0].tamanho.toDouble()/1024/1024/1024))
     val ram = 100 - ((looca.memoria.disponivel.toDouble()/1024/1024/1024) * 100 / (looca.memoria.total.toDouble()/1024/1024/1024))
-    val mbRecv = oshi.bytesRecv * 10.0.pow(-6)
-    val mbSent = oshi.bytesSent * 10.0.pow(-6)
+    val mbRecv = oshi.bytesRecv * 10.0.pow(-9)
+    val mbSent = oshi.bytesSent * 10.0.pow(-9)
     val valoresPadroes = mutableListOf<Double>(looca.processador.uso, disco, ram, mbRecv, mbSent)
 
     val lista = mutableListOf<String>()
