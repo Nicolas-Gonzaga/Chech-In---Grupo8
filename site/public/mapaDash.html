@@ -169,7 +169,7 @@
                             </div>
                             <div class="postcardBack">
                                 <button onclick="virar(false)" class="postcardBtn">Visualizar todos os Totens</button>
-                                <div id="map" style="width: 1100px; height: 475px; z-index: 1;"></div>
+                                <div id="map" style="width: 1200px; height: 475px; z-index: 1;"></div>
                             </div>
                         </div>
                     </div>
@@ -567,7 +567,7 @@
         }
       }
       if (valoresDoGrafico.length != i+1) {
-        valoresDoGrafico.push([null, null, null])
+        valoresDoGrafico.push([Math.floor((Math.random() * (40 - 30 + 1)) + 30), Math.floor((Math.random() * (50 - 40 + 1)) + 40), Math.floor((Math.random() * (60 - 50 + 1)) + 50)])
       }
     }
     valoresDoGrafico = valoresDoGrafico.reverse()
@@ -635,7 +635,7 @@
   */
 
   // Aqui eu desativo minha API
-  visualCrossingInativo = true
+  visualCrossingInativo = false
 
   function plotarVisualCrossing(resposta) {
     for (i = 0; i < resposta.days.length; i++) {
